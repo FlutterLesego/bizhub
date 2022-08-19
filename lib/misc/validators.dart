@@ -30,8 +30,6 @@ String? validatePassword(String? value) {
 String? validateConfirmPassword(String? value) {
   if (value == null || value.isEmpty) {
     return 'please retype password';
-  } else if (validatePassword(value).toString() != value) {
-    return 'passwords do not match';
   }
   return null;
 }
