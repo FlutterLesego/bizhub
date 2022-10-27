@@ -22,7 +22,7 @@ class _LoadingPageState extends State<LoadingPage> {
         //set time in seconds
         const Duration(seconds: 5), () {
           //go to login page after 5 seconds of the loading page
-      Navigator.popAndPushNamed(context, RouteManager.loginPage);
+      Navigator.popAndPushNamed(context, RouteManager.firstAppHomePage);
     });
     super.initState();
   }
@@ -36,7 +36,7 @@ class _LoadingPageState extends State<LoadingPage> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: const [
           Text(
-            "first app",
+            "bizHub",
             style: titleStyleIndigo,
           ),
           SizedBoxH20(),

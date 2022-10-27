@@ -22,7 +22,7 @@ class LoginPage extends StatelessWidget {
                   height: MediaQuery.of(context).size.height*0.1,
                   
                 ),
-                const Text("First App",
+                const Text("bizHub",
                 style: titleStyleIndigo),
               ],
             ),

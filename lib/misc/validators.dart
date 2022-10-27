@@ -1,3 +1,7 @@
+// ignore_for_file: unused_import
+
+import 'dart:ffi';
+
 String? validateName(String? value) {
   if (value == null || value.isEmpty) {
     return 'name required!';
@@ -12,6 +16,15 @@ String? validateEmail(String? value) {
           r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$')
       .hasMatch(value)) {
     return 'invalid email address';
+  }
+  return null;
+}
+
+String? validatePhone(String? value) {
+  if (value == null || value.isEmpty) {
+    return 'phone number required!';
+  } else if (value.length < 10) {
+    return 'phone number invalid!';
   }
   return null;
 }

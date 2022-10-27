@@ -3,7 +3,14 @@ import 'package:firstapp/view_models/user_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-void main() {
+import 'utils/user_preferences.dart';
+
+Future main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await UserPreferences.init();
+
+
   runApp(const MyApp());
 }
 
@@ -17,19 +24,17 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(
           create: (context) => UserViewModel(),
-          )
+        )
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         onGenerateRoute: RouteManager.onGenerateRoute,
         initialRoute: RouteManager.loadingPage,
         theme: ThemeData(
+          primaryColor: Colors.indigo.shade50,
           primarySwatch: Colors.indigo,
         ),
-        
       ),
     );
   }
 }
-
-

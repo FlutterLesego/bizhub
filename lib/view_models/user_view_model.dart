@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 class UserViewModel with ChangeNotifier {
   final loginFormKey = GlobalKey<FormState>();
   final registerFormKey = GlobalKey<FormState>();
+  final updateFormKey = GlobalKey<FormState>();
 
   void loginUserInUI(BuildContext context,
       {required String email, required String password}) async {
@@ -19,6 +20,7 @@ class UserViewModel with ChangeNotifier {
     BuildContext context, {
     required String name,
     required String email,
+    required String phone,
     required String password,
     required String confirmPassword,
   }) async {
@@ -29,6 +31,25 @@ class UserViewModel with ChangeNotifier {
         showSnackBar(context, 'passwords do not match', 2000);
       } else {
         Navigator.of(context).popAndPushNamed(RouteManager.firstAppHomePage);
+      }
+    }
+  }
+
+  void updateUserInUI(
+    BuildContext context, {
+    required String name,
+    required String email,
+    required String phone,
+    required String password,
+    required String confirmPassword,
+  }) async {
+    FocusManager.instance.primaryFocus?.unfocus();
+
+    if (updateFormKey.currentState?.validate() ?? false) {
+      if (confirmPassword.toString().trim() != password.toString().trim()) {
+        showSnackBar(context, 'passwords do not match', 2000);
+      } else {
+        Navigator.of(context).popAndPushNamed(RouteManager.profilePage);
       }
     }
   }

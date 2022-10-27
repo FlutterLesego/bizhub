@@ -18,12 +18,14 @@ class _RegisterFormState extends State<RegisterForm> {
   late TextEditingController passwordController;
   late TextEditingController confirmPasswordController;
   late TextEditingController emailController;
+  late TextEditingController phoneController;
 
   @override
   void initState() {
     super.initState();
     nameController = TextEditingController();
     emailController = TextEditingController();
+    phoneController = TextEditingController();
     passwordController = TextEditingController();
     confirmPasswordController = TextEditingController();
   }
@@ -32,6 +34,7 @@ class _RegisterFormState extends State<RegisterForm> {
   void dispose() {
     nameController.dispose();
     emailController.dispose();
+    phoneController.dispose();
     passwordController.dispose();
     confirmPasswordController.dispose();
     super.dispose();
@@ -48,7 +51,7 @@ class _RegisterFormState extends State<RegisterForm> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               const Text(
-                "First App",
+                "bizHub",
                 style: titleStyleIndigo,
               ),
               const SizedBoxH20(),
@@ -56,7 +59,7 @@ class _RegisterFormState extends State<RegisterForm> {
                 validator: validateName,
                 controller: nameController,
                 decoration: formDecoration(
-                  "Name",
+                  "Full Name",
                   Icons.person_outline,
                 ),
               ),
@@ -65,7 +68,15 @@ class _RegisterFormState extends State<RegisterForm> {
                 validator: validateEmail,
                 controller: emailController,
                 decoration: formDecoration(
-                  "Email address",
+                  "Email Address",
+                  Icons.mail_outline,
+                ),
+              ),
+              TextFormField(
+                validator: validateEmail,
+                controller: phoneController,
+                decoration: formDecoration(
+                  "Phone Number",
                   Icons.mail_outline,
                 ),
               ),
@@ -83,7 +94,7 @@ class _RegisterFormState extends State<RegisterForm> {
                 validator: validateConfirmPassword,
                 controller: confirmPasswordController,
                 decoration: formDecoration(
-                  "Confirm password",
+                  "Confirm Password",
                   Icons.lock_outline,
                 ),
               ),
@@ -99,6 +110,7 @@ class _RegisterFormState extends State<RegisterForm> {
                     context.read<UserViewModel>().createUserInUI(context, 
                     name: nameController.text.trim(),
                     email: emailController.text.trim(),
+                    phone: phoneController.text.trim(),
                     password: passwordController.text.trim(),
                     confirmPassword: confirmPasswordController.text.trim());
                   }),

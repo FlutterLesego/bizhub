@@ -1,7 +1,5 @@
 import 'package:firstapp/routes/route_manager.dart';
 import 'package:flutter/material.dart';
-
-import '../misc/constants.dart';
 import '../widgets/register_from.dart';
 
 class RegisterPage extends StatelessWidget {
@@ -21,8 +19,6 @@ class RegisterPage extends StatelessWidget {
               color: Colors.indigo,
             )),
         backgroundColor: Colors.white,
-        title: const Text("Sign up",
-        style: style16Indigo,),
       ),
       backgroundColor: Colors.white,
       body: SafeArea(
