@@ -2,6 +2,7 @@ import 'package:backendless_sdk/backendless_sdk.dart';
 import 'package:firstapp/routes/route_manager.dart';
 import 'package:firstapp/widgets/dialogs.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:provider/provider.dart';
 
 class UserViewModel with ChangeNotifier {
   final loginFormKey = GlobalKey<FormState>();
@@ -30,6 +31,31 @@ class UserViewModel with ChangeNotifier {
 
   String _userProgressText = '';
   String get userProgressText => userProgressText;
+
+//create a new user
+  Future<String> createUserAccount(BackendlessUser user) async {
+    String results = 'OK';
+
+    _showUserProgress = true;
+    _userProgressText = 'Creating account';
+    notifyListeners();
+
+    try {
+      await Backendless.userService.register(user);
+      BizHubEntry emptyEntry = BizHubEntry(users: {}, username: user.email);
+      await Backendless.data
+          .of('BizHubEntry')
+          .save(emptyEntry.toJson())
+          .onError((error, stackTrace) {
+        result = error.toString();
+      });
+    } catch (e) {
+      result = getError(e.toString());
+    }
+    _showUserProgress = false;
+    notifyListeners();
+    return result;
+  }
 
 //check if user exists
   Future<String> checkIfUserLoggedIn() async {
@@ -116,7 +142,19 @@ class UserViewModel with ChangeNotifier {
       if (confirmPassword.toString().trim() != password.toString().trim()) {
         showSnackBar(context, 'passwords do not match', 2000);
       } else {
-        Navigator.of(context).popAndPushNamed(RouteManager.firstAppHomePage);
+        Backendless user = BackendlessUser()
+          ..email = email.trim()
+          ..password = password.trim();
+
+        String result =
+            await context.read<UserViewModel>().createUserAccount(user);
+        if (result != 'OK') {
+          showSnackBar(context, result, 3000);
+        } else {
+          showSnackBar(context, 'Account Created successfully!', 3000);
+          Navigator.of(context).popAndPushNamed(RouteManager.firstAppHomePage);
+        }
+
       }
     }
   }
