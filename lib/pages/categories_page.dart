@@ -1,4 +1,5 @@
 import 'package:firstapp/misc/constants.dart';
+import 'package:firstapp/routes/route_manager.dart';
 import 'package:flutter/material.dart';
 
 import '../widgets/category_view.dart';
@@ -10,7 +11,14 @@ class CategoriesPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: const Icon(Icons.arrow_back_ios),
+        leading: InkWell(
+          child: const Icon(
+            Icons.arrow_back_ios,
+          ),
+          onTap: () {
+            Navigator.popAndPushNamed(context, RouteManager.firstAppHomePage);
+          },
+        ),
         title: const Text(
           "Categories",
           style: style16White,
