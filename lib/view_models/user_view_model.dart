@@ -191,3 +191,28 @@ class UserViewModel with ChangeNotifier {
     }
   }
 }
+
+//error messages for users
+String getError(String message) {
+  if (message.contains('email address must be confirmed first')) {
+    return 'Please confirm your email address first';
+  }
+  if (message.contains('User already exists')) {
+    return 'User already exists! Please create a new user or log in.';
+  }
+  if (message.contains('Invalid login or password')) {
+    return 'Invalid credentials! Please check your username or password.';
+  }
+  if (message
+      .contains('User account is locked out due to too many failed logins')) {
+    return 'Account locked due to many failed login attempts. Please try again after 30 minutes.';
+  }
+  if (message.contains('Unable to find a user with the specified identity')) {
+    return 'Email address not found! Please check and try again or register a new account.';
+  }
+  if (message.contains(
+      'Unable to resolve host "api.backendless.com": No address associated with hostname')) {
+    return 'No internet connection found! Please connect and try again.';
+  }
+  return message;
+}
