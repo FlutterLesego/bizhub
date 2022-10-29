@@ -87,7 +87,7 @@ class _LoginFormState extends State<LoginForm> {
                     style: style16White,
                   ),
                   onPressed: () {
-                    context.read<UserViewModel>().loginUserInUI(context,
+                    context.read<UserViewModel>().loginServiceProviderInUI(context,
                         email: emailController.text.trim(),
                         password: passwordController.text.trim());
                   }),

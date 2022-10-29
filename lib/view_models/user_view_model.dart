@@ -33,20 +33,20 @@ class UserViewModel with ChangeNotifier {
   String _userProgressText = '';
   String get userProgressText => userProgressText;
 
-//create a new biz provider
-  Future<String> createBizAccount(BackendlessUser user) async {
+/////
+  ///
+//register new service provider
+  Future<String> createServiceProvider(BackendlessUser user) async {
     String result = 'OK';
 
     _showUserProgress = true;
     _userProgressText = 'Creating account...';
     notifyListeners();
 
-/////
-///    
-//register new user
     try {
       await Backendless.userService.register(user);
-      ServiceEntry emptyEntry = ServiceEntry(services: {}, username: user.email);
+      ServiceEntry emptyEntry =
+          ServiceEntry(services: {}, username: user.email);
       await Backendless.data
           .of('ServiceEntry')
           .save(emptyEntry.toJson())
@@ -61,8 +61,30 @@ class UserViewModel with ChangeNotifier {
     return result;
   }
 
- //// 
-///
+////
+  ///
+//Login service provider in to the app
+  Future<String> loginServiceProvider(String username, String password) async {
+    String result = 'OK';
+
+    _showUserProgress = true;
+    _userProgressText = "Logging in...";
+    BackendlessUser? user = await Backendless.userService
+        .login(username, password, true)
+        .onError((error, stackTrace) {
+      result = getError(error.toString());
+    });
+    if (user != null) {
+      _currentUser = user;
+    }
+    _showUserProgress = false;
+    notifyListeners();
+
+    return result;
+  }
+
+////
+  ///
 //check if user exists
   Future<String> checkIfUserLoggedIn() async {
     String result = 'OK';
@@ -125,16 +147,25 @@ class UserViewModel with ChangeNotifier {
   }
 
 //log in the user in UI
-  void loginUserInUI(BuildContext context,
+  void loginServiceProviderInUI(BuildContext context,
       {required String email, required String password}) async {
     FocusManager.instance.primaryFocus?.unfocus();
     if (loginFormKey.currentState?.validate() ?? false) {
-      Navigator.of(context).popAndPushNamed(RouteManager.firstAppHomePage);
-      //showSnackBar();
+      String result = await context
+          .read<UserViewModel>()
+          .loginServiceProvider(email.trim(), password.trim());
+      if (result != 'OK') {
+        showSnackBar(context, result, 3000);
+      } else {
+        //get the users' services
+        // context.read<ServiceViewModel>().getServices(email);
+        Navigator.of(context).popAndPushNamed(RouteManager.serviceProviderPage);
+      }
     }
   }
 
-  void createUserInUI(
+//create new service provider method
+  void createServiceProviderInUI(
     BuildContext context, {
     required String name,
     required String email,
@@ -150,17 +181,25 @@ class UserViewModel with ChangeNotifier {
       } else {
         BackendlessUser user = BackendlessUser()
           ..email = email.trim()
-          ..password = password.trim();
+          ..password = password.trim()
+          ..putProperties({
+            'name': name.trim(),
+            'email address': email.trim(),
+            'phone number': phone.trim(),
+            'location': name.trim(),
+            'password': password.trim(),
+            'confirm password': confirmPassword.trim(),
+          });
 
         String result =
-            await context.read<UserViewModel>().createBizAccount(user);
+            await context.read<UserViewModel>().createServiceProvider(user);
         if (result != 'OK') {
           showSnackBar(context, result, 3000);
         } else {
-          showSnackBar(context, 'Account Created successfully!', 3000);
-          Navigator.of(context).popAndPushNamed(RouteManager.serviceProviderPage);
+          showSnackBar(context, 'Account Created Successfully!', 2000);
+          Navigator.of(context)
+              .popAndPushNamed(RouteManager.serviceProviderPage);
         }
-
       }
     }
   }
@@ -191,7 +230,7 @@ class UserViewModel with ChangeNotifier {
   void resetPasswordInUI(BuildContext context, {required String email}) async {
     if (email.isEmpty) {
       showSnackBar(context,
-          'Please enter email address and click on "Reset Password"', 4000);
+          'Please enter email address and click on "Reset Password"', 3000);
     } else {
       showSnackBar(context, 'Reset instructions sent to $email ', 3000);
     }
