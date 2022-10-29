@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:backendless_sdk/backendless_sdk.dart';
 import 'package:firstapp/models/service_entry.dart';
 import 'package:firstapp/routes/route_manager.dart';
@@ -125,8 +127,43 @@ class UserViewModel with ChangeNotifier {
     return result;
   }
 
-////  
-///
+  ///
+//logout user
+  Future<String> logoutUser() async {
+    String result = 'OK';
+
+    _showUserProgress = true;
+    _userProgressText = 'Logging out...';
+    notifyListeners();
+
+    await Backendless.userService.logout().onError((error, stackTrace) {
+      result = error.toString();
+    });
+    _showUserProgress = false;
+    notifyListeners();
+    return result;
+  }
+
+////
+  ///
+//reset pasword
+  Future<String> resetPassword(String username) async {
+    String result = 'OK';
+    _showUserProgress = true;
+    _userProgressText = 'Resetting password';
+    notifyListeners();
+    await Backendless.userService
+        .restorePassword(username)
+        .onError((error, stackTrace) {
+      result = getError(error.toString());
+    });
+    _showUserProgress = false;
+    notifyListeners();
+    return result;
+  }
+
+////
+  ///
 //check if user exists inUI
   void checkIfUserExists(String username) async {
     DataQueryBuilder queryBuilder = DataQueryBuilder()
@@ -226,7 +263,14 @@ class UserViewModel with ChangeNotifier {
   }
 
   void logoutUserInUI(BuildContext context) async {
-    Navigator.popAndPushNamed(context, RouteManager.loginPage);
+    String result = await context.read<UserViewModel>().logoutUser();
+
+    if (result == 'OK') {
+      context.read<UserViewModel>().setCurrentUserToNull();
+      Navigator.popAndPushNamed(context, RouteManager.firstAppHomePage);
+    } else {
+      showSnackBar(context, result, 3000);
+    }
   }
 
   void resetPasswordInUI(BuildContext context, {required String email}) async {
@@ -234,7 +278,13 @@ class UserViewModel with ChangeNotifier {
       showSnackBar(context,
           'Please enter email address and click on "Reset Password"', 3000);
     } else {
-      showSnackBar(context, 'Reset instructions sent to $email ', 3000);
+      String result =
+          await context.read<UserViewModel>().resetPassword(email);
+      if (result == 'OK') {
+        showSnackBar(context, "Reset instructions sent to $email", 3000);
+      } else {
+        showSnackBar(context, result, 3500);
+      }
     }
   }
 }

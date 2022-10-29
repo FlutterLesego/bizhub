@@ -1,5 +1,7 @@
 import 'package:firstapp/utils/user_preferences.dart';
+import 'package:firstapp/view_models/user_view_model.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../misc/constants.dart';
 import '../routes/route_manager.dart';
@@ -24,7 +26,6 @@ class NavigationDrawer extends StatelessWidget {
 
 //header of the drawer
   Widget buildHeader(BuildContext context) => Material(
-
         color: Colors.indigoAccent.shade100,
         child: InkWell(
           onTap: () async {
@@ -37,12 +38,13 @@ class NavigationDrawer extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-               ProfileWidget(
-                imagePath: UserPreferences.myUser.imagePath,
-                onClicked: () async {
-                 Navigator.popAndPushNamed(context, RouteManager.profilePage);
-                },
-              ),
+                ProfileWidget(
+                  imagePath: UserPreferences.myUser.imagePath,
+                  onClicked: () async {
+                    Navigator.popAndPushNamed(
+                        context, RouteManager.profilePage);
+                  },
+                ),
                 const SizedBoxH10(),
                 Text(
                   UserPreferences.myUser.name,
@@ -131,9 +133,7 @@ class NavigationDrawer extends StatelessWidget {
                 style: style16Indigo,
               ),
               onTap: () async {
-                const AppProgressIndicator(text: "Logging out...");
-                Navigator.pop(context);
-                Navigator.pushNamed(context, RouteManager.loginPage);
+                context.read<UserViewModel>().logoutUserInUI(context);
               },
             )
           ],
