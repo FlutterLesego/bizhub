@@ -85,7 +85,7 @@ class UserViewModel with ChangeNotifier {
 
 ////
   ///
-//check if user exists
+//check if user is logged in
   Future<String> checkIfUserLoggedIn() async {
     String result = 'OK';
 
@@ -125,6 +125,8 @@ class UserViewModel with ChangeNotifier {
     return result;
   }
 
+////  
+///
 //check if user exists inUI
   void checkIfUserExists(String username) async {
     DataQueryBuilder queryBuilder = DataQueryBuilder()
