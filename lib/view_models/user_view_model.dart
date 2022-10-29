@@ -1,4 +1,5 @@
 import 'package:backendless_sdk/backendless_sdk.dart';
+import 'package:firstapp/models/service_entry.dart';
 import 'package:firstapp/routes/route_manager.dart';
 import 'package:firstapp/widgets/dialogs.dart';
 import 'package:flutter/cupertino.dart';
@@ -32,19 +33,22 @@ class UserViewModel with ChangeNotifier {
   String _userProgressText = '';
   String get userProgressText => userProgressText;
 
-//create a new user
-  Future<String> createUserAccount(BackendlessUser user) async {
+//create a new biz provider
+  Future<String> createBizAccount(BackendlessUser user) async {
     String result = 'OK';
 
     _showUserProgress = true;
-    _userProgressText = 'Creating account';
+    _userProgressText = 'Creating account...';
     notifyListeners();
+
+/////
+///    
 //register new user
     try {
       await Backendless.userService.register(user);
-      BizHubEntry emptyEntry = BizHubEntry(services: {}, username: user.email);
+      ServiceEntry emptyEntry = ServiceEntry(services: {}, username: user.email);
       await Backendless.data
-          .of('BizHubEntry')
+          .of('ServiceEntry')
           .save(emptyEntry.toJson())
           .onError((error, stackTrace) {
         result = error.toString();
@@ -57,6 +61,8 @@ class UserViewModel with ChangeNotifier {
     return result;
   }
 
+ //// 
+///
 //check if user exists
   Future<String> checkIfUserLoggedIn() async {
     String result = 'OK';
@@ -74,10 +80,10 @@ class UserViewModel with ChangeNotifier {
         result = error.toString();
       });
 
-      if (currentUserObjectId != null) {
+      if (currentObjectId != null) {
         Map<dynamic, dynamic>? mapOfCurrentUser = await Backendless.data
             .of("Users")
-            .findById(currentUserObjectId)
+            .findById(currentObjectId)
             .onError((error, stackTrace) {
           result = error.toString();
         });
@@ -147,12 +153,12 @@ class UserViewModel with ChangeNotifier {
           ..password = password.trim();
 
         String result =
-            await context.read<UserViewModel>().createUserAccount(user);
+            await context.read<UserViewModel>().createBizAccount(user);
         if (result != 'OK') {
           showSnackBar(context, result, 3000);
         } else {
           showSnackBar(context, 'Account Created successfully!', 3000);
-          Navigator.of(context).popAndPushNamed(RouteManager.firstAppHomePage);
+          Navigator.of(context).popAndPushNamed(RouteManager.serviceProviderPage);
         }
 
       }

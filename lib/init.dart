@@ -21,7 +21,7 @@ class InitApp {
     if (result == 'OK') {
       Navigator.popAndPushNamed(context, RouteManager.firstAppHomePage);
     } else {
-      Navigator.popAndPushNamed(context, RouteManager.loginPage);
+      Navigator.popAndPushNamed(context, RouteManager.directoryPage);
     }
   }
 }
