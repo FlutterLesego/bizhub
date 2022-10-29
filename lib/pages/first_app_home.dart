@@ -103,9 +103,11 @@ class _FirstAppHomeState extends State<FirstAppHome> {
                         Navigator.popAndPushNamed(
                             context, RouteManager.categoriesPage);
                       },
-                      child: const Text(
-                        "view all",
-                        style: style16grey,
+                      child: const InkWell(
+                        child: Text(
+                          "view all",
+                          style: style16grey,
+                        ),
                       ),
                     )
                   ],

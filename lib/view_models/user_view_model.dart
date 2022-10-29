@@ -34,15 +34,15 @@ class UserViewModel with ChangeNotifier {
 
 //create a new user
   Future<String> createUserAccount(BackendlessUser user) async {
-    String results = 'OK';
+    String result = 'OK';
 
     _showUserProgress = true;
     _userProgressText = 'Creating account';
     notifyListeners();
-
+//register new user
     try {
       await Backendless.userService.register(user);
-      BizHubEntry emptyEntry = BizHubEntry(users: {}, username: user.email);
+      BizHubEntry emptyEntry = BizHubEntry(services: {}, username: user.email);
       await Backendless.data
           .of('BizHubEntry')
           .save(emptyEntry.toJson())

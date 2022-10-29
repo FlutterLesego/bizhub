@@ -46,6 +46,8 @@ dependencies:
 
   #store image
   path_provider: ^2.0.11
+
+  #database
   backendless_sdk: ^7.2.6
 
 
