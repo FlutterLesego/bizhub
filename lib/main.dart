@@ -7,7 +7,6 @@ import 'utils/user_preferences.dart';
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
   await UserPreferences.init();
 
 

@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:firstapp/init.dart';
 import 'package:firstapp/misc/constants.dart';
 import 'package:firstapp/routes/route_manager.dart';
 import 'package:flutter/material.dart';
@@ -21,10 +22,11 @@ class _LoadingPageState extends State<LoadingPage> {
     Timer(
         //set time in seconds
         const Duration(seconds: 5), () {
-          //go to login page after 5 seconds of the loading page
+      //go to login page after 5 seconds of the loading page
       Navigator.popAndPushNamed(context, RouteManager.serviceProviderPage);
     });
     super.initState();
+    InitApp.initializeApp(context);
   }
 
   @override

@@ -142,7 +142,7 @@ class UserViewModel with ChangeNotifier {
       if (confirmPassword.toString().trim() != password.toString().trim()) {
         showSnackBar(context, 'passwords do not match', 2000);
       } else {
-        Backendless user = BackendlessUser()
+        BackendlessUser user = BackendlessUser()
           ..email = email.trim()
           ..password = password.trim();
 
