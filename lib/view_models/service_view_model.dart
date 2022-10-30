@@ -2,6 +2,7 @@
 
 import 'dart:js';
 
+import 'package:backendless_sdk/backendless_sdk.dart';
 import 'package:firstapp/models/service_entry.dart';
 import 'package:firstapp/routes/route_manager.dart';
 import 'package:firstapp/view_models/user_view_model.dart';
@@ -31,13 +32,79 @@ class ServiceViewModel with ChangeNotifier {
   bool get busyRetrieving => _busyRetrieving;
   bool get busySaving => _busySaving;
 
+//get services of the user
   Future<String> getServices(String username) async {
     String result = 'OK';
+    DataQueryBuilder queryBuilder = DataQueryBuilder()
+      ..whereClause = "username = '$username'";
+
+    _busyRetrieving = true;
+    notifyListeners();
+
+    List<Map<dynamic, dynamic>?>? map = await Backendless.data
+        .of('ServiceEntry')
+        .find(queryBuilder)
+        .onError((error, stackTrace) {
+      result = error.toString();
+    });
+
+    //check if there is an error and show it
+    if (result != 'OK') {
+      _busyRetrieving = false;
+      notifyListeners();
+      return result;
+    }
+
+    //convert map and save it into the service entry
+    if (map != null) {
+      if (map.isNotEmpty) {
+        _serviceEntry = ServiceEntry.fromJson(map.first);
+        _services = convertMapToServiceList(_serviceEntry!.services);
+        notifyListeners();
+      } else {
+        _services = [];
+        notifyListeners();
+      }
+    } else {
+      result = 'NOT OK';
+    }
+
+    _busyRetrieving = false;
+    notifyListeners();
+
     return result;
   }
 
+////
+  ///
+//----------save services in our database----------//
+  ///
+////
   Future<String> saveServiceEntry(String username, bool inUI) async {
     String result = 'OK';
+    if (_serviceEntry == null) {
+      _serviceEntry = ServiceEntry(
+          services: convertServiceListToMap(_services), username: username);
+    } else {
+      _serviceEntry!.services = convertServiceListToMap(_services);
+    }
+
+    if (inUI) {
+      _busySaving = true;
+      notifyListeners();
+    }
+    await Backendless.data
+        .of('ServiceEntry')
+        .save(_serviceEntry!.toJson())
+        .onError((error, stackTrace) {
+      result = error.toString();
+    });
+
+    if (inUI) {
+      _busySaving = false;
+      notifyListeners();
+    }
+
     return result;
   }
 
@@ -63,29 +130,20 @@ class ServiceViewModel with ChangeNotifier {
         context.read<ServiceViewModel>().createService(service);
         Navigator.popAndPushNamed(context, RouteManager.serviceProviderPage);
       }
-      // context
-      //     .read<ServiceViewModel>()
-      //     .saveService(context.read<UserViewModel>().currentUser!.email, true);
-      // Service service = Service(
-      //     title: titleController.toString(),
-      //     created: created,
-      //     description: descriptionController.toString(),
-      //     category: category,
-      //     rating: rating,
-      //     image: image);
-      // if (context.read<ServiceViewModel>().services.contains(service)) {
-      //   showSnackBar(
-      //       context, 'Service with the same title already exists', 4000);
-      // } else {
-      //   context.read<UserViewModel>().currentUser!.email.toString().trim();
-      //   titleController.text = '';
-      //   descriptionController.text = '';
-      //   context.read<ServiceViewModel>().createService(service);
-      //   context.read<ServiceViewModel>().saveService(
-      //       context.read<ServiceViewModel>().currentUser!.email, true);
-      //   Navigator.pop(context);
-      //   showSnackBar(context, "Service added successfully!", 3500);
-      // }
+    }
+  }
+
+  ////
+  ///
+  //---------save all services in UI---------//
+
+  void saveAllServicesInUI(BuildContext context) async {
+    String result = await context.read<ServiceViewModel>().saveServiceEntry(
+        context.read<UserViewModel>().currentUser!.email, true);
+    if (result != 'OK') {
+      showSnackBar(context, result, 3000);
+    } else {
+      showSnackBar(context, "Service saved successfully!", 3000);
     }
   }
 
@@ -95,9 +153,11 @@ class ServiceViewModel with ChangeNotifier {
   void getServicesInUI(BuildContext context) async {
     String result = await context
         .read<ServiceViewModel>()
-        .getServices(context.read<ServiceViewModel>().currentUser!.email);
+        .getServices(context.read<UserViewModel>().currentUser!.email);
     if (result != 'OK') {
-      showSnackBar(context, "Services Retrieved Successfully!", 35000);
+      showSnackBar(context, result, 35000);
+    } else {
+      showSnackBar(context, "Services Retrieved Successfully!", 3000);
     }
   }
 
