@@ -5,7 +5,6 @@ import 'package:provider/provider.dart';
 
 import '../misc/constants.dart';
 import '../routes/route_manager.dart';
-import 'app_progress_indicator.dart';
 import 'profile_widget.dart';
 
 class NavigationDrawer extends StatelessWidget {

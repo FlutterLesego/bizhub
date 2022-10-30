@@ -19,14 +19,15 @@ class _LoadingPageState extends State<LoadingPage> {
   //implement init state to initialize app
   void initState() {
     //set timer before directing to next page
-    // Timer(
-    //     //set time in seconds
-    //     const Duration(seconds: 5), () {
-    //   //go to login page after 5 seconds of the loading page
-    //   Navigator.popAndPushNamed(context, RouteManager.serviceProviderPage);
-    // });
+    Timer(
+        //set time in seconds
+        const Duration(seconds: 5), () {
+          
+      //go to login page after 5 seconds of the loading page
+      
     super.initState();
     InitApp.initializeApp(context);
+    });
   }
 
   @override

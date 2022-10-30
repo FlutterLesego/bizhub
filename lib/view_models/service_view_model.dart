@@ -1,4 +1,4 @@
-// ignore_for_file: use_build_context_synchronously
+// ignore_for_file: use_build_context_synchronously, body_might_complete_normally_nullable
 
 import 'dart:js';
 
@@ -158,6 +158,17 @@ class ServiceViewModel with ChangeNotifier {
       showSnackBar(context, result, 35000);
     } else {
       showSnackBar(context, "Services Retrieved Successfully!", 3000);
+    }
+  }
+
+  void refreshServicesInUI(BuildContext context) async {
+    String result = await context.read<ServiceViewModel>().getServices(
+          context.read<UserViewModel>().currentUser!.email,
+        );
+    if (result != 'OK') {
+      showSnackBar(context, result, 3000);
+    } else {
+      showSnackBar(context, "Services Retrieved Successfully", 2000);
     }
   }
 

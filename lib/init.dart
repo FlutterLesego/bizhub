@@ -2,6 +2,7 @@
 
 import 'package:backendless_sdk/backendless_sdk.dart';
 import 'package:firstapp/routes/route_manager.dart';
+import 'package:firstapp/view_models/service_view_model.dart';
 import 'package:firstapp/view_models/user_view_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
@@ -19,9 +20,12 @@ class InitApp {
         applicationId: appID);
     String result = await context.read<UserViewModel>().checkIfUserLoggedIn();
     if (result == 'OK') {
-      Navigator.popAndPushNamed(context, RouteManager.firstAppHomePage);
+      context
+          .read<ServiceViewModel>()
+          .getServices(context.read<UserViewModel>().currentUser!.email);
+      Navigator.popAndPushNamed(context, RouteManager.serviceProviderPage);
     } else {
-      Navigator.popAndPushNamed(context, RouteManager.directoryPage);
+      Navigator.popAndPushNamed(context, RouteManager.firstAppHomePage);
     }
   }
 }

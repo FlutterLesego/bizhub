@@ -71,6 +71,10 @@ class _ServiceAddState extends State<ServiceAdd> {
                     const SizedBoxH20(),
                     ElevatedButton(
                         onPressed: () {
+                          context.read<ServiceViewModel>().createNewServiceInUI(
+                              context,
+                              titleController: titleController,
+                              descriptionController: descriptionController);
                           Navigator.popAndPushNamed(
                               context, RouteManager.serviceProviderPage);
                         },

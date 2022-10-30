@@ -1,4 +1,6 @@
+import 'package:firstapp/view_models/service_view_model.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../../misc/constants.dart';
 import '../../routes/route_manager.dart';
@@ -27,6 +29,14 @@ class _ServiceProviderPageState extends State<ServiceProviderPage> {
           "bizHub",
           style: titleStyleBlack,
         ),
+        actions: [
+          IconButton(
+              onPressed: () async {
+                context.read<ServiceViewModel>().refreshServicesInUI(context);
+              },
+              icon: const Icon(Icons.refresh,
+              color: Colors.indigo,))
+        ],
       ),
       body: SafeArea(
           child: ListView(

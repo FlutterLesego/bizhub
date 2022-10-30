@@ -1,4 +1,4 @@
-// ignore_for_file: use_build_context_synchronously
+// ignore_for_file: use_build_context_synchronously, unused_field, recursive_getters, body_might_complete_normally_nullable, avoid_print
 
 import 'package:backendless_sdk/backendless_sdk.dart';
 import 'package:firstapp/models/service_entry.dart';
@@ -6,6 +6,8 @@ import 'package:firstapp/routes/route_manager.dart';
 import 'package:firstapp/widgets/dialogs.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
+
+import 'service_view_model.dart';
 
 class UserViewModel with ChangeNotifier {
   final loginFormKey = GlobalKey<FormState>();
@@ -173,7 +175,7 @@ class UserViewModel with ChangeNotifier {
         .withClass<BackendlessUser>()
         .find(queryBuilder)
         .then((value) {
-      if (value == null || value.length == 0) {
+      if (value == null || value.isEmpty) {
         _userExists = false;
         notifyListeners();
       } else {
@@ -197,7 +199,7 @@ class UserViewModel with ChangeNotifier {
         showSnackBar(context, result, 3000);
       } else {
         //get the users' services
-        // context.read<ServiceViewModel>().getServices(email);
+        context.read<ServiceViewModel>().getServices(email);
         Navigator.of(context).popAndPushNamed(RouteManager.serviceProviderPage);
       }
     }
