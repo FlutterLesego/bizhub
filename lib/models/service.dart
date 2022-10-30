@@ -24,7 +24,7 @@ class Service {
   final String description;
   final String category;
   final DateTime created;
-  final Double rating;
+  final Double? rating;
   final String image;
 
   Service(
@@ -32,7 +32,7 @@ class Service {
       required this.created,
       required this.description,
       required this.category,
-      required this.rating,
+      this.rating,
       required this.image});
 
   Map<String, dynamic> toJson() => {

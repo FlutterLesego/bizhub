@@ -1,4 +1,5 @@
 import 'package:firstapp/routes/route_manager.dart';
+import 'package:firstapp/view_models/service_view_model.dart';
 import 'package:firstapp/view_models/user_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -23,7 +24,9 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(
           create: (context) => UserViewModel(),
-        )
+        ),
+        ChangeNotifierProvider(
+          create: (context) => ServiceViewModel())
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

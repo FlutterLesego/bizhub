@@ -17,7 +17,7 @@ class ServiceEntry {
 
   Map<String, Object?> toJson() => {
         'username': username,
-        'servces': services,
+        'services': services,
         'created': created,
         'updated': updated,
         'objectId': objectId,

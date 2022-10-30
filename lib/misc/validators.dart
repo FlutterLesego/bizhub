@@ -46,3 +46,17 @@ String? validateConfirmPassword(String? value) {
   }
   return null;
 }
+
+String? validateServiceTitle(String? value) {
+  if (value == null || value.isEmpty) {
+    return 'please enter service title';
+  }
+  return null;
+}
+
+String? validateServiceDescription(String? value) {
+  if (value == null || value.isEmpty) {
+    return 'please enter service description';
+  }
+  return null;
+}

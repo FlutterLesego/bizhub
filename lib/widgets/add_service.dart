@@ -1,6 +1,10 @@
 import 'package:firstapp/misc/constants.dart';
 import 'package:firstapp/routes/route_manager.dart';
+import 'package:firstapp/view_models/service_view_model.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../misc/validators.dart';
 
 class ServiceAdd extends StatefulWidget {
   const ServiceAdd({super.key});
@@ -44,6 +48,7 @@ class _ServiceAddState extends State<ServiceAdd> {
         children: [
           SingleChildScrollView(
             child: Form(
+              key: context.read<ServiceViewModel>().serviceFormKey,
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Column(
@@ -53,14 +58,14 @@ class _ServiceAddState extends State<ServiceAdd> {
                     const SizedBoxH30(),
                     TextFormField(
                         textCapitalization: TextCapitalization.characters,
-                        //validator: validateEmptyTitle,
+                        validator: validateServiceTitle,
                         controller: titleController,
                         decoration: serviceFormDecoration("Title")),
                     const SizedBoxH30(),
                     TextFormField(
                         maxLines: 1,
                         minLines: 1,
-                        //validator: validateEmptyDescription,
+                        validator: validateServiceDescription,
                         controller: descriptionController,
                         decoration: serviceFormDecoration("Description")),
                     const SizedBoxH20(),
