@@ -1,5 +1,5 @@
 class User {
-  final String name;
+  final String bizName;
   final String emailAddress;
   final int phoneNumber;
   final String password;
@@ -7,7 +7,7 @@ class User {
   final String imagePath;
 
   const User({
-    required this.name,
+    required this.bizName,
     required this.emailAddress,
     required this.phoneNumber,
     required this.password,
@@ -17,7 +17,7 @@ class User {
 
   Map<String, dynamic> toJson() => {
         'imagePath': imagePath,
-        'name': name,
+        'bizName': bizName,
         'email': emailAddress,
         'phoneNumber': phoneNumber,
         'password': password,

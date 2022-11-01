@@ -2,6 +2,13 @@
 
 import 'dart:ffi';
 
+String? validateBizName(String? value) {
+  if (value == null || value.isEmpty) {
+    return 'biz name required!';
+  }
+  return null;
+}
+
 String? validateName(String? value) {
   if (value == null || value.isEmpty) {
     return 'name required!';
@@ -25,6 +32,13 @@ String? validatePhone(String? value) {
     return 'phone number required!';
   } else if (value.length < 10) {
     return 'phone number invalid!';
+  }
+  return null;
+}
+
+String? validateLocation(String? value) {
+  if (value == null || value.isEmpty) {
+    return 'location required!';
   }
   return null;
 }

@@ -1,9 +1,11 @@
+import 'package:backendless_sdk/backendless_sdk.dart';
 import 'package:firstapp/misc/constants.dart';
 import 'package:firstapp/models/user_model.dart';
 import 'package:firstapp/routes/route_manager.dart';
-import 'package:firstapp/utils/user_preferences.dart';
+import 'package:firstapp/view_models/user_view_model.dart';
 import 'package:firstapp/widgets/appbar_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../widgets/profile_widget.dart';
 
@@ -17,7 +19,6 @@ class ProfilePage extends StatefulWidget {
 class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
-    const user = UserPreferences.myUser;
 
     return Scaffold(
       appBar: buildAppBar(context),
@@ -26,17 +27,17 @@ class _ProfilePageState extends State<ProfilePage> {
         children: [
           const SizedBoxH20(),
           ProfileWidget(
-            imagePath: user.imagePath,
+            imagePath: context.read<UserViewModel>().currentUser!.getProperty('imagePath'),
             onClicked: () async {
               Navigator.popAndPushNamed(context, RouteManager.editProfilePage);
             },
           ),
           const SizedBoxH20(),
-          buildName(user),
+          buildName(context),
           const SizedBoxH10(),
-          buildEmail(user),
+          buildEmail(context),
           const SizedBoxH10(),
-          buildPhoneNumber(user),
+          buildPhoneNumber(context),
           const SizedBoxH30(),
           Center(child: buildButton()),
         ],
@@ -44,28 +45,28 @@ class _ProfilePageState extends State<ProfilePage> {
     );
   }
 
-  Widget buildName(User user) => Column(
+  Widget buildName(BuildContext context) => Column(
         children: [
           Text(
-            user.name,
+            context.read<UserViewModel>().currentUser!.getProperty('bizName'),
             style: title26Indigo,
           )
         ],
       );
 
-  Widget buildEmail(User user) => Column(
+  Widget buildEmail(BuildContext context) => Column(
         children: [
           Text(
-            user.emailAddress,
+            context.read<UserViewModel>().currentUser!.getProperty('email'),
             style: style16Indigo,
           )
         ],
       );
 
-  Widget buildPhoneNumber(User user) => Column(
+  Widget buildPhoneNumber(BuildContext context) => Column(
         children: [
           Text(
-            user.phoneNumber.toString(),
+            context.read<UserViewModel>().currentUser!.getProperty('phoneNumber'),
             style: style16Indigo,
           )
         ],

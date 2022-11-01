@@ -50,6 +50,11 @@ dependencies:
   #database
   backendless_sdk: ^7.2.6
 
+  #location
+  location: ^4.4.0
+  geolocator: ^9.0.2
+  geocoding: ^2.0.5
+
 
 dev_dependencies:
   flutter_test:

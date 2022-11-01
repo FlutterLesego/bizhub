@@ -1,4 +1,4 @@
-import 'package:firstapp/utils/user_preferences.dart';
+import 'package:backendless_sdk/backendless_sdk.dart';
 import 'package:firstapp/view_models/user_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -23,7 +23,7 @@ class NavigationDrawer extends StatelessWidget {
         ),
       );
 
-//header of the drawer
+// - - - - header of the drawer - - - - - //
   Widget buildHeader(BuildContext context) => Material(
         color: Colors.indigoAccent.shade100,
         child: InkWell(
@@ -38,7 +38,7 @@ class NavigationDrawer extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 ProfileWidget(
-                  imagePath: UserPreferences.myUser.imagePath,
+                  imagePath: context.read<UserViewModel>().currentUser!.getProperty('imagePath'),
                   onClicked: () async {
                     Navigator.popAndPushNamed(
                         context, RouteManager.profilePage);
@@ -46,18 +46,26 @@ class NavigationDrawer extends StatelessWidget {
                 ),
                 const SizedBoxH10(),
                 Text(
-                  UserPreferences.myUser.name,
+                  context
+                      .read<UserViewModel>()
+                      .currentUser!
+                      .getProperty('name'),
                   style: style14White,
                 ),
                 const SizedBoxH10(),
-                Text(UserPreferences.myUser.emailAddress)
+                Text(
+                  context
+                      .read<UserViewModel>()
+                      .currentUser!
+                      .getProperty('email'),
+                )
               ],
             ),
           ),
         ),
       );
 
-//menu items of the drawer
+// - - - - - menu items of the drawer - - - - - //
   Widget buildMenuItems(BuildContext context) => Container(
         padding: const EdgeInsets.all(20),
         child: Wrap(
@@ -74,7 +82,7 @@ class NavigationDrawer extends StatelessWidget {
               ),
               onTap: () {
                 Navigator.pop(context);
-                Navigator.pushNamed(context, RouteManager.firstAppHomePage);
+                Navigator.pushNamed(context, RouteManager.serviceProviderPage);
               },
             ),
             ListTile(

@@ -1,6 +1,4 @@
-// ignore_for_file: use_build_context_synchronously, body_might_complete_normally_nullable
-
-import 'dart:js';
+// ignore_for_file: use_build_context_synchronously, body_might_complete_normally_nullable, unused_import
 
 import 'package:backendless_sdk/backendless_sdk.dart';
 import 'package:firstapp/models/service_entry.dart';
@@ -117,17 +115,23 @@ class ServiceViewModel with ChangeNotifier {
     required TextEditingController descriptionController,
   }) async {
     if (serviceFormKey.currentState?.validate() ?? false) {
+      context.read<ServiceViewModel>().saveServiceEntry(
+          context.read<UserViewModel>().currentUser!.email, true);
       Service service = Service(
           title: titleController.text.trim(),
           created: DateTime.now(),
           description: descriptionController.text.trim(),
-          category: '',
-          image: 'image');
+          category: 'category',
+          image: 'imagePath');
       if (context.read<ServiceViewModel>().services.contains(service)) {
         showSnackBar(context, "Service Already Exists!", 3000);
       } else {
         titleController.text = '';
+        descriptionController.text = '';
         context.read<ServiceViewModel>().createService(service);
+        context.read<ServiceViewModel>().saveServiceEntry(
+            context.read<UserViewModel>().currentUser!.email, true);
+        showSnackBar(context, 'Service added successfully!', 2000);
         Navigator.popAndPushNamed(context, RouteManager.serviceProviderPage);
       }
     }

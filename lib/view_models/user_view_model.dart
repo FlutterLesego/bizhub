@@ -208,9 +208,10 @@ class UserViewModel with ChangeNotifier {
 //create new service provider method
   void createServiceProviderInUI(
     BuildContext context, {
-    required String name,
+    required String bizName,
     required String email,
     required String phone,
+    required String location,
     required String password,
     required String confirmPassword,
   }) async {
@@ -224,12 +225,9 @@ class UserViewModel with ChangeNotifier {
           ..email = email.trim()
           ..password = password.trim()
           ..putProperties({
-            'name': name.trim(),
-            'email address': email.trim(),
-            'phone number': phone.trim(),
-            'location': name.trim(),
-            'password': password.trim(),
-            'confirm password': confirmPassword.trim(),
+            'bizName': bizName.trim(),
+            'phone': phone.trim(),
+            'location': location.trim(),
           });
 
         String result =
@@ -237,9 +235,10 @@ class UserViewModel with ChangeNotifier {
         if (result != 'OK') {
           showSnackBar(context, result, 3000);
         } else {
-          showSnackBar(context, 'Account Created Successfully!', 2000);
+          showSnackBar(context, 'Account Created Successfully!', 1500);
+          showSnackBar(context, 'Please check your email and verify!', 2500);
           Navigator.of(context)
-              .popAndPushNamed(RouteManager.serviceProviderPage);
+              .popAndPushNamed(RouteManager.loginPage);
         }
       }
     }
@@ -247,9 +246,10 @@ class UserViewModel with ChangeNotifier {
 
   void updateUserInUI(
     BuildContext context, {
-    required String name,
+    required String bizName,
     required String email,
     required String phone,
+    required String location,
     required String password,
     required String confirmPassword,
   }) async {
@@ -289,15 +289,19 @@ class UserViewModel with ChangeNotifier {
       }
     }
   }
+
+  void deleteAccountInUI(BuildContext context){
+    
+  }
 }
 
 //error messages for users
 String getError(String message) {
   if (message.contains('email address must be confirmed first')) {
-    return 'Please confirm your email address first';
+    return 'Please verify your email address first';
   }
   if (message.contains('User already exists')) {
-    return 'User already exists! Please create a new user or log in.';
+    return 'Email already exists! Please create a new user or log in.';
   }
   if (message.contains('Invalid login or password')) {
     return 'Invalid credentials! Please check your username or password.';
