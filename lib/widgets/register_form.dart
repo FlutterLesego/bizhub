@@ -48,37 +48,6 @@ class _RegisterFormState extends State<RegisterForm> {
     super.dispose();
   }
 
-  String completeAddress = "";
-  Position? position;
-  List<Placemark>? placeMark;
-
-////
-  ///
-//-----get location function-----//
-
-  void getCurrentLocation() async {
-    LocationPermission locationPermission = await Geolocator.checkPermission();
-    if (locationPermission == LocationPermission.denied) {
-      await Geolocator.openLocationSettings();
-    }
-
-    Position newPosition = await Geolocator.getCurrentPosition(
-        desiredAccuracy: LocationAccuracy.bestForNavigation);
-
-    position = newPosition;
-
-    placeMark = await placemarkFromCoordinates(
-      position!.latitude,
-      position!.longitude,
-    );
-
-    Placemark pmark = placeMark![0];
-
-    completeAddress =
-        '${pmark.locality}, ${pmark.subAdministrativeArea}, ${pmark.administrativeArea} ${pmark.postalCode}'; //get location step by step
-
-    locationController.text = completeAddress;
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -97,7 +66,7 @@ class _RegisterFormState extends State<RegisterForm> {
               const SizedBoxH20(),
               TextFormField(
                 validator: validateBizName,
-                controller: nameController,
+                controller: bizNameController,
                 decoration: formDecoration(
                   "Biz Name",
                   Icons.person_outline,
@@ -136,7 +105,8 @@ class _RegisterFormState extends State<RegisterForm> {
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(30))),
                   onPressed: () {
-                    getCurrentLocation();
+                    context.read<UserViewModel>().getCurrentLocation(context,
+                    location: locationController.text.trim());
                   },
                   icon: const Icon(
                     Icons.location_searching,

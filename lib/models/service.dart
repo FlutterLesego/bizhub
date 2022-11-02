@@ -16,7 +16,7 @@ Map<dynamic, dynamic> convertServiceListToMap(List<Service> services) {
 List<Service> convertMapToServiceList(Map<dynamic, dynamic> map) {
   List<Service> services = [];
   for (var i = 0; i < map.length; i++) {
-    services.add(Service.fromJson(map[i]));
+    services.add(Service.fromJson(map['$i']));
   }
   return services;
 }
@@ -25,6 +25,7 @@ class Service {
   final String title;
   final String description;
   final String category;
+  final String location;
   final DateTime created;
   final Double? rating;
   final String image;
@@ -34,6 +35,7 @@ class Service {
       required this.created,
       required this.description,
       required this.category,
+      required this.location,
       this.rating,
       required this.image});
 
@@ -43,6 +45,7 @@ class Service {
         'serviceCategory': category,
         'serviceRating': rating,
         'serviceImage': image,
+        'serviceLocation': location,
         'created': created.millisecondsSinceEpoch
       };
 
@@ -51,6 +54,7 @@ class Service {
       title: json!['serviceTitle'] as String,
       description: json['serviceDescription'] as String,
       category: json['serviceCategory'] as String,
+      location: json['serviceLocation'] as String,
       rating: json['serviceRating'] as Double,
       image: json['serviceImage'] as String,
       created: DateTime.fromMillisecondsSinceEpoch(

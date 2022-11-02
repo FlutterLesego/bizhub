@@ -30,7 +30,8 @@ class ServiceViewModel with ChangeNotifier {
   bool get busyRetrieving => _busyRetrieving;
   bool get busySaving => _busySaving;
 
-//get services of the user
+////--------------------------------------------////
+// -----get services of the service provider-----//
   Future<String> getServices(String username) async {
     String result = 'OK';
     DataQueryBuilder queryBuilder = DataQueryBuilder()
@@ -72,11 +73,8 @@ class ServiceViewModel with ChangeNotifier {
     return result;
   }
 
-////
-  ///
-//----------save services in our database----------//
-  ///
-////
+////------------------------------------////
+// -----save new service in database-----//
   Future<String> saveServiceEntry(String username, bool inUI) async {
     String result = 'OK';
     if (_serviceEntry == null) {
@@ -121,6 +119,7 @@ class ServiceViewModel with ChangeNotifier {
           created: DateTime.now(),
           description: descriptionController.text.trim(),
           category: 'category',
+          location: context.read<UserViewModel>().currentUser!.getProperty('location'),
           image: 'imagePath');
       if (context.read<ServiceViewModel>().services.contains(service)) {
         showSnackBar(context, "Service Already Exists!", 3000);
@@ -175,22 +174,21 @@ class ServiceViewModel with ChangeNotifier {
     }
   }
 
-////
-  ///
-//add a new service
+////------------------------////
+// -----adding a service-----//
   void createService(Service service) {
     _services.insert(0, service);
     notifyListeners();
   }
 
-  ///
-//delete service method
+////--------------------------////
+// -----deleting a service-----//
   void deleteService(Service service) {
     _services.remove(service);
     notifyListeners();
   }
 
-  ///
-//edit a service
+////-------------------------////
+// -----editing a service-----//
   void editService(int index) {}
 }

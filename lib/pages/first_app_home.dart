@@ -139,15 +139,6 @@ class _FirstAppHomeState extends State<FirstAppHome> {
                   scrollDirection: Axis.vertical,
                   child: Column(
                     children: const [
-                      ServiceView(),
-                      SizedBoxH10(),
-                      ServiceView(),
-                      SizedBoxH10(),
-                      ServiceView(),
-                      SizedBoxH10(),
-                      ServiceView(),
-                      SizedBoxH10(),
-                      ServiceView(),
                     ],
                   ),
                 ),

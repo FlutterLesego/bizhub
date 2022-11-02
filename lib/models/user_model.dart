@@ -2,6 +2,7 @@ class User {
   final String bizName;
   final String emailAddress;
   final String phoneNumber;
+  final String location;
   final String password;
   final String confirmPassword;
   final String imagePath;
@@ -10,6 +11,7 @@ class User {
     required this.bizName,
     required this.emailAddress,
     required this.phoneNumber,
+    required this.location,
     required this.password,
     required this.confirmPassword,
     required this.imagePath,
@@ -20,6 +22,7 @@ class User {
         'name': bizName,
         'email': emailAddress,
         'phoneNumber': phoneNumber,
+        'location': location,
         'password': password,
         'confirmPassword': confirmPassword,
       };

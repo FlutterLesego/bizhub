@@ -5,6 +5,8 @@ import 'package:firstapp/models/service_entry.dart';
 import 'package:firstapp/routes/route_manager.dart';
 import 'package:firstapp/widgets/dialogs.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:geocoding/geocoding.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:provider/provider.dart';
 
 import 'service_view_model.dart';
@@ -37,9 +39,8 @@ class UserViewModel with ChangeNotifier {
   String _userProgressText = '';
   String get userProgressText => userProgressText;
 
-/////
-  ///
-//register new service provider
+////-------------------------------------////
+// -----register new service provider-----//
   Future<String> createServiceProvider(BackendlessUser user) async {
     String result = 'OK';
 
@@ -65,9 +66,8 @@ class UserViewModel with ChangeNotifier {
     return result;
   }
 
-////
-  ///
-//Login service provider in to the app
+////-------------------------------------////
+// -----log in service provider-----//
   Future<String> loginServiceProvider(String username, String password) async {
     String result = 'OK';
 
@@ -87,9 +87,8 @@ class UserViewModel with ChangeNotifier {
     return result;
   }
 
-////
-  ///
-//check if user is logged in
+//////////////////////////////////////////////////////
+// -----check if service provider is logged in-----//
   Future<String> checkIfUserLoggedIn() async {
     String result = 'OK';
 
@@ -129,8 +128,8 @@ class UserViewModel with ChangeNotifier {
     return result;
   }
 
-  ///
-//logout user
+////-------------------------------------////
+// -----log out service provider-----//
   Future<String> logoutUser() async {
     String result = 'OK';
 
@@ -146,9 +145,8 @@ class UserViewModel with ChangeNotifier {
     return result;
   }
 
-////
-  ///
-//reset pasword
+////-------------------------------------------////
+// -----reset password for service provider-----//
   Future<String> resetPassword(String username) async {
     String result = 'OK';
     _showUserProgress = true;
@@ -164,9 +162,8 @@ class UserViewModel with ChangeNotifier {
     return result;
   }
 
-////
-  ///
-//check if user exists inUI
+////-------------------------------------////
+// -----check if service provider exists-----//
   void checkIfUserExists(String username) async {
     DataQueryBuilder queryBuilder = DataQueryBuilder()
       ..whereClause = "email = '$username'";
@@ -237,8 +234,7 @@ class UserViewModel with ChangeNotifier {
         } else {
           showSnackBar(context, 'Account Created Successfully!', 1500);
           showSnackBar(context, 'Please check your email and verify!', 2500);
-          Navigator.of(context)
-              .popAndPushNamed(RouteManager.loginPage);
+          Navigator.of(context).popAndPushNamed(RouteManager.loginPage);
         }
       }
     }
@@ -280,8 +276,7 @@ class UserViewModel with ChangeNotifier {
       showSnackBar(context,
           'Please enter email address and click on "Reset Password"', 3000);
     } else {
-      String result =
-          await context.read<UserViewModel>().resetPassword(email);
+      String result = await context.read<UserViewModel>().resetPassword(email);
       if (result == 'OK') {
         showSnackBar(context, "Reset instructions sent to $email", 3000);
       } else {
@@ -290,12 +285,46 @@ class UserViewModel with ChangeNotifier {
     }
   }
 
-  void deleteAccountInUI(BuildContext context){
-    
+  void deleteAccountInUI(BuildContext context) {}
+
+  String completeAddress = "";
+  Position? position;
+  List<Placemark>? placeMark;
+
+////
+  ///
+//-----get location function-----//
+
+  void getCurrentLocation(BuildContext context,
+      {required String location}) async {
+    LocationPermission locationPermission = await Geolocator.checkPermission();
+    if (locationPermission == LocationPermission.denied) {
+      await Geolocator.openLocationSettings();
+    }
+
+    Position newPosition = await Geolocator.getCurrentPosition(
+        desiredAccuracy: LocationAccuracy.bestForNavigation);
+
+    position = newPosition;
+
+    placeMark = await placemarkFromCoordinates(
+      position!.latitude,
+      position!.longitude,
+    );
+
+    Placemark pmark = placeMark![0];
+
+    completeAddress =
+        '${pmark.subThoroughfare} ${pmark.thoroughfare}';
+        //${pmark.subLocality} ${pmark.locality}, ${pmark.postalCode}
+        //'; //get location step by step
+
+    location = completeAddress.toString().trim();
   }
 }
 
-//error messages for users
+////-------------------------------////
+//-----error messages for users-----//
 String getError(String message) {
   if (message.contains('email address must be confirmed first')) {
     return 'Please verify your email address first';
