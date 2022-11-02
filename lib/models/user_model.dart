@@ -1,7 +1,7 @@
 class User {
   final String bizName;
   final String emailAddress;
-  final int phoneNumber;
+  final String phoneNumber;
   final String password;
   final String confirmPassword;
   final String imagePath;
@@ -17,7 +17,7 @@ class User {
 
   Map<String, dynamic> toJson() => {
         'imagePath': imagePath,
-        'bizName': bizName,
+        'name': bizName,
         'email': emailAddress,
         'phoneNumber': phoneNumber,
         'password': password,

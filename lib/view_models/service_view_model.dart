@@ -1,4 +1,4 @@
-// ignore_for_file: use_build_context_synchronously, body_might_complete_normally_nullable, unused_import
+// ignore_for_file: use_build_context_synchronously, body_might_complete_normally_nullable, unused_import, prefer_is_empty
 
 import 'package:backendless_sdk/backendless_sdk.dart';
 import 'package:firstapp/models/service_entry.dart';
@@ -55,13 +55,12 @@ class ServiceViewModel with ChangeNotifier {
 
     //convert map and save it into the service entry
     if (map != null) {
-      if (map.isNotEmpty) {
+      if (map.length > 0) {
         _serviceEntry = ServiceEntry.fromJson(map.first);
         _services = convertMapToServiceList(_serviceEntry!.services);
         notifyListeners();
       } else {
-        _services = [];
-        notifyListeners();
+        emptyServices();
       }
     } else {
       result = 'NOT OK';

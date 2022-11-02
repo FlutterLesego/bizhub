@@ -20,9 +20,7 @@ class _ServiceProviderPageState extends State<ServiceProviderPage> {
     return Scaffold(
       // - - - - - top app bar - - - - - //
       appBar: AppBar(
-        iconTheme: const IconThemeData(
-          color: Colors.indigo
-        ),
+        iconTheme: const IconThemeData(color: Colors.indigo),
         // leading: const Icon(
         //   Icons.menu_rounded,
         //   color: Colors.black,
@@ -35,6 +33,11 @@ class _ServiceProviderPageState extends State<ServiceProviderPage> {
           style: titleStyleBlack,
         ),
         actions: [
+          IconButton(
+              onPressed: () async {
+                context.read<ServiceViewModel>().saveAllServicesInUI(context);
+              },
+              icon: const Icon(Icons.save)),
           IconButton(
               onPressed: () async {
                 context.read<ServiceViewModel>().refreshServicesInUI(context);

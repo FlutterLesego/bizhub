@@ -177,7 +177,7 @@ class _RegisterFormState extends State<RegisterForm> {
                         context,
                         bizName: bizNameController.text.trim(),
                         email: emailController.text.trim(),
-                        phone: phoneController.text.trim(),
+                        phoneNumber: phoneController.text.trim(),
                         location: locationController.text.trim(),
                         password: passwordController.text.trim(),
                         confirmPassword: confirmPasswordController.text.trim());

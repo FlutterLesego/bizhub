@@ -210,7 +210,7 @@ class UserViewModel with ChangeNotifier {
     BuildContext context, {
     required String bizName,
     required String email,
-    required String phone,
+    required String phoneNumber,
     required String location,
     required String password,
     required String confirmPassword,
@@ -225,8 +225,8 @@ class UserViewModel with ChangeNotifier {
           ..email = email.trim()
           ..password = password.trim()
           ..putProperties({
-            'bizName': bizName.trim(),
-            'phone': phone.trim(),
+            'name': bizName.trim(),
+            'phoneNumber': phoneNumber.trim(),
             'location': location.trim(),
           });
 
@@ -248,7 +248,7 @@ class UserViewModel with ChangeNotifier {
     BuildContext context, {
     required String bizName,
     required String email,
-    required String phone,
+    required String phoneNumber,
     required String location,
     required String password,
     required String confirmPassword,
