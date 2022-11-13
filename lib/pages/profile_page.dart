@@ -1,12 +1,10 @@
-import 'package:backendless_sdk/backendless_sdk.dart';
 import 'package:firstapp/misc/constants.dart';
-import 'package:firstapp/models/user_model.dart';
 import 'package:firstapp/routes/route_manager.dart';
-import 'package:firstapp/view_models/user_view_model.dart';
 import 'package:firstapp/widgets/appbar_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../services/user_view_model.dart';
 import '../widgets/profile_widget.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -19,7 +17,6 @@ class ProfilePage extends StatefulWidget {
 class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       appBar: buildAppBar(context),
       body: ListView(
@@ -27,7 +24,7 @@ class _ProfilePageState extends State<ProfilePage> {
         children: [
           const SizedBoxH20(),
           ProfileWidget(
-            imagePath: context.read<UserViewModel>().currentUser!.getProperty('imagePath'),
+            imagePath: '',
             onClicked: () async {
               Navigator.popAndPushNamed(context, RouteManager.editProfilePage);
             },
@@ -38,7 +35,9 @@ class _ProfilePageState extends State<ProfilePage> {
           buildEmail(context),
           const SizedBoxH10(),
           buildPhoneNumber(context),
-          const SizedBoxH30(),
+          const SizedBoxH10(),
+          buildLocation(context),
+          const SizedBoxH20(),
           Center(child: buildButton()),
         ],
       ),
@@ -48,7 +47,7 @@ class _ProfilePageState extends State<ProfilePage> {
   Widget buildName(BuildContext context) => Column(
         children: [
           Text(
-            context.read<UserViewModel>().currentUser!.getProperty('bizName'),
+            context.read<UserViewModel>().currentUser!.getProperty('name'),
             style: title26Indigo,
           )
         ],
@@ -66,9 +65,30 @@ class _ProfilePageState extends State<ProfilePage> {
   Widget buildPhoneNumber(BuildContext context) => Column(
         children: [
           Text(
-            context.read<UserViewModel>().currentUser!.getProperty('phoneNumber'),
+            context
+                .read<UserViewModel>()
+                .currentUser!
+                .getProperty('phoneNumber'),
             style: style16Indigo,
           )
+        ],
+      );
+
+  Widget buildLocation(BuildContext context) => Column(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Icon(
+                Icons.location_pin,
+                color: Colors.indigo,
+              ),
+              Text(
+                context.read<UserViewModel>().currentUser!.getProperty('location'),
+                style: style16Black,
+              )
+            ],
+          ),
         ],
       );
 
@@ -77,7 +97,8 @@ class _ProfilePageState extends State<ProfilePage> {
         children: [
           TextButton.icon(
               onPressed: () async {
-                await Navigator.popAndPushNamed(context, RouteManager.editProfilePage);
+                await Navigator.popAndPushNamed(
+                    context, RouteManager.editProfilePage);
               },
               icon: const Icon(
                 Icons.edit,
@@ -88,8 +109,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 style: style14Black,
               )),
           TextButton.icon(
-            onPressed: () {
-            },
+            onPressed: () {},
             icon: const Icon(
               Icons.delete_forever_outlined,
               color: Colors.indigo,

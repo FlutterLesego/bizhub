@@ -1,16 +1,16 @@
 import 'package:firstapp/routes/route_manager.dart';
-import 'package:firstapp/view_models/service_view_model.dart';
-import 'package:firstapp/view_models/user_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
+import 'services/service_view_model.dart';
+import 'services/user_view_model.dart';
 // Future main() async {
 //   WidgetsFlutterBinding.ensureInitialized();
 //   await UserPreferences.init();
 
 void main() {
-    runApp(const MyApp());
+  runApp(const MyApp());
 }
-
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -23,8 +23,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (context) => UserViewModel(),
         ),
-        ChangeNotifierProvider(
-          create: (context) => ServiceViewModel())
+        ChangeNotifierProvider(create: (context) => ServiceViewModel())
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

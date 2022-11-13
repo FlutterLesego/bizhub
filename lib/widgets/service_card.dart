@@ -12,18 +12,20 @@ class ServiceCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      color: Colors.indigo.shade50,
+      color: Colors.grey.shade50,
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: ListTile(
-          title: Text(
-            service.title,
-            style: bold16Indigo
+          title: Text(service.title, style: bold16Indigo),
+          subtitle: Row(
+            children: [
+              const Icon(Icons.location_pin,
+              color: Colors.indigo,),
+              const SizedBoxH30(),
+              Text(service.location, style: style14Black),
+            ],
           ),
-          subtitle: Text(service.location,
-          style: style14Black),
-          onTap: (){
-          },
+          onTap: () {},
         ),
       ),
     );

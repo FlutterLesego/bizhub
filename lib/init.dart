@@ -2,10 +2,11 @@
 
 import 'package:backendless_sdk/backendless_sdk.dart';
 import 'package:firstapp/routes/route_manager.dart';
-import 'package:firstapp/view_models/service_view_model.dart';
-import 'package:firstapp/view_models/user_view_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
+
+import 'services/service_view_model.dart';
+import 'services/user_view_model.dart';
 
 class InitApp {
   //api keys for backendless
@@ -25,7 +26,7 @@ class InitApp {
           .getServices(context.read<UserViewModel>().currentUser!.email);
       Navigator.popAndPushNamed(context, RouteManager.serviceProviderPage);
     } else {
-      Navigator.popAndPushNamed(context, RouteManager.loginPage);
+      Navigator.popAndPushNamed(context, RouteManager.firstAppHomePage);
     }
   }
 }

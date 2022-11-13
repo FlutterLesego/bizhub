@@ -1,10 +1,15 @@
+// ignore_for_file: unnecessary_null_comparison
+
 import 'package:firstapp/misc/constants.dart';
 import 'package:firstapp/routes/route_manager.dart';
+import 'package:firstapp/widgets/dropdown_button.dart';
+import 'package:firstapp/widgets/service_view.dart';
 import 'package:flutter/material.dart';
 
+import '../services/service_view_model.dart';
 import '../widgets/category_view.dart';
 import '../widgets/navigation_drawer.dart';
-import '../widgets/service_view.dart';
+import 'package:provider/provider.dart' as provider;
 
 class FirstAppHome extends StatefulWidget {
   const FirstAppHome({Key? key}) : super(key: key);
@@ -118,6 +123,7 @@ class _FirstAppHomeState extends State<FirstAppHome> {
                   scrollDirection: Axis.horizontal,
                   child: Row(
                     children: const [
+                      DropdownButton(),
                       ServiceCategoryView(),
                       ServiceCategoryView(),
                       ServiceCategoryView(),
@@ -135,11 +141,28 @@ class _FirstAppHomeState extends State<FirstAppHome> {
                   ],
                 ),
                 const SizedBoxH20(),
-                SingleChildScrollView(
-                  scrollDirection: Axis.vertical,
-                  child: Column(
-                    children: const [
-                    ],
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 8.0, vertical: 20),
+                    child: provider.Consumer<ServiceViewModel>(
+                      builder: ((context, value, child) {
+                        return value != null
+                            ? ListView.builder(
+                                physics: const BouncingScrollPhysics(),
+                                itemCount: value.services.length,
+                                itemBuilder: (context, index) {
+                                  return ServiceView(
+                                      service: value.services[index]);
+                                })
+                            : const Center(
+                                child: Text(
+                                  'Services Not Yet Available',
+                                  style: style16Black,
+                                ),
+                              );
+                      }),
+                    ),
                   ),
                 ),
                 const SizedBoxH10()

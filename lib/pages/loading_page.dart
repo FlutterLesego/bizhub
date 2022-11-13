@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:firstapp/init.dart';
 import 'package:firstapp/misc/constants.dart';
-import 'package:firstapp/routes/route_manager.dart';
 import 'package:flutter/material.dart';
 
 import '../widgets/app_progress_indicator.dart';

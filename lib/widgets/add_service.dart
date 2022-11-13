@@ -1,10 +1,11 @@
 import 'package:firstapp/misc/constants.dart';
 import 'package:firstapp/routes/route_manager.dart';
-import 'package:firstapp/view_models/service_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../misc/validators.dart';
+import '../services/helper_service.dart';
+import '../services/service_view_model.dart';
 
 class ServiceAdd extends StatefulWidget {
   const ServiceAdd({super.key});
@@ -71,12 +72,9 @@ class _ServiceAddState extends State<ServiceAdd> {
                     const SizedBoxH20(),
                     ElevatedButton(
                         onPressed: () {
-                          context.read<ServiceViewModel>().createNewServiceInUI(
-                              context,
+                          createNewServiceInUI(context,
                               titleController: titleController,
                               descriptionController: descriptionController);
-                          Navigator.popAndPushNamed(
-                              context, RouteManager.serviceProviderPage);
                         },
                         child: const Text("Add Service"))
                   ],

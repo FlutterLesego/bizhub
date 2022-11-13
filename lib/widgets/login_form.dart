@@ -1,11 +1,10 @@
 import 'package:firstapp/routes/route_manager.dart';
-import 'package:firstapp/view_models/user_view_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 import '../misc/constants.dart';
 import '../misc/validators.dart';
+import '../services/helper_user.dart';
 
 class LoginForm extends StatefulWidget {
   const LoginForm({Key? key}) : super(key: key);
@@ -35,7 +34,7 @@ class _LoginFormState extends State<LoginForm> {
   @override
   Widget build(BuildContext context) {
     return Form(
-        key: context.read<UserViewModel>().loginFormKey,
+        key:loginFormKey,
         child: Padding(
           padding: const EdgeInsets.all(20.0),
           child: Column(
@@ -69,7 +68,7 @@ class _LoginFormState extends State<LoginForm> {
                 children: [
                   TextButton(
                       onPressed: () {
-                        context.read<UserViewModel>().resetPasswordInUI(context,
+                        resetPasswordInUI(context,
                             email: emailController.text.trim());
                       },
                       child: const Text(
@@ -87,7 +86,8 @@ class _LoginFormState extends State<LoginForm> {
                     style: style16White,
                   ),
                   onPressed: () {
-                    context.read<UserViewModel>().loginServiceProviderInUI(context,
+                    loginServiceProviderInUI(
+                        context,
                         email: emailController.text.trim(),
                         password: passwordController.text.trim());
                   }),

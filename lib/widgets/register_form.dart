@@ -1,12 +1,8 @@
 import 'package:firstapp/misc/constants.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:geocoding/geocoding.dart';
-import 'package:geolocator/geolocator.dart';
-import 'package:provider/provider.dart';
-
 import '../misc/validators.dart';
-import '../view_models/user_view_model.dart';
+import '../services/helper_user.dart';
 
 class RegisterForm extends StatefulWidget {
   const RegisterForm({Key? key}) : super(key: key);
@@ -48,11 +44,10 @@ class _RegisterFormState extends State<RegisterForm> {
     super.dispose();
   }
 
-
   @override
   Widget build(BuildContext context) {
     return Form(
-        key: context.read<UserViewModel>().registerFormKey,
+        key: registerFormKey,
         child: Padding(
           padding: const EdgeInsets.all(20.0),
           child: Column(
@@ -105,8 +100,8 @@ class _RegisterFormState extends State<RegisterForm> {
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(30))),
                   onPressed: () {
-                    context.read<UserViewModel>().getCurrentLocation(context,
-                    location: locationController.text.trim());
+                    getCurrentLocation(context,
+                        location: locationController.text.trim());
                   },
                   icon: const Icon(
                     Icons.location_searching,
@@ -143,8 +138,7 @@ class _RegisterFormState extends State<RegisterForm> {
                     style: style16White,
                   ),
                   onPressed: () {
-                    context.read<UserViewModel>().createServiceProviderInUI(
-                        context,
+                    createServiceProviderInUI(context,
                         bizName: bizNameController.text.trim(),
                         email: emailController.text.trim(),
                         phoneNumber: phoneController.text.trim(),

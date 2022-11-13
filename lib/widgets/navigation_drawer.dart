@@ -1,10 +1,10 @@
-import 'package:backendless_sdk/backendless_sdk.dart';
-import 'package:firstapp/view_models/user_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../misc/constants.dart';
 import '../routes/route_manager.dart';
+import '../services/helper_user.dart';
+import '../services/user_view_model.dart';
 import 'profile_widget.dart';
 
 class NavigationDrawer extends StatelessWidget {
@@ -38,7 +38,7 @@ class NavigationDrawer extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 ProfileWidget(
-                  imagePath: context.read<UserViewModel>().currentUser!.getProperty('imagePath'),
+                  imagePath: '',
                   onClicked: () async {
                     Navigator.popAndPushNamed(
                         context, RouteManager.profilePage);
@@ -140,7 +140,7 @@ class NavigationDrawer extends StatelessWidget {
                 style: style16Indigo,
               ),
               onTap: () async {
-                context.read<UserViewModel>().logoutUserInUI(context);
+                logoutUserInUI(context);
               },
             )
           ],

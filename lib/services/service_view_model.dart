@@ -3,7 +3,6 @@
 import 'package:backendless_sdk/backendless_sdk.dart';
 import 'package:firstapp/models/service_entry.dart';
 import 'package:firstapp/routes/route_manager.dart';
-import 'package:firstapp/view_models/user_view_model.dart';
 import 'package:firstapp/widgets/dialogs.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
@@ -36,6 +35,7 @@ class ServiceViewModel with ChangeNotifier {
     String result = 'OK';
     DataQueryBuilder queryBuilder = DataQueryBuilder()
       ..whereClause = "username = '$username'";
+    // queryBuilder.sortBy = ["created"];
 
     _busyRetrieving = true;
     notifyListeners();
@@ -103,76 +103,6 @@ class ServiceViewModel with ChangeNotifier {
     return result;
   }
 
-// ----------helpers---------//
-  ///
-//create a new service
-  void createNewServiceInUI(
-    BuildContext context, {
-    required TextEditingController titleController,
-    required TextEditingController descriptionController,
-  }) async {
-    if (serviceFormKey.currentState?.validate() ?? false) {
-      context.read<ServiceViewModel>().saveServiceEntry(
-          context.read<UserViewModel>().currentUser!.email, true);
-      Service service = Service(
-          title: titleController.text.trim(),
-          created: DateTime.now(),
-          description: descriptionController.text.trim(),
-          category: 'category',
-          location: context.read<UserViewModel>().currentUser!.getProperty('location'),
-          image: 'imagePath');
-      if (context.read<ServiceViewModel>().services.contains(service)) {
-        showSnackBar(context, "Service Already Exists!", 3000);
-      } else {
-        titleController.text = '';
-        descriptionController.text = '';
-        context.read<ServiceViewModel>().createService(service);
-        context.read<ServiceViewModel>().saveServiceEntry(
-            context.read<UserViewModel>().currentUser!.email, true);
-        showSnackBar(context, 'Service added successfully!', 2000);
-        Navigator.popAndPushNamed(context, RouteManager.serviceProviderPage);
-      }
-    }
-  }
-
-  ////
-  ///
-  //---------save all services in UI---------//
-
-  void saveAllServicesInUI(BuildContext context) async {
-    String result = await context.read<ServiceViewModel>().saveServiceEntry(
-        context.read<UserViewModel>().currentUser!.email, true);
-    if (result != 'OK') {
-      showSnackBar(context, result, 3000);
-    } else {
-      showSnackBar(context, "Service saved successfully!", 3000);
-    }
-  }
-
-////
-  ///
-//get services in Ui
-  void getServicesInUI(BuildContext context) async {
-    String result = await context
-        .read<ServiceViewModel>()
-        .getServices(context.read<UserViewModel>().currentUser!.email);
-    if (result != 'OK') {
-      showSnackBar(context, result, 35000);
-    } else {
-      showSnackBar(context, "Services Retrieved Successfully!", 3000);
-    }
-  }
-
-  void refreshServicesInUI(BuildContext context) async {
-    String result = await context.read<ServiceViewModel>().getServices(
-          context.read<UserViewModel>().currentUser!.email,
-        );
-    if (result != 'OK') {
-      showSnackBar(context, result, 3000);
-    } else {
-      showSnackBar(context, "Services Retrieved Successfully", 2000);
-    }
-  }
 
 ////------------------------////
 // -----adding a service-----//

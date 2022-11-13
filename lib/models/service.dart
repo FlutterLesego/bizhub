@@ -27,26 +27,26 @@ class Service {
   final String category;
   final String location;
   final DateTime created;
-  final Double? rating;
+  final DateTime? updated;
   final String image;
 
   Service(
       {required this.title,
       required this.created,
+      this.updated,
       required this.description,
       required this.category,
       required this.location,
-      this.rating,
       required this.image});
 
-  Map<String, dynamic> toJson() => {
+  Map<String, Object?> toJson() => {
         'serviceTitle': title,
         'serviceDescription': description,
         'serviceCategory': category,
-        'serviceRating': rating,
         'serviceImage': image,
         'serviceLocation': location,
-        'created': created.millisecondsSinceEpoch
+        'created': created.millisecondsSinceEpoch,
+        'updated': created.millisecondsSinceEpoch
       };
 
 //convert from Backendless database
@@ -55,18 +55,15 @@ class Service {
       description: json['serviceDescription'] as String,
       category: json['serviceCategory'] as String,
       location: json['serviceLocation'] as String,
-      rating: json['serviceRating'] as Double,
       image: json['serviceImage'] as String,
       created: DateTime.fromMillisecondsSinceEpoch(
-          (json['created'] as double).toInt()));
+          (json['created'] as double).toInt()),
+      updated: DateTime.fromMillisecondsSinceEpoch(
+          (json['updated'] as double).toInt()));
 
   @override
   bool operator ==(covariant Service service) {
-    return (title.toUpperCase().compareTo(service.title.toUpperCase()) == 0 ||
-        description
-                .toUpperCase()
-                .compareTo(service.description.toUpperCase()) ==
-            0);
+    return (title.toUpperCase().compareTo(service.title.toUpperCase()) == 0);
   }
 
   @override
