@@ -2,7 +2,6 @@
 
 import 'package:firstapp/misc/constants.dart';
 import 'package:firstapp/routes/route_manager.dart';
-import 'package:firstapp/widgets/dropdown_button.dart';
 import 'package:firstapp/widgets/service_view.dart';
 import 'package:flutter/material.dart';
 
@@ -123,7 +122,6 @@ class _FirstAppHomeState extends State<FirstAppHome> {
                   scrollDirection: Axis.horizontal,
                   child: Row(
                     children: const [
-                      DropdownButton(),
                       ServiceCategoryView(),
                       ServiceCategoryView(),
                       ServiceCategoryView(),

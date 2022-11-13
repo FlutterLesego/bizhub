@@ -26,7 +26,7 @@ class InitApp {
           .getServices(context.read<UserViewModel>().currentUser!.email);
       Navigator.popAndPushNamed(context, RouteManager.serviceProviderPage);
     } else {
-      Navigator.popAndPushNamed(context, RouteManager.firstAppHomePage);
+      Navigator.popAndPushNamed(context, RouteManager.loginPage);
     }
   }
 }
