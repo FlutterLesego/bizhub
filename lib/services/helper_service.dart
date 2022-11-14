@@ -12,11 +12,10 @@ import 'user_view_model.dart';
 // ----------helpers---------//
 ///
 //create a new service
-void createNewServiceInUI(
-  BuildContext context, {
-  required TextEditingController titleController,
-  required TextEditingController descriptionController,
-}) async {
+void createNewServiceInUI(BuildContext context,
+    {required TextEditingController titleController,
+    required TextEditingController descriptionController,
+    required String dropDownValue}) async {
   if (titleController.text.isEmpty || descriptionController.text.isEmpty) {
     showSnackBar(context, "Please enter all fields", 2000);
   } else {
@@ -24,7 +23,7 @@ void createNewServiceInUI(
         title: titleController.text.trim(),
         created: DateTime.now(),
         description: descriptionController.text.trim(),
-        category: 'category',
+        category: dropDownValue.toString().trim(),
         location:
             context.read<UserViewModel>().currentUser!.getProperty('location'),
         image: 'imagePath');

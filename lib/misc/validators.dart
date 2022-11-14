@@ -74,3 +74,23 @@ String? validateServiceDescription(String? value) {
   }
   return null;
 }
+
+String? validateCIPC(String? value) {
+  if (value == null || value.length > 12 || value.length < 12) {
+    return 'invalid CIPC registratn number';
+  } else if (!RegExp(r'^(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#\$%\^&\*])(?=.{8,})')
+      .hasMatch(value)) {
+    return 'CIPC must not contain any letter or special character';
+  }
+  return null;
+}
+
+String? validateIDNumber(String? value) {
+  if (value == null || value.length > 13 || value.length < 13) {
+    return 'invalid ID number';
+  } else if (!RegExp(r'^(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#\$%\^&\*])(?=.{8,})')
+      .hasMatch(value)) {
+    return 'ID number must not contain any letter or special character';
+  }
+  return null;
+}

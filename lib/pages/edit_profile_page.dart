@@ -1,6 +1,7 @@
 // ignore_for_file: deprecated_member_use, depend_on_referenced_packages
 
 import 'dart:io';
+import 'package:firstapp/widgets/radio_button.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart';
@@ -194,7 +195,8 @@ class _EditProfilePageState extends State<EditProfilePage> {
                     phoneNumber: phoneController.text.trim(),
                     location: locationController.text.trim(),
                     password: passwordController.text.trim(),
-                    confirmPassword: confirmPasswordController.text.trim());
+                    confirmPassword: confirmPasswordController.text.trim(),
+                    businessType: BusinessTypeEnum.Registered);
               }),
         ],
       ),

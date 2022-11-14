@@ -1,6 +1,7 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'package:backendless_sdk/backendless_sdk.dart';
+import 'package:firstapp/widgets/radio_button.dart';
 import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
@@ -39,6 +40,9 @@ void createServiceProviderInUI(
   required String bizName,
   required String email,
   required String phoneNumber,
+  required BusinessTypeEnum businessType,
+  String? cipcNumber,
+  String? idNumber,
   required String location,
   required String password,
   required String confirmPassword,
@@ -56,6 +60,9 @@ void createServiceProviderInUI(
           'name': bizName.trim(),
           'phoneNumber': phoneNumber.trim(),
           'location': location.trim(),
+          'businessType': businessType.toString().trim(),
+          'cipcNumber': cipcNumber!.trim(),
+          'idNumber': idNumber!.trim()
         });
 
       String result =
@@ -76,6 +83,9 @@ void updateUserInUI(
   required String bizName,
   required String email,
   required String phoneNumber,
+  required BusinessTypeEnum businessType,
+  String? cipcNumber,
+  String? idNumber,
   required String location,
   required String password,
   required String confirmPassword,
@@ -145,8 +155,16 @@ void getCurrentLocation(BuildContext context,
 
   Placemark pmark = placeMark![0];
 
-  completeAddress = '${pmark.administrativeArea}, ${pmark.subLocality} ${pmark.locality}';
+  completeAddress =
+      '${pmark.administrativeArea}, ${pmark.subLocality} ${pmark.locality}';
   //get location step by step
 
   location = completeAddress.toString().trim();
+}
+
+void getBusinessType(BuildContext context,
+    {required ValueChanged valueChanged}) async {
+  if (valueChanged.toString().isEmpty) {
+    showSnackBar(context, "Please select business type", 2000);
+  }
 }
