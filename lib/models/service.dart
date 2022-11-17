@@ -11,7 +11,6 @@ Map<dynamic, dynamic> convertServiceListToMap(List<Service> services) {
   return map;
 }
 
-
 //add new service
 List<Service> convertMapToServiceList(Map<dynamic, dynamic> map) {
   List<Service> services = [];
@@ -22,6 +21,7 @@ List<Service> convertMapToServiceList(Map<dynamic, dynamic> map) {
 }
 
 class Service {
+  final String bizName;
   final String title;
   final String description;
   final String category;
@@ -31,7 +31,8 @@ class Service {
   final String image;
 
   Service(
-      {required this.title,
+      {required this.bizName,
+      required this.title,
       required this.created,
       this.updated,
       required this.description,
@@ -40,6 +41,7 @@ class Service {
       required this.image});
 
   Map<String, Object?> toJson() => {
+        'bizName': bizName,
         'serviceTitle': title,
         'serviceDescription': description,
         'serviceCategory': category,
@@ -52,6 +54,7 @@ class Service {
 //convert from Backendless database
   static Service fromJson(Map<dynamic, dynamic>? json) => Service(
       title: json!['serviceTitle'] as String,
+      bizName: json['bizName'] as String,
       description: json['serviceDescription'] as String,
       category: json['serviceCategory'] as String,
       location: json['serviceLocation'] as String,

@@ -23,12 +23,7 @@ class _ProfilePageState extends State<ProfilePage> {
         physics: const BouncingScrollPhysics(),
         children: [
           const SizedBoxH20(),
-          ProfileWidget(
-            imagePath: '',
-            onClicked: () async {
-              Navigator.popAndPushNamed(context, RouteManager.editProfilePage);
-            },
-          ),
+          ProfileWidget(),
           const SizedBoxH20(),
           buildName(context),
           const SizedBoxH10(),
@@ -84,7 +79,10 @@ class _ProfilePageState extends State<ProfilePage> {
                 color: Colors.indigo,
               ),
               Text(
-                context.read<UserViewModel>().currentUser!.getProperty('location'),
+                context
+                    .read<UserViewModel>()
+                    .currentUser!
+                    .getProperty('location'),
                 style: style16Black,
               )
             ],

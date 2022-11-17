@@ -1,6 +1,7 @@
 // ignore_for_file: unnecessary_null_comparison
 
 import 'package:backendless_sdk/backendless_sdk.dart';
+import 'package:firstapp/widgets/biz_nav_drawer.dart';
 import 'package:firstapp/widgets/navigation_drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart' as provider;
@@ -53,7 +54,7 @@ class _ServiceProviderPageState extends State<ServiceProviderPage> {
 
       ///--------------------------------------///
       // - - - - - navigation drawer - - - - - //
-      drawer: const NavigationDrawer(),
+      drawer: const BizNavigationDrawer(),
       body: Stack(children: [
         SafeArea(
           child: Column(
@@ -67,9 +68,9 @@ class _ServiceProviderPageState extends State<ServiceProviderPage> {
                       selector: (context, value) => value.currentUser,
                       builder: (context, value, child) {
                         return const Text(
-                                "My Services",
-                                style: titleStyleBlack,
-                              );
+                          "My Services",
+                          style: titleStyleBlack,
+                        );
                       },
                     )
                   ],
@@ -83,7 +84,7 @@ class _ServiceProviderPageState extends State<ServiceProviderPage> {
                     builder: ((context, value, child) {
                       return value != null
                           ? ListView.builder(
-                            physics: const BouncingScrollPhysics(),
+                              physics: const BouncingScrollPhysics(),
                               itemCount: value.services.length,
                               itemBuilder: (context, index) {
                                 return ServiceCard(

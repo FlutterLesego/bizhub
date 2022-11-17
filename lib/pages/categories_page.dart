@@ -31,18 +31,7 @@ class CategoriesPage extends StatelessWidget {
           crossAxisCount: 2,
           crossAxisSpacing: 2,
           mainAxisSpacing: 2,
-          children: const [
-            ServiceCategoryView(),
-            ServiceCategoryView(),
-            ServiceCategoryView(),
-            ServiceCategoryView(),
-            ServiceCategoryView(),
-            ServiceCategoryView(),
-            ServiceCategoryView(),
-            ServiceCategoryView(),
-            ServiceCategoryView(),
-            ServiceCategoryView()
-          ],
+          children: const [],
         )),
       ),
     );

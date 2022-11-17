@@ -17,12 +17,21 @@ class ServiceCard extends StatelessWidget {
         padding: const EdgeInsets.all(8.0),
         child: ListTile(
           title: Text(service.title, style: bold16Indigo),
-          subtitle: Row(
+          subtitle: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Icon(Icons.location_pin,
-              color: Colors.indigo,),
-              const SizedBoxH30(),
-              Text(service.location, style: style14Black),
+              Text(service.category, style: style16Black),
+              Row(
+                children: [
+                  const Icon(
+                    Icons.location_pin,
+                    color: Colors.indigo,
+                  ),
+                  const SizedBoxH30(),
+                  Text(service.location,
+                      style: style14Black, overflow: TextOverflow.ellipsis),
+                ],
+              ),
             ],
           ),
           onTap: () {},

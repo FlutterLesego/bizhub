@@ -15,15 +15,49 @@ import 'user_view_model.dart';
 void createNewServiceInUI(BuildContext context,
     {required TextEditingController titleController,
     required TextEditingController descriptionController,
-    required String dropDownValue}) async {
+    required String categoryName}) async {
   if (titleController.text.isEmpty || descriptionController.text.isEmpty) {
     showSnackBar(context, "Please enter all fields", 2000);
   } else {
     Service service = Service(
+        bizName: context.read<UserViewModel>().currentUser!.getProperty('name'),
         title: titleController.text.trim(),
         created: DateTime.now(),
         description: descriptionController.text.trim(),
-        category: dropDownValue.toString().trim(),
+        category: categoryName.toString().trim(),
+        location:
+            context.read<UserViewModel>().currentUser!.getProperty('location'),
+        image: 'imagePath');
+    if (context.read<ServiceViewModel>().services.contains(service)) {
+      showSnackBar(context, "Service Already Exists!", 3000);
+    } else {
+      titleController.text = '';
+      descriptionController.text = '';
+      context.read<ServiceViewModel>().createService(service);
+      context.read<ServiceViewModel>().saveServiceEntry(
+          context.read<UserViewModel>().currentUser!.email, true);
+      showSnackBar(context, 'Service added successfully!', 2000);
+      Navigator.popAndPushNamed(context, RouteManager.serviceProviderPage);
+    }
+  }
+}
+
+// ----------helpers---------//
+///
+//update a service
+void updateServiceInUI(BuildContext context,
+    {required TextEditingController titleController,
+    required TextEditingController descriptionController,
+    required String categoryName}) async {
+  if (titleController.text.isEmpty || descriptionController.text.isEmpty) {
+    showSnackBar(context, "Please enter all fields", 2000);
+  } else {
+    Service service = Service(
+        bizName: context.read<UserViewModel>().currentUser!.getProperty('name'),
+        title: titleController.text.trim(),
+        created: DateTime.now(),
+        description: descriptionController.text.trim(),
+        category: categoryName.toString().trim(),
         location:
             context.read<UserViewModel>().currentUser!.getProperty('location'),
         image: 'imagePath');

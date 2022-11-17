@@ -1,3 +1,4 @@
+import 'package:firstapp/widgets/app_progress_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -25,39 +26,34 @@ class NavigationDrawer extends StatelessWidget {
 
 // - - - - header of the drawer - - - - - //
   Widget buildHeader(BuildContext context) => Material(
-        color: Colors.indigoAccent.shade100,
+        color: Colors.indigo.shade50,
         child: InkWell(
           onTap: () async {
             Navigator.pop(context);
-            Navigator.of(context).pushNamed(RouteManager.profilePage);
+            Navigator.of(context).pushNamed(RouteManager.loginPage);
           },
           child: Container(
             padding: EdgeInsets.only(
                 top: 24 + MediaQuery.of(context).padding.top, bottom: 24),
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                ProfileWidget(
-                  imagePath: '',
-                  onClicked: () async {
-                    Navigator.popAndPushNamed(
-                        context, RouteManager.profilePage);
-                  },
-                ),
-                const SizedBoxH10(),
+                SizedBoxH10(),
                 Text(
-                  context
-                      .read<UserViewModel>()
-                      .currentUser!
-                      .getProperty('name'),
-                  style: style14White,
+                  "Got a Biz?",
+                  style: titleStyleBlack,
                 ),
-                const SizedBoxH10(),
-                Text(
-                  context
-                      .read<UserViewModel>()
-                      .currentUser!
-                      .getProperty('email'),
+                const SizedBoxH5(),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      "Login/Register",
+                      style: style16Indigo,
+                    ),
+                    Icon(Icons.arrow_forward_ios),
+                  ],
                 )
               ],
             ),
@@ -73,62 +69,19 @@ class NavigationDrawer extends StatelessWidget {
           children: [
             ListTile(
               leading: const Icon(
-                Icons.home_outlined,
+                Icons.info_outlined,
                 color: Colors.indigo,
               ),
               title: const Text(
-                'Home',
+                'About bizHub',
                 style: style16Indigo,
               ),
               onTap: () {
-                Navigator.pop(context);
-                Navigator.pushNamed(context, RouteManager.serviceProviderPage);
+                showAboutDialog(
+                    context: context,
+                    applicationName: "bizHub",
+                    applicationVersion: "version 1.0");
               },
-            ),
-            ListTile(
-              leading: const Icon(
-                Icons.favorite_border,
-                color: Colors.indigo,
-              ),
-              title: const Text(
-                'Favourites',
-                style: style16Indigo,
-              ),
-              onTap: () {
-                Navigator.pop(context);
-                // Navigator.pushNamed(context, RouteManager.favouritesPage);
-              },
-            ),
-            ListTile(
-              leading: const Icon(
-                Icons.notifications,
-                color: Colors.indigo,
-              ),
-              title: const Text(
-                'Notifications',
-                style: style16Indigo,
-              ),
-              onTap: () {
-                Navigator.pop(context);
-                // Navigator.pushNamed(context, RouteManager.notificationsPage);
-              },
-            ),
-            ListTile(
-              leading: const Icon(
-                Icons.receipt_long_outlined,
-                color: Colors.indigo,
-              ),
-              title: const Text(
-                'History',
-                style: style16Indigo,
-              ),
-              onTap: () {
-                Navigator.pop(context);
-                // Navigator.pushNamed(context,RouteManager.historyPage);
-              },
-            ),
-            const Divider(
-              height: 20.0,
             ),
             ListTile(
               leading: const Icon(
@@ -136,11 +89,11 @@ class NavigationDrawer extends StatelessWidget {
                 color: Colors.indigo,
               ),
               title: const Text(
-                'Logout',
+                'Exit App',
                 style: style16Indigo,
               ),
               onTap: () async {
-                logoutUserInUI(context);
+                Navigator.pop(context);
               },
             )
           ],

@@ -37,7 +37,7 @@ void loginServiceProviderInUI(BuildContext context,
 //create new service provider method
 void createServiceProviderInUI(
   BuildContext context, {
-  required String bizName,
+  required String name,
   required String email,
   required String phoneNumber,
   required BusinessTypeEnum businessType,
@@ -57,7 +57,7 @@ void createServiceProviderInUI(
         ..email = email.trim()
         ..password = password.trim()
         ..putProperties({
-          'name': bizName.trim(),
+          'name': name.trim(),
           'phoneNumber': phoneNumber.trim(),
           'location': location.trim(),
           'businessType': businessType.toString().trim(),
@@ -80,7 +80,7 @@ void createServiceProviderInUI(
 
 void updateUserInUI(
   BuildContext context, {
-  required String bizName,
+  required String name,
   required String email,
   required String phoneNumber,
   required BusinessTypeEnum businessType,

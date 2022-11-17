@@ -21,9 +21,9 @@ class ServiceEntry {
       };
 
   static ServiceEntry fromJson(Map<dynamic, dynamic>? json) => ServiceEntry(
-    username: json!['username'] as String,
-    services: json['services'] as Map<dynamic, dynamic>,
-    objectId: json['objectId'] as String,
-    created: json['created'] as DateTime,
-  );
+        username: json!['username'] as String,
+        services: json['services'] as Map<dynamic, dynamic>,
+        objectId: json['objectId'] as String,
+        created: json['created'] as DateTime,
+      );
 }

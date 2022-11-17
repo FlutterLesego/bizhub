@@ -26,7 +26,7 @@ InputDecoration serviceFormDecoration(
     labelStyle: const TextStyle(color: Colors.grey),
     enabledBorder: const OutlineInputBorder(
         borderRadius: BorderRadius.all(Radius.circular(10)),
-        borderSide: BorderSide(width: 1, color: Colors.indigo)),
+        borderSide: BorderSide(width: 2, color: Colors.indigo)),
     focusedBorder: const OutlineInputBorder(
         borderRadius: BorderRadius.all(Radius.circular(10)),
         borderSide: BorderSide(width: 2, color: Colors.indigo)),
@@ -51,6 +51,19 @@ const errorBorder = OutlineInputBorder(
     borderSide: BorderSide(width: 2, color: Colors.red));
 
 //Divider box
+class SizedBoxH5 extends StatelessWidget {
+  const SizedBoxH5({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return const SizedBox(
+      height: 5,
+    );
+  }
+}
+
 class SizedBoxH10 extends StatelessWidget {
   const SizedBoxH10({
     Key? key,
@@ -131,6 +144,9 @@ const TextStyle style14White =
 
 const TextStyle style16grey =
     TextStyle(fontSize: 16, color: Colors.grey, fontWeight: FontWeight.w300);
+
+const TextStyle style14grey =
+    TextStyle(fontSize: 14, color: Colors.grey, fontWeight: FontWeight.w300);
 
 const TextStyle style16Black =
     TextStyle(fontSize: 16, color: Colors.black, fontWeight: FontWeight.w300);

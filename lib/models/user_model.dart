@@ -1,7 +1,7 @@
 import 'package:firstapp/widgets/radio_button.dart';
 
 class User {
-  final String bizName;
+  final String name;
   final String emailAddress;
   final String phoneNumber;
   final BusinessTypeEnum businessType;
@@ -13,7 +13,7 @@ class User {
   final String imagePath;
 
   User({
-    required this.bizName,
+    required this.name,
     required this.emailAddress,
     required this.phoneNumber,
     required this.businessType,
@@ -27,7 +27,7 @@ class User {
 
   Map<String, dynamic> toJson() => {
         'imagePath': imagePath,
-        'name': bizName,
+        'name': name,
         'email': emailAddress,
         'phoneNumber': phoneNumber,
         'businessType': businessType,

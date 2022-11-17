@@ -94,19 +94,19 @@ class _EditProfilePageState extends State<EditProfilePage> {
         physics: const BouncingScrollPhysics(),
         children: [
           const SizedBoxH20(),
-          ProfileWidget(
-            imagePath: '',
-            onClicked: () async {
-              final image =
-                  await ImagePicker().getImage(source: ImageSource.gallery);
+          // ProfileWidget(
+          //   imagePath: '',
+          //   onClicked: () async {
+          //     final image =
+          //         await ImagePicker().getImage(source: ImageSource.gallery);
 
-              if (image == null) return;
-              final directory = await getApplicationDocumentsDirectory();
-              final name = basename(image.path);
-              final imageFile = File('${directory.path}/$name');
-              final newImage = await File(image.path).copy(imageFile.path);
-            },
-          ),
+          //     if (image == null) return;
+          //     final directory = await getApplicationDocumentsDirectory();
+          //     final name = basename(image.path);
+          //     final imageFile = File('${directory.path}/$name');
+          //     final newImage = await File(image.path).copy(imageFile.path);
+          //   },
+          // ),
           const SizedBoxH20(),
           TextFormField(
             textInputAction: TextInputAction.next,
@@ -190,7 +190,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
               ),
               onPressed: () {
                 updateUserInUI(context,
-                    bizName: bizNameController.text.trim(),
+                    name: bizNameController.text.trim(),
                     email: emailController.text.trim(),
                     phoneNumber: phoneController.text.trim(),
                     location: locationController.text.trim(),

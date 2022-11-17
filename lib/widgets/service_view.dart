@@ -1,20 +1,26 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:firstapp/models/service.dart';
 import 'package:flutter/material.dart';
 
 import '../misc/constants.dart';
+import '../models/user_model.dart';
 
 class ServiceView extends StatelessWidget {
-  const ServiceView({Key? key, required this.service}) : super(key: key);
+  const ServiceView({
+    Key? key,
+    required this.service,
+  }) : super(key: key);
   final Service service;
 
   @override
   Widget build(BuildContext context) {
     return Card(
-      color: Colors.grey.shade50,
+      color: Colors.indigo.shade50,
       child: ListTile(
         title: Container(
           margin:
-              const EdgeInsets.only(top: 10, left: 20, right: 20, bottom: 20),
+              const EdgeInsets.only(top: 10, left: 10, right: 10, bottom: 20),
           child: Row(
             children: [
               Container(
@@ -35,40 +41,36 @@ class ServiceView extends StatelessWidget {
                       borderRadius: BorderRadius.only(
                           topRight: Radius.circular(20),
                           bottomRight: Radius.circular(20))),
-                  child: Padding(
-                    padding: const EdgeInsets.only(left: 10),
-                    child: Column(
-                      children: [
-                        Row(
-                          children: [
-                            Text(
-                              service.title,
-                              style: style16Black,
-                              overflow: TextOverflow.ellipsis,
-                            ),
-                          ],
-                        ),
-                        const SizedBoxH10(),
-                        Row(
-                          children: [
-                            Text(
-                              service.category,
-                              style: style16grey,
-                            ),
-                          ],
-                        ),
-                        const SizedBoxH10(),
-                        Row(
-                          children: [
-                            const Icon(
-                              Icons.person_pin_circle,
-                              color: Colors.indigo,
-                            ),
-                            Text(service.location)
-                          ],
-                        )
-                      ],
-                    ),
+                  child: Column(
+                    children: [
+                      Row(
+                        children: [
+                          Text(
+                            service.bizName,
+                            style: style16Black,
+                          ),
+                        ],
+                      ),
+                      const SizedBoxH10(),
+                      Row(
+                        children: [
+                          Text(
+                            service.title,
+                            style: style16grey,
+                          ),
+                        ],
+                      ),
+                      const SizedBoxH10(),
+                      Row(
+                        children: [
+                          const Icon(
+                            Icons.person_pin_circle,
+                            color: Colors.indigo,
+                          ),
+                          Text(service.location, overflow: TextOverflow.clip)
+                        ],
+                      )
+                    ],
                   ),
                 ),
               ),

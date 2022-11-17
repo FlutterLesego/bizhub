@@ -39,12 +39,9 @@ class _FirstAppHomeState extends State<FirstAppHome> {
     return Scaffold(
       drawer: const NavigationDrawer(),
       appBar: AppBar(
-        leading: const Icon(
-          Icons.menu_rounded,
-          color: Colors.black,
-        ),
+        iconTheme: IconThemeData(color: Colors.black),
         backgroundColor: Colors.white,
-        elevation: 0,
+        elevation: 0.1,
         centerTitle: true,
         title: const Text(
           "bizHub",
@@ -53,121 +50,134 @@ class _FirstAppHomeState extends State<FirstAppHome> {
       ),
 
       body: SafeArea(
-          child: ListView(
-        children: [
-          Container(
-            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-            child: Column(
+          child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+        child: Column(
+          children: [
+            //search bar
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                //search bar
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Container(
-                      width: MediaQuery.of(context).size.width / 1.15,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
-                        color: Colors.indigo.shade50,
-                      ),
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 12, vertical: 12),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: const [
-                          Icon(
-                            Icons.search,
-                            color: Colors.grey,
-                          ),
-                          Text(
-                            'What are you looking for?',
-                            style: style16grey,
-                            textAlign: TextAlign.center,
-                          ),
-                          Icon(
-                            Icons.filter_list,
-                            color: Colors.grey,
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-                const SizedBoxH20(),
-                //title
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    const Text(
-                      "Categories",
-                      style: titleStyleBlack,
-                    ),
-                    TextButton(
-                      onPressed: () {
-                        Navigator.popAndPushNamed(
-                            context, RouteManager.categoriesPage);
-                      },
-                      child: const InkWell(
-                        child: Text(
-                          "view all",
-                          style: style16grey,
-                        ),
-                      ),
-                    )
-                  ],
-                ),
-                const SizedBoxH20(),
-                //bus companies view
-                SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
+                Container(
+                  width: MediaQuery.of(context).size.width / 1.15,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),
+                    color: Colors.indigo.shade50,
+                  ),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
                   child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: const [
-                      ServiceCategoryView(),
-                      ServiceCategoryView(),
-                      ServiceCategoryView(),
-                      ServiceCategoryView(),
+                      Icon(
+                        Icons.search,
+                        color: Colors.grey,
+                      ),
+                      Text(
+                        'What are you looking for?',
+                        style: style16grey,
+                        textAlign: TextAlign.center,
+                      ),
+                      Icon(
+                        Icons.filter_list,
+                        color: Colors.grey,
+                      ),
                     ],
                   ),
                 ),
-                const SizedBoxH20(),
-                Row(
-                  children: const [
-                    Text(
-                      "New Services",
-                      style: titleStyleBlack,
-                    ),
-                  ],
-                ),
-                const SizedBoxH20(),
-                Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 8.0, vertical: 20),
-                    child: provider.Consumer<ServiceViewModel>(
-                      builder: ((context, value, child) {
-                        return value != null
-                            ? ListView.builder(
-                                physics: const BouncingScrollPhysics(),
-                                itemCount: value.services.length,
-                                itemBuilder: (context, index) {
-                                  return ServiceView(
-                                      service: value.services[index]);
-                                })
-                            : const Center(
-                                child: Text(
-                                  'Services Not Yet Available',
-                                  style: style16Black,
-                                ),
-                              );
-                      }),
-                    ),
-                  ),
-                ),
-                const SizedBoxH10()
               ],
             ),
-          )
-        ],
+            const SizedBoxH10(),
+            //Categories title and director
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const Text(
+                  "Categories",
+                  style: titleStyleBlack,
+                ),
+                TextButton(
+                  onPressed: () {
+                    Navigator.popAndPushNamed(
+                        context, RouteManager.categoriesPage);
+                  },
+                  child: InkWell(
+                    child: const Text(
+                      "view all",
+                      style: style16grey,
+                    ),
+                    onTap: () {
+                      Navigator.popAndPushNamed(
+                          context, RouteManager.categoriesPage);
+                    },
+                  ),
+                )
+              ],
+            ),
+            // services view
+            Expanded(
+              child: Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 8.0, vertical: 20),
+                child: provider.Consumer<ServiceViewModel>(
+                  builder: ((context, value, child) {
+                    return value != null
+                        ? ListView.builder(
+                            scrollDirection: Axis.vertical,
+                            physics: const BouncingScrollPhysics(),
+                            itemCount: 5,
+                            itemBuilder: (context, index) {
+                              return ServiceCategoryView();
+                            })
+                        : const Center(
+                            child: Text(
+                              'Categories Not Available',
+                              style: style16Black,
+                            ),
+                          );
+                  }),
+                ),
+              ),
+            ),
+            const SizedBoxH20(),
+            Row(
+              children: const [
+                Text(
+                  "New Services",
+                  style: titleStyleBlack,
+                ),
+              ],
+            ),
+            const SizedBoxH20(),
+            Expanded(
+              child: Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 8.0, vertical: 20),
+                child: provider.Consumer<ServiceViewModel>(
+                  builder: ((context, value, child) {
+                    return value != null
+                        ? ListView.builder(
+                            physics: const BouncingScrollPhysics(),
+                            itemCount: value.services.length,
+                            itemBuilder: (context, index) {
+                              return ServiceView(
+                                service: value.services[index],
+                              );
+                            })
+                        : const Center(
+                            child: Text(
+                              'Services Not Yet Available',
+                              style: style16Black,
+                            ),
+                          );
+                  }),
+                ),
+              ),
+            ),
+            const SizedBoxH10()
+          ],
+        ),
       )),
 
       // bottomSheet: DraggableScrollableSheet(

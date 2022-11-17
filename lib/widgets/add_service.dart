@@ -121,29 +121,14 @@ class _ServiceAddState extends State<ServiceAdd> {
                       const SizedBoxH20(),
                       //
                       //adding images
-                      ProfileWidget(
-                        imagePath: '',
-                        onClicked: () async {
-                          final image = await ImagePicker()
-                              .getImage(source: ImageSource.gallery);
-
-                          if (image == null) return;
-                          final directory =
-                              await getApplicationDocumentsDirectory();
-                          final name = basename(image.path);
-                          final imageFile = File('${directory.path}/$name');
-                          final newImage =
-                              await File(image.path).copy(imageFile.path);
-                        },
-                      ),
+                      ProfileWidget(),
                       const SizedBoxH20(),
                       ElevatedButton(
                           onPressed: () {
                             createNewServiceInUI(context,
                                 titleController: titleController,
                                 descriptionController: descriptionController,
-                                dropDownValue:
-                                    _selectedValue.toString().trim());
+                                categoryName: _selectedValue.toString().trim());
                           },
                           child: const Text("Add Service"))
                     ],

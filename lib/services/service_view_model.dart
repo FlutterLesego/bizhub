@@ -103,7 +103,6 @@ class ServiceViewModel with ChangeNotifier {
     return result;
   }
 
-
 ////------------------------////
 // -----adding a service-----//
   void createService(Service service) {
