@@ -1,20 +1,15 @@
 // ignore_for_file: deprecated_member_use, depend_on_referenced_packages
 
-import 'dart:io';
 import 'package:firstapp/widgets/radio_button.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:image_picker/image_picker.dart';
-import 'package:path_provider/path_provider.dart';
-import 'package:path/path.dart';
 
 import '../misc/constants.dart';
 import '../misc/validators.dart';
 import '../services/helper_user.dart';
 import '../widgets/appbar_widget.dart';
-import '../widgets/profile_widget.dart';
 
 class EditProfilePage extends StatefulWidget {
   const EditProfilePage({Key? key}) : super(key: key);

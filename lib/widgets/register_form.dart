@@ -1,13 +1,8 @@
 // ignore_for_file: deprecated_member_use
-
-import 'dart:io';
-
 import 'package:firstapp/misc/constants.dart';
 import 'package:firstapp/widgets/profile_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
-import 'package:path_provider/path_provider.dart';
 import '../misc/validators.dart';
 import '../services/helper_user.dart';
 import 'radio_button.dart';

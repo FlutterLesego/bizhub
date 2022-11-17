@@ -1,12 +1,6 @@
-import 'package:firstapp/widgets/app_progress_indicator.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-
 import '../misc/constants.dart';
 import '../routes/route_manager.dart';
-import '../services/helper_user.dart';
-import '../services/user_view_model.dart';
-import 'profile_widget.dart';
 
 class NavigationDrawer extends StatelessWidget {
   const NavigationDrawer({Key? key}) : super(key: key);
@@ -39,15 +33,15 @@ class NavigationDrawer extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                SizedBoxH10(),
-                Text(
+                const SizedBoxH10(),
+                const Text(
                   "Got a Biz?",
                   style: titleStyleBlack,
                 ),
                 const SizedBoxH5(),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
+                  children: const [
                     Text(
                       "Login/Register",
                       style: style16Indigo,

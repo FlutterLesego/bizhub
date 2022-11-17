@@ -2,7 +2,6 @@
 
 import 'package:backendless_sdk/backendless_sdk.dart';
 import 'package:firstapp/widgets/biz_nav_drawer.dart';
-import 'package:firstapp/widgets/navigation_drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart' as provider;
 import '../../misc/constants.dart';

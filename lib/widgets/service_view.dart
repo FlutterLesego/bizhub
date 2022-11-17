@@ -2,9 +2,7 @@
 
 import 'package:firstapp/models/service.dart';
 import 'package:flutter/material.dart';
-
 import '../misc/constants.dart';
-import '../models/user_model.dart';
 
 class ServiceView extends StatelessWidget {
   const ServiceView({

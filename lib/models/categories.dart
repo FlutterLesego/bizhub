@@ -1,10 +1,5 @@
 // ignore_for_file: avoid_renaming_method_parameters
 
-import 'dart:convert';
-import 'dart:ffi';
-
-import 'package:flutter/foundation.dart';
-
 //category map
 Map<dynamic, dynamic> convertCategoryListToMap(
     List<ServiceCategory> categories) {

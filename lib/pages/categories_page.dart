@@ -2,8 +2,6 @@ import 'package:firstapp/misc/constants.dart';
 import 'package:firstapp/routes/route_manager.dart';
 import 'package:flutter/material.dart';
 
-import '../widgets/category_view.dart';
-
 class CategoriesPage extends StatelessWidget {
   const CategoriesPage({super.key});
 

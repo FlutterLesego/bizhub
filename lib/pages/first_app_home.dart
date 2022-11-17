@@ -39,7 +39,7 @@ class _FirstAppHomeState extends State<FirstAppHome> {
     return Scaffold(
       drawer: const NavigationDrawer(),
       appBar: AppBar(
-        iconTheme: IconThemeData(color: Colors.black),
+        iconTheme: const IconThemeData(color: Colors.black),
         backgroundColor: Colors.white,
         elevation: 0.1,
         centerTitle: true,
@@ -128,7 +128,7 @@ class _FirstAppHomeState extends State<FirstAppHome> {
                             physics: const BouncingScrollPhysics(),
                             itemCount: 5,
                             itemBuilder: (context, index) {
-                              return ServiceCategoryView();
+                              return const ServiceCategoryView();
                             })
                         : const Center(
                             child: Text(

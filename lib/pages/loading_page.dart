@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:firstapp/init.dart';
 import 'package:firstapp/misc/constants.dart';
 import 'package:flutter/material.dart';
@@ -23,10 +21,9 @@ class _LoadingPageState extends State<LoadingPage> {
     // Timer(
     //     //set time in seconds
     //     const Duration(seconds: 5), () {
-          
+
     //   //go to login page after 5 seconds of the loading page
-      
-    
+
     // });
   }
 
