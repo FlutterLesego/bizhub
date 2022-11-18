@@ -5,7 +5,6 @@ import '../misc/constants.dart';
 import '../routes/route_manager.dart';
 import '../services/helper_user.dart';
 import '../services/user_view_model.dart';
-import 'profile_widget.dart';
 
 class BizNavigationDrawer extends StatelessWidget {
   const BizNavigationDrawer({Key? key}) : super(key: key);
@@ -37,7 +36,6 @@ class BizNavigationDrawer extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                ProfileWidget(),
                 const SizedBoxH10(),
                 Text(
                   context

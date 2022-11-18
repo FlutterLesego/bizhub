@@ -1,4 +1,4 @@
-// ignore_for_file: deprecated_member_use
+// ignore_for_file: deprecated_member_use, prefer_const_constructors
 import 'package:firstapp/misc/constants.dart';
 import 'package:firstapp/widgets/profile_widget.dart';
 import 'package:flutter/cupertino.dart';

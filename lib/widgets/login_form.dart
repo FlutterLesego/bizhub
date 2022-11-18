@@ -34,7 +34,7 @@ class _LoginFormState extends State<LoginForm> {
   @override
   Widget build(BuildContext context) {
     return Form(
-        key:loginFormKey,
+        key: loginFormKey,
         child: Padding(
           padding: const EdgeInsets.all(20.0),
           child: Column(
@@ -55,6 +55,7 @@ class _LoginFormState extends State<LoginForm> {
               TextFormField(
                 textInputAction: TextInputAction.done,
                 validator: validatePassword,
+                obscureText: true,
                 controller: passwordController,
                 decoration: formDecoration(
                   'Password',
@@ -86,8 +87,7 @@ class _LoginFormState extends State<LoginForm> {
                     style: style16White,
                   ),
                   onPressed: () {
-                    loginServiceProviderInUI(
-                        context,
+                    loginServiceProviderInUI(context,
                         email: emailController.text.trim(),
                         password: passwordController.text.trim());
                   }),

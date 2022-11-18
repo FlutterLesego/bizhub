@@ -1,9 +1,9 @@
 // ignore: avoid_web_libraries_in_flutter, unused_import
-// import 'dart:js';
 
 import 'package:firstapp/pages/first_app_home.dart';
 import 'package:firstapp/pages/loading_page.dart';
 import 'package:firstapp/pages/profile_page.dart';
+import 'package:firstapp/pages/view_service_page.dart';
 // ignore: unnecessary_import
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -27,6 +27,7 @@ class RouteManager {
   static const String serviceAddPage = 'serviceAddPage';
   static const String directoryPage = 'directoryPage';
   static const String categoriesPage = 'categoriesPage';
+  static const String viewServicePage = 'viewServicePage';
 
   static Route<dynamic>? onGenerateRoute(RouteSettings settings) {
     switch (settings.name) {
@@ -54,7 +55,7 @@ class RouteManager {
 
       case editProfilePage:
         return MaterialPageRoute(builder: (context) => const EditProfilePage());
-      
+
       //route for service provider home screen
       case serviceProviderPage:
         return MaterialPageRoute(
@@ -71,6 +72,10 @@ class RouteManager {
       //route for categories page
       case categoriesPage:
         return MaterialPageRoute(builder: (context) => const CategoriesPage());
+
+      //route for viewing a particular service
+      case viewServicePage:
+        return MaterialPageRoute(builder: (context) => const ViewServicePage());
 
       default:
         throw Exception("No route found!");
