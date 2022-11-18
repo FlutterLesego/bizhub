@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:firstapp/misc/constants.dart';
 import 'package:firstapp/routes/route_manager.dart';
 import 'package:firstapp/widgets/appbar_widget.dart';

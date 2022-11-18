@@ -20,22 +20,6 @@ class FirstAppHome extends StatefulWidget {
 class _FirstAppHomeState extends State<FirstAppHome> {
   @override
   Widget build(BuildContext context) {
-    // return Scaffold(
-    //   appBar: AppBar(
-    //     title: const Text(
-    //       "first app",
-    //       style: style16White,
-    //     ),
-    //     actions: [
-    //       IconButton(
-    //           onPressed: () {
-    //             context.read<UserViewModel>().logoutUserInUI(context);
-    //           },
-    //           icon: const Icon(Icons.exit_to_app))
-    //     ],
-    //   ),
-    //   body: const Center(child: Text("Home Screen!")),
-    // );
     return Scaffold(
       drawer: const NavigationDrawer(),
       appBar: AppBar(
@@ -48,7 +32,6 @@ class _FirstAppHomeState extends State<FirstAppHome> {
           style: titleStyleBlack,
         ),
       ),
-
       body: SafeArea(
           child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
@@ -117,30 +100,15 @@ class _FirstAppHomeState extends State<FirstAppHome> {
             ),
             // services view
             Expanded(
-              child: Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 8.0, vertical: 20),
-                child: provider.Consumer<ServiceViewModel>(
-                  builder: ((context, value, child) {
-                    return value != null
-                        ? ListView.builder(
-                            scrollDirection: Axis.vertical,
-                            physics: const BouncingScrollPhysics(),
-                            itemCount: 5,
-                            itemBuilder: (context, index) {
-                              return const ServiceCategoryView();
-                            })
-                        : const Center(
-                            child: Text(
-                              'Categories Not Available',
-                              style: style16Black,
-                            ),
-                          );
-                  }),
-                ),
-              ),
-            ),
-            const SizedBoxH20(),
+                child: SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Row(children: const [
+                      ServiceCategoryView(),
+                      ServiceCategoryView(),
+                      ServiceCategoryView(),
+                      ServiceCategoryView(),
+                      ServiceCategoryView(),
+                    ]))),
             Row(
               children: const [
                 Text(
@@ -179,44 +147,6 @@ class _FirstAppHomeState extends State<FirstAppHome> {
           ],
         ),
       )),
-
-      // bottomSheet: DraggableScrollableSheet(
-      //               initialChildSize: 0.2,
-      //               minChildSize: 0.1,
-      //               maxChildSize: 0.4,
-      //               builder: (BuildContext context,
-      //                   ScrollController scrollController) {
-      //                 return SingleChildScrollView(
-      //                   controller: scrollController,
-      //                   child: Container(
-      //                     color: Colors.indigo,
-      //                     child: ListView.builder(
-      //                       controller: scrollController,
-      //                       itemBuilder: (BuildContext context, int index){
-      //                       return ListTile(title: Text('Item $index'));
-      //                     }))
-
-      //                 );
-      //               }),
-      // bottomNavigationBar: BottomNavigationBar(
-      //   items: const [
-      //     BottomNavigationBarItem(
-      //       icon: Icon(FontAwesomeIcons.house,
-      //       color: Colors.deepPurple,),
-      //       label: "home"),
-      //     BottomNavigationBarItem(
-      //       icon: Icon(FontAwesomeIcons.magnifyingGlass,
-      //       color: Colors.deepPurple,),
-      //       label: "search"),
-      //     BottomNavigationBarItem(
-      //       icon: Icon(FontAwesomeIcons.receipt,
-      //       color: Colors.deepPurple,),
-      //       label: "history"),
-      //     BottomNavigationBarItem(
-      //       icon: Icon(FontAwesomeIcons.user,
-      //       color: Colors.deepPurple,),
-      //       label: "profile")
-      //   ]),
     );
   }
 }
