@@ -64,8 +64,7 @@ class _RegisterFormState extends State<RegisterForm> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              ProfileWidget(),
-              // TextButton.icon(
+              ProfileWidget(), // TextButton.icon(
               //   icon: const Icon(Icons.add_photo_alternate),
               //   label: const Text(
               //     "Biz Logo",
@@ -182,7 +181,7 @@ class _RegisterFormState extends State<RegisterForm> {
                           borderRadius: BorderRadius.circular(30))),
                   onPressed: () {
                     getCurrentLocation(context,
-                        location: locationController.text.trim());
+                        location: locationController.text);
                   },
                   icon: const Icon(
                     Icons.location_searching,
@@ -220,6 +219,7 @@ class _RegisterFormState extends State<RegisterForm> {
                   ),
                   onPressed: () {
                     createServiceProviderInUI(context,
+                        bizLogo: ProfileWidget().toString(),
                         name: bizNameController.text.trim(),
                         email: emailController.text.trim(),
                         phoneNumber: phoneController.text.trim(),
