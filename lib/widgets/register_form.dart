@@ -31,7 +31,7 @@ class _RegisterFormState extends State<RegisterForm> {
 
   String bizImageUrl = "";
 
-  Future _pickImage() async {
+  Future _pickImage(String bizImage) async {
     imageXFile = await ImagePicker().pickImage(source: ImageSource.gallery);
     setState(() {
       imageXFile;
@@ -80,14 +80,13 @@ class _RegisterFormState extends State<RegisterForm> {
               Center(
                   child: InkWell(
                 onTap: () {
-                  _pickImage();
+                  _pickImage(bizImageUrl);
                 },
                 child: CircleAvatar(
                   radius: MediaQuery.of(context).size.width / 5,
                   backgroundColor: Colors.indigo.shade50,
-                  backgroundImage: imageXFile == null
-                      ? null
-                      : FileImage(File(imageXFile!.path)),
+                  backgroundImage:
+                      imageXFile == null ? null : FileImage(File(bizImageUrl)),
                   child: imageXFile == null
                       ? Column(
                           mainAxisAlignment: MainAxisAlignment.center,
