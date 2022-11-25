@@ -1,6 +1,8 @@
 // ignore_for_file: use_build_context_synchronously, body_might_complete_normally_nullable, unused_import, prefer_is_empty
 
 import 'package:backendless_sdk/backendless_sdk.dart';
+import 'package:firstapp/models/categoriesEntry.dart';
+import 'package:firstapp/models/category.dart';
 import 'package:firstapp/models/service_entry.dart';
 import 'package:firstapp/routes/route_manager.dart';
 import 'package:firstapp/widgets/dialogs.dart';
@@ -14,9 +16,14 @@ class ServiceViewModel with ChangeNotifier {
 
   ServiceEntry? _serviceEntry;
 
+  CategoryEntry? _categoryEntry;
+
   //empty service list
   List<Service> _services = [];
   List<Service> get services => _services;
+
+  List<Category> _categories = [];
+  List<Category> get categories => _categories;
 
   void emptyServices() {
     _services = [];
@@ -36,6 +43,95 @@ class ServiceViewModel with ChangeNotifier {
     DataQueryBuilder queryBuilder = DataQueryBuilder()
       ..whereClause = "username = '$username'";
     // queryBuilder.sortBy = ["created"];
+
+    _busyRetrieving = true;
+    notifyListeners();
+
+    List<Map<dynamic, dynamic>?>? map = await Backendless.data
+        .of('ServiceEntry')
+        .find(queryBuilder)
+        .onError((error, stackTrace) {
+      result = error.toString();
+    });
+
+    //check if there is an error and show it
+    if (result != 'OK') {
+      _busyRetrieving = false;
+      notifyListeners();
+      return result;
+    }
+
+    //convert map and save it into the service entry
+    if (map != null) {
+      if (map.length > 0) {
+        _serviceEntry = ServiceEntry.fromJson(map.first);
+        _services = convertMapToServiceList(_serviceEntry!.services);
+        notifyListeners();
+      } else {
+        emptyServices();
+      }
+    } else {
+      result = 'NOT OK';
+    }
+
+    _busyRetrieving = false;
+    notifyListeners();
+
+    return result;
+  }
+
+////--------------------------------------------////
+// -----get categories of the services-----//
+  Future<String> getCategories(String categoryName) async {
+    String result = 'OK';
+    DataQueryBuilder queryBuilder = DataQueryBuilder()
+      ..whereClause = "categoryName = '$categoryName'";
+    queryBuilder.sortBy = ["created"];
+
+    _busyRetrieving = true;
+    notifyListeners();
+
+    List<Map<dynamic, dynamic>?>? map = await Backendless.data
+        .of('CategoryEntry')
+        .find(queryBuilder)
+        .onError((error, stackTrace) {
+      result = error.toString();
+    });
+
+    //check if there is an error and show it
+    if (result != 'OK') {
+      _busyRetrieving = false;
+      notifyListeners();
+      return result;
+    }
+
+    //convert map and save it into the service entry
+    if (map != null) {
+      if (map.length > 0) {
+        _categoryEntry = CategoryEntry.fromJson(map.first);
+        _categories = convertMapToCategoryList(_categoryEntry!.categories);
+        notifyListeners();
+      } else {
+        _categories = [];
+        notifyListeners();
+      }
+    } else {
+      result = 'NOT OK';
+    }
+
+    _busyRetrieving = false;
+    notifyListeners();
+
+    return result;
+  }
+
+  ////--------------------------------------------////
+// -----get all services available-----//
+  Future<String> getAllServices(String services) async {
+    String result = 'OK';
+    DataQueryBuilder queryBuilder = DataQueryBuilder()
+      ..whereClause = "services = '$services'";
+    queryBuilder.sortBy = ["created"];
 
     _busyRetrieving = true;
     notifyListeners();

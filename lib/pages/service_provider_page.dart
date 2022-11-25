@@ -40,14 +40,6 @@ class _ServiceProviderPageState extends State<ServiceProviderPage> {
                 saveAllServicesInUI(context);
               },
               icon: const Icon(Icons.save)),
-
-          ///----------------------------------------------------------------///
-          // - - - - - refress icon to refresh the services in UI - - - - -//
-          IconButton(
-              onPressed: () async {
-                refreshServicesInUI(context);
-              },
-              icon: const Icon(Icons.refresh))
         ],
       ),
 

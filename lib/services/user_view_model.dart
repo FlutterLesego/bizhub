@@ -151,6 +151,23 @@ class UserViewModel with ChangeNotifier {
     return result;
   }
 
+////-------------------------------------------////
+// -----reset password for service provider-----//
+  Future<String> deleteAccount(String username) async {
+    String result = 'OK';
+    _showUserProgress = true;
+    _userProgressText = 'Deleting account...';
+    notifyListeners();
+    await Backendless.userService
+        .restorePassword(username)
+        .onError((error, stackTrace) {
+      result = getError(error.toString());
+    });
+    _showUserProgress = false;
+    notifyListeners();
+    return result;
+  }
+
 ////-------------------------------------////
 // -----check if service provider exists-----//
   void checkIfUserExists(String username) async {
