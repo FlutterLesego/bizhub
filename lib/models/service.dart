@@ -1,5 +1,7 @@
 // ignore_for_file: avoid_renaming_method_parameters
 
+import 'dart:ffi';
+
 Map<dynamic, dynamic> convertServiceListToMap(List<Service> services) {
   Map<dynamic, dynamic> map = {};
   for (var i = 0; i < services.length; i++) {
@@ -23,6 +25,8 @@ class Service {
   final String description;
   final String category;
   final String location;
+  final String servicePhone;
+  final String serviceEmail;
   final DateTime created;
   final DateTime? updated;
   final String image;
@@ -35,6 +39,8 @@ class Service {
       required this.description,
       required this.category,
       required this.location,
+      required this.servicePhone,
+      required this.serviceEmail,
       required this.image});
 
   Map<String, Object?> toJson() => {
@@ -44,6 +50,8 @@ class Service {
         'serviceCategory': category,
         'serviceImage': image,
         'serviceLocation': location,
+        'servicePhone': servicePhone,
+        'serviceEmail': serviceEmail,
         'created': created.millisecondsSinceEpoch,
         'updated': created.millisecondsSinceEpoch
       };
@@ -55,6 +63,8 @@ class Service {
       description: json['serviceDescription'] as String,
       category: json['serviceCategory'] as String,
       location: json['serviceLocation'] as String,
+      servicePhone: json['servicePhone'] as String,
+      serviceEmail: json['serviceEnail'] as String,
       image: json['serviceImage'] as String,
       created: DateTime.fromMillisecondsSinceEpoch(
           (json['created'] as double).toInt()),

@@ -3,6 +3,7 @@
 import 'package:firstapp/pages/first_app_home.dart';
 import 'package:firstapp/pages/loading_page.dart';
 import 'package:firstapp/pages/profile_page.dart';
+import 'package:firstapp/pages/view_ratings_page.dart';
 import 'package:firstapp/pages/view_service_page.dart';
 // ignore: unnecessary_import
 import 'package:flutter/cupertino.dart';
@@ -28,6 +29,7 @@ class RouteManager {
   static const String directoryPage = 'directoryPage';
   static const String categoriesPage = 'categoriesPage';
   static const String viewServicePage = 'viewServicePage';
+  static const String viewRatingsPage = 'viewRatingsPage';
 
   static Route<dynamic>? onGenerateRoute(RouteSettings settings) {
     switch (settings.name) {
@@ -54,7 +56,7 @@ class RouteManager {
         return MaterialPageRoute(builder: (context) => const ProfilePage());
 
       case editProfilePage:
-        return MaterialPageRoute(builder: (context) => const EditProfilePage());
+        return MaterialPageRoute(builder: (context) => EditProfilePage());
 
       //route for service provider home screen
       case serviceProviderPage:
@@ -76,6 +78,10 @@ class RouteManager {
       //route for viewing a particular service
       case viewServicePage:
         return MaterialPageRoute(builder: (context) => const ViewServicePage());
+
+      //route for viewing ratings for a service
+      case viewRatingsPage:
+        return MaterialPageRoute(builder: (context) => const ViewRatingsPage());
 
       default:
         throw Exception("No route found!");

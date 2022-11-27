@@ -1,6 +1,9 @@
+import 'dart:ffi';
+
 import 'package:firstapp/widgets/radio_button.dart';
 
 class User {
+  final String bizLogo;
   final String name;
   final String emailAddress;
   final String phoneNumber;
@@ -13,6 +16,7 @@ class User {
   final String imagePath;
 
   User({
+    required this.bizLogo,
     required this.name,
     required this.emailAddress,
     required this.phoneNumber,
@@ -26,7 +30,7 @@ class User {
   });
 
   Map<String, dynamic> toJson() => {
-        'imagePath': imagePath,
+        'bizLogo': bizLogo,
         'name': name,
         'email': emailAddress,
         'phoneNumber': phoneNumber,

@@ -16,6 +16,7 @@ class _LoadingPageState extends State<LoadingPage> {
   //implement init state to initialize app
   void initState() {
     super.initState();
+    WidgetsFlutterBinding.ensureInitialized();
     InitApp.initializeApp(context);
     //set timer before directing to next page
     // Timer(

@@ -94,3 +94,10 @@ String? validateIDNumber(String? value) {
   }
   return null;
 }
+
+String? validateImage(String? value) {
+  if (value == null || value.isEmpty) {
+    return 'biz logo required!';
+  }
+  return null;
+}

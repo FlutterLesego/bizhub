@@ -1,8 +1,10 @@
 // ignore_for_file: deprecated_member_use, prefer_const_constructors
+import 'dart:io';
+
 import 'package:firstapp/misc/constants.dart';
-import 'package:firstapp/widgets/profile_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import '../misc/validators.dart';
 import '../services/helper_user.dart';
 import 'radio_button.dart';
@@ -54,6 +56,18 @@ class _RegisterFormState extends State<RegisterForm> {
     super.dispose();
   }
 
+  XFile? imageXFile;
+
+  String bizImageUrl = "";
+
+  Future _pickImage() async {
+    imageXFile = await ImagePicker().pickImage(source: ImageSource.gallery);
+    setState(() {
+      imageXFile;
+      bizImageUrl = imageXFile!.path.toString();
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Form(
@@ -64,23 +78,35 @@ class _RegisterFormState extends State<RegisterForm> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              ProfileWidget(), // TextButton.icon(
-              //   icon: const Icon(Icons.add_photo_alternate),
-              //   label: const Text(
-              //     "Biz Logo",
-              //     style: style16grey,
-              //   ),
-              //   onPressed: () async {
-              //     final image =
-              //         await ImagePicker().getImage(source: ImageSource.gallery);
-              //     if (image == null) return;
-              //     final name = basename(image.path);
-              //     final directory = await getExternalStorageDirectory();
-              //     final imageFile = File('${directory!.path}/$name');
-              //     final bizImage = await File(image.path).copy(imageFile.path);
-              //     DecorationImage(image: FileImage(File(imageFile.path)));
-              //   },
-              // ),
+              Center(
+                child: InkWell(
+                  focusColor: Colors.white,
+                  splashColor: Colors.white,
+                  hoverColor: Colors.white,
+                  highlightColor: Colors.white,
+                  onTap: () {
+                    _pickImage();
+                  },
+                  child: CircleAvatar(
+                    radius: MediaQuery.of(context).size.width / 5,
+                    backgroundColor: Colors.indigo.shade50,
+                    backgroundImage: imageXFile == null
+                        ? null
+                        : FileImage(File(imageXFile!.path)),
+                    child: imageXFile == null
+                        ? Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Icon(
+                                Icons.photo_camera,
+                                size: MediaQuery.of(context).size.width / 5,
+                              ),
+                            ],
+                          )
+                        : null,
+                  ),
+                ),
+              ),
               const SizedBoxH10(),
               TextFormField(
                 validator: validateBizName,
@@ -219,7 +245,7 @@ class _RegisterFormState extends State<RegisterForm> {
                   ),
                   onPressed: () {
                     createServiceProviderInUI(context,
-                        bizLogo: ProfileWidget().toString(),
+                        bizLogo: bizImageUrl.toString().trim(),
                         name: bizNameController.text.trim(),
                         email: emailController.text.trim(),
                         phoneNumber: phoneController.text.trim(),

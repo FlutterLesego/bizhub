@@ -1,18 +1,22 @@
-// ignore_for_file: deprecated_member_use, depend_on_referenced_packages
+// ignore_for_file: deprecated_member_use, depend_on_referenced_packages, must_be_immutable
 
+import 'package:firstapp/services/user_view_model.dart';
 import 'package:firstapp/widgets/radio_button.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:provider/provider.dart';
 
 import '../misc/constants.dart';
 import '../misc/validators.dart';
+import '../models/user_model.dart';
 import '../services/helper_user.dart';
 import '../widgets/appbar_widget.dart';
 
 class EditProfilePage extends StatefulWidget {
-  const EditProfilePage({Key? key}) : super(key: key);
+  EditProfilePage({Key? key, this.user}) : super(key: key);
+  User? user;
 
   @override
   State<EditProfilePage> createState() => _EditProfilePageState();
@@ -52,6 +56,11 @@ class _EditProfilePageState extends State<EditProfilePage> {
   Position? position;
   List<Placemark>? placeMark;
 
+  void getUserData() {
+    bizNameController.text =
+        context.read<UserViewModel>().currentUser!.getProperty("bizName");
+  }
+
 ////
   ///
 //-----get location function-----//
@@ -74,8 +83,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
 
     Placemark pmark = placeMark![0];
 
-    completeAddress =
-        '${pmark.locality}, ${pmark.subAdministrativeArea}, ${pmark.administrativeArea} ${pmark.postalCode}'; //get location step by step
+    completeAddress = '${pmark.locality}'; //get location step by step
 
     locationController.text = completeAddress;
   }
@@ -114,7 +122,8 @@ class _EditProfilePageState extends State<EditProfilePage> {
           ),
           const SizedBoxH10(),
           TextFormField(
-            textInputAction: TextInputAction.done,
+            restorationId: context.read<UserViewModel>().currentUser!.email,
+            textInputAction: TextInputAction.next,
             validator: validateEmail,
             controller: emailController,
             decoration: formDecoration(

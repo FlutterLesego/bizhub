@@ -100,15 +100,28 @@ class _FirstAppHomeState extends State<FirstAppHome> {
             ),
             // services view
             Expanded(
-                child: SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    child: Row(children: const [
-                      ServiceCategoryView(),
-                      ServiceCategoryView(),
-                      ServiceCategoryView(),
-                      ServiceCategoryView(),
-                      ServiceCategoryView(),
-                    ]))),
+              child: Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 8.0, vertical: 20),
+                child: provider.Consumer<ServiceViewModel>(
+                  builder: ((context, value, child) {
+                    return value != null
+                        ? ListView.builder(
+                            scrollDirection: Axis.vertical,
+                            itemCount: 5,
+                            itemBuilder: (context, index) {
+                              return const ServiceCategoryView();
+                            })
+                        : const Center(
+                            child: Text(
+                              'Categories Not Available',
+                              style: style16Black,
+                            ),
+                          );
+                  }),
+                ),
+              ),
+            ),
             Row(
               children: const [
                 Text(
@@ -117,7 +130,6 @@ class _FirstAppHomeState extends State<FirstAppHome> {
                 ),
               ],
             ),
-            const SizedBoxH20(),
             Expanded(
               child: Padding(
                 padding:

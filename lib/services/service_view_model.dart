@@ -31,10 +31,10 @@ class ServiceViewModel with ChangeNotifier {
 
 ////--------------------------------------------////
 // -----get services of the service provider-----//
-  Future<String> getServices(String username) async {
+  Future<String> getServices(String services) async {
     String result = 'OK';
     DataQueryBuilder queryBuilder = DataQueryBuilder()
-      ..whereClause = "username = '$username'";
+      ..whereClause = "services = '$services'";
     // queryBuilder.sortBy = ["created"];
 
     _busyRetrieving = true;

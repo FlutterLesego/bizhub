@@ -1,6 +1,7 @@
 import 'package:firstapp/misc/constants.dart';
 import 'package:firstapp/models/service.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 
 class ServiceCard extends StatelessWidget {
   const ServiceCard({
@@ -13,8 +14,7 @@ class ServiceCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       color: Colors.grey.shade50,
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
+      child: Slidable(
         child: ListTile(
           title: Text(service.title, style: bold16Indigo),
           subtitle: Column(

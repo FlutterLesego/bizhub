@@ -5,8 +5,8 @@ import 'package:firstapp/widgets/view_service.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart' as provider;
 
-class ViewServicePage extends StatelessWidget {
-  const ViewServicePage({super.key});
+class ViewRatingsPage extends StatelessWidget {
+  const ViewRatingsPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +26,7 @@ class ViewServicePage extends StatelessWidget {
                 child: provider.Consumer<ServiceViewModel>(
                   builder: ((context, value, child) {
                     return ListView.builder(
-                        itemCount: 1,
+                        itemCount: 5,
                         itemBuilder: (context, index) {
                           return ViewService(
                             service: value.services[index],

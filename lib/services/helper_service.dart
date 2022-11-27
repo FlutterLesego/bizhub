@@ -27,6 +27,12 @@ void createNewServiceInUI(BuildContext context,
         category: categoryName.toString().trim(),
         location:
             context.read<UserViewModel>().currentUser!.getProperty('location'),
+        servicePhone: context
+            .read<UserViewModel>()
+            .currentUser!
+            .getProperty('phoneNumber'),
+        serviceEmail:
+            context.read<UserViewModel>().currentUser!.getProperty('email'),
         image: 'imagePath');
     if (context.read<ServiceViewModel>().services.contains(service)) {
       showSnackBar(context, "Service Already Exists!", 3000);
@@ -60,6 +66,12 @@ void updateServiceInUI(BuildContext context,
         category: categoryName.toString().trim(),
         location:
             context.read<UserViewModel>().currentUser!.getProperty('location'),
+        servicePhone: context
+            .read<UserViewModel>()
+            .currentUser!
+            .getProperty('phoneNumber'),
+        serviceEmail:
+            context.read<UserViewModel>().currentUser!.getProperty('email'),
         image: 'imagePath');
     if (context.read<ServiceViewModel>().services.contains(service)) {
       showSnackBar(context, "Service Already Exists!", 3000);

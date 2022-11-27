@@ -37,6 +37,7 @@ void loginServiceProviderInUI(BuildContext context,
 //create new service provider method
 void createServiceProviderInUI(
   BuildContext context, {
+  required String bizLogo,
   required String name,
   required String email,
   required String phoneNumber,
@@ -57,6 +58,7 @@ void createServiceProviderInUI(
         ..email = email.trim()
         ..password = password.trim()
         ..putProperties({
+          'bizLogo': bizLogo.trim(),
           'name': name.trim(),
           'phoneNumber': phoneNumber.trim(),
           'location': location.trim(),
