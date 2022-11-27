@@ -116,13 +116,7 @@ class _FirstAppHomeState extends State<FirstAppHome> {
             Expanded(
                 child: SingleChildScrollView(
                     scrollDirection: Axis.horizontal,
-                    child: Row(children: const [
-                      ServiceCategoryView(),
-                      ServiceCategoryView(),
-                      ServiceCategoryView(),
-                      ServiceCategoryView(),
-                      ServiceCategoryView(),
-                    ]))),
+                    child: Row(children: const []))),
             Row(
               children: const [
                 Text(
