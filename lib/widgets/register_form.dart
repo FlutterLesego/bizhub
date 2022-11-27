@@ -1,6 +1,5 @@
 // ignore_for_file: deprecated_member_use, prefer_const_constructors
 import 'dart:io';
-
 import 'package:firstapp/misc/constants.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -27,6 +26,18 @@ class _RegisterFormState extends State<RegisterForm> {
   late TextEditingController cipcNumberController;
   late TextEditingController idNumberController;
   BusinessTypeEnum? _businessTypeEnum;
+
+  XFile? imageXFile;
+
+  String bizImageUrl = "";
+
+  Future _pickImage(String bizImage) async {
+    imageXFile = await ImagePicker().pickImage(source: ImageSource.gallery);
+    setState(() {
+      imageXFile;
+      bizImageUrl = imageXFile!.path.toString();
+    });
+  }
 
   @override
   void initState() {
@@ -56,18 +67,6 @@ class _RegisterFormState extends State<RegisterForm> {
     super.dispose();
   }
 
-  XFile? imageXFile;
-
-  String bizImageUrl = "";
-
-  Future _pickImage() async {
-    imageXFile = await ImagePicker().pickImage(source: ImageSource.gallery);
-    setState(() {
-      imageXFile;
-      bizImageUrl = imageXFile!.path.toString();
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Form(
@@ -79,34 +78,28 @@ class _RegisterFormState extends State<RegisterForm> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Center(
-                child: InkWell(
-                  focusColor: Colors.white,
-                  splashColor: Colors.white,
-                  hoverColor: Colors.white,
-                  highlightColor: Colors.white,
-                  onTap: () {
-                    _pickImage();
-                  },
-                  child: CircleAvatar(
-                    radius: MediaQuery.of(context).size.width / 5,
-                    backgroundColor: Colors.indigo.shade50,
-                    backgroundImage: imageXFile == null
-                        ? null
-                        : FileImage(File(imageXFile!.path)),
-                    child: imageXFile == null
-                        ? Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Icon(
-                                Icons.photo_camera,
-                                size: MediaQuery.of(context).size.width / 5,
-                              ),
-                            ],
-                          )
-                        : null,
-                  ),
+                  child: InkWell(
+                onTap: () {
+                  _pickImage(bizImageUrl);
+                },
+                child: CircleAvatar(
+                  radius: MediaQuery.of(context).size.width / 5,
+                  backgroundColor: Colors.indigo.shade50,
+                  backgroundImage:
+                      imageXFile == null ? null : FileImage(File(bizImageUrl)),
+                  child: imageXFile == null
+                      ? Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(
+                              Icons.add_a_photo,
+                              size: MediaQuery.of(context).size.width / 5,
+                            )
+                          ],
+                        )
+                      : null,
                 ),
-              ),
+              )),
               const SizedBoxH10(),
               TextFormField(
                 validator: validateBizName,

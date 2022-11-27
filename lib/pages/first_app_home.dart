@@ -5,6 +5,7 @@ import 'package:firstapp/routes/route_manager.dart';
 import 'package:firstapp/widgets/service_view.dart';
 import 'package:flutter/material.dart';
 
+import '../services/helper_service.dart';
 import '../services/service_view_model.dart';
 import '../widgets/category_view.dart';
 import '../widgets/navigation_drawer.dart';
@@ -31,6 +32,18 @@ class _FirstAppHomeState extends State<FirstAppHome> {
           "bizHub",
           style: titleStyleBlack,
         ),
+        actions: [
+          ///----------------------------------------------------------------///
+          // - - - - - refress icon to refresh the services in UI - - - - -//
+          IconButton(
+              onPressed: () async {
+                refreshServicesInUI(context);
+              },
+              icon: const Icon(
+                Icons.refresh,
+                color: Colors.indigo,
+              ))
+        ],
       ),
       body: SafeArea(
           child: Container(
@@ -98,30 +111,18 @@ class _FirstAppHomeState extends State<FirstAppHome> {
                 )
               ],
             ),
+            const SizedBoxH10(),
             // services view
             Expanded(
-              child: Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 8.0, vertical: 20),
-                child: provider.Consumer<ServiceViewModel>(
-                  builder: ((context, value, child) {
-                    return value != null
-                        ? ListView.builder(
-                            scrollDirection: Axis.vertical,
-                            itemCount: 5,
-                            itemBuilder: (context, index) {
-                              return const ServiceCategoryView();
-                            })
-                        : const Center(
-                            child: Text(
-                              'Categories Not Available',
-                              style: style16Black,
-                            ),
-                          );
-                  }),
-                ),
-              ),
-            ),
+                child: SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Row(children: const [
+                      ServiceCategoryView(),
+                      ServiceCategoryView(),
+                      ServiceCategoryView(),
+                      ServiceCategoryView(),
+                      ServiceCategoryView(),
+                    ]))),
             Row(
               children: const [
                 Text(

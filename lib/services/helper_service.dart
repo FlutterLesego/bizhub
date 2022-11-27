@@ -103,9 +103,7 @@ void saveAllServicesInUI(BuildContext context) async {
 }
 
 void refreshServicesInUI(BuildContext context) async {
-  String result = await context.read<ServiceViewModel>().getServices(
-        context.read<UserViewModel>().currentUser!.email,
-      );
+  String result = context.read<ServiceViewModel>().getAllServices.toString();
   if (result != 'OK') {
     showSnackBar(context, result, 3000);
   } else {
