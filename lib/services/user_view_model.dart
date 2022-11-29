@@ -56,6 +56,42 @@ class UserViewModel with ChangeNotifier {
   }
 
 ////-------------------------------------////
+// -----update service provider-----//
+  Future<String> updateServiceProvider(BackendlessUser user) async {
+    String result = 'OK';
+    // DataQueryBuilder queryBuilder = DataQueryBuilder();
+    // queryBuilder.whereClause = "user = user";
+    // Backendless.data
+    //     .of('Users')
+    //     .find(queryBuilder)
+    //     .then((users) {})
+    //     .onError((error, stackTrace) {
+    //   result = error.toString();
+    // });
+
+    _showUserProgress = true;
+    _userProgressText = 'Updating details...';
+    notifyListeners();
+
+    try {
+      await Backendless.userService.update(user);
+      ServiceEntry emptyEntry =
+          ServiceEntry(services: {}, username: user.email);
+      await Backendless.data
+          .of('ServiceEntry')
+          .save(emptyEntry.toJson())
+          .onError((error, stackTrace) {
+        result = error.toString();
+      });
+    } catch (e) {
+      result = getError(e.toString());
+    }
+    _showUserProgress = false;
+    notifyListeners();
+    return result;
+  }
+
+////-------------------------------------////
 // -----log in service provider-----//
   Future<String> loginServiceProvider(String username, String password) async {
     String result = 'OK';

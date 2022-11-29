@@ -62,6 +62,7 @@ void createServiceProviderInUI(
           'name': name.trim(),
           'phoneNumber': phoneNumber.trim(),
           'location': location.trim(),
+          'confirmPassword': confirmPassword.trim(),
           'businessType': businessType.toString().trim(),
           'cipcNumber': cipcNumber!.trim(),
           'idNumber': idNumber!.trim()
@@ -82,6 +83,7 @@ void createServiceProviderInUI(
 
 void updateUserInUI(
   BuildContext context, {
+  required String bizLogo,
   required String name,
   required String email,
   required String phoneNumber,
@@ -98,7 +100,28 @@ void updateUserInUI(
     if (confirmPassword.toString().trim() != password.toString().trim()) {
       showSnackBar(context, 'passwords do not match', 2000);
     } else {
-      Navigator.of(context).popAndPushNamed(RouteManager.profilePage);
+      BackendlessUser user = BackendlessUser()
+        ..email = email.trim()
+        ..password = password.trim()
+        ..putProperties({
+          'bizLogo': bizLogo.trim(),
+          'name': name.trim(),
+          'phoneNumber': phoneNumber.trim(),
+          'location': location.trim(),
+          'confirmPassword': confirmPassword.trim(),
+          'businessType': businessType.toString().trim(),
+          'cipcNumber': cipcNumber!.trim(),
+          'idNumber': idNumber!.trim()
+        });
+
+      String result =
+          await context.read<UserViewModel>().updateServiceProvider(user);
+      if (result != 'OK') {
+        showSnackBar(context, result, 3000);
+      } else {
+        showSnackBar(context, 'Details Updated Successfully!', 1500);
+        Navigator.of(context).popAndPushNamed(RouteManager.profilePage);
+      }
     }
   }
 }

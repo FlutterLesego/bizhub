@@ -7,7 +7,6 @@ import 'package:flutter/material.dart';
 
 import '../services/helper_service.dart';
 import '../services/service_view_model.dart';
-import '../widgets/category_view.dart';
 import '../widgets/navigation_drawer.dart';
 import 'package:provider/provider.dart' as provider;
 

@@ -1,7 +1,10 @@
 import 'package:firstapp/misc/constants.dart';
 import 'package:firstapp/models/service.dart';
+import 'package:firstapp/services/helper_user.dart';
+import 'package:firstapp/services/service_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:provider/provider.dart';
 
 class ServiceCard extends StatelessWidget {
   const ServiceCard({
@@ -15,6 +18,18 @@ class ServiceCard extends StatelessWidget {
     return Card(
       color: Colors.grey.shade50,
       child: Slidable(
+        endActionPane: ActionPane(motion: const BehindMotion(), children: [
+          SlidableAction(
+            icon: Icons.delete,
+            onPressed: (BuildContext context) {
+              deleteAccountInUI(context);
+            },
+          ),
+          SlidableAction(
+            icon: Icons.edit,
+            onPressed: (BuildContext context) {},
+          )
+        ]),
         child: ListTile(
           title: Text(service.title, style: bold16Indigo),
           subtitle: Column(

@@ -1,6 +1,5 @@
 // ignore_for_file: use_build_context_synchronously
 
-import 'package:backendless_sdk/backendless_sdk.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firstapp/routes/route_manager.dart';
 import 'package:flutter/cupertino.dart';

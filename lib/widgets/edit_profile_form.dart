@@ -1,32 +1,38 @@
-// ignore_for_file: deprecated_member_use, prefer_const_constructors
+// ignore_for_file: deprecated_member_use, depend_on_referenced_packages, must_be_immutable
+
 import 'dart:io';
-import 'package:firstapp/misc/constants.dart';
+
+import 'package:firstapp/services/user_view_model.dart';
+import 'package:firstapp/widgets/radio_button.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:provider/provider.dart';
+
+import '../misc/constants.dart';
 import '../misc/validators.dart';
 import '../services/helper_user.dart';
-import 'radio_button.dart';
 
-class RegisterForm extends StatefulWidget {
-  const RegisterForm({Key? key}) : super(key: key);
+class EditProfileForm extends StatefulWidget {
+  static const route = '/EditProfilePage';
+
+  const EditProfileForm({Key? key}) : super(key: key);
 
   @override
-  State<RegisterForm> createState() => _RegisterFormState();
+  State<EditProfileForm> createState() => _EditProfileFormState();
 }
 
-class _RegisterFormState extends State<RegisterForm> {
-  late TextEditingController bizNameController;
-  late TextEditingController nameController;
-  late TextEditingController passwordController;
-  late TextEditingController confirmPasswordController;
-  late TextEditingController emailController;
-  late TextEditingController phoneController;
-  late TextEditingController locationController;
-  late TextEditingController cipcNumberController;
-  late TextEditingController idNumberController;
+class _EditProfileFormState extends State<EditProfileForm> {
+  final bizNameController = TextEditingController();
+  final emailController = TextEditingController();
+  final phoneController = TextEditingController();
+  final locationController = TextEditingController();
+  final passwordController = TextEditingController();
+  final confirmPasswordController = TextEditingController();
+  final cipcNumberController = TextEditingController();
+  final idNumberController = TextEditingController();
   BusinessTypeEnum? _businessTypeEnum;
 
   XFile? imageXFile;
@@ -44,32 +50,44 @@ class _RegisterFormState extends State<RegisterForm> {
   @override
   void initState() {
     super.initState();
-    bizNameController = TextEditingController();
-    nameController = TextEditingController();
-    emailController = TextEditingController();
-    phoneController = TextEditingController();
-    locationController = TextEditingController();
-    passwordController = TextEditingController();
-    confirmPasswordController = TextEditingController();
-    cipcNumberController = TextEditingController();
-    idNumberController = TextEditingController();
+    bizNameController.text =
+        context.read<UserViewModel>().currentUser!.getProperty('name');
+    emailController.text = context.read<UserViewModel>().currentUser!.email;
+    phoneController.text =
+        context.read<UserViewModel>().currentUser!.getProperty('phoneNumber');
+    locationController.text =
+        context.read<UserViewModel>().currentUser!.getProperty('location');
+    passwordController.text = context
+        .read<UserViewModel>()
+        .currentUser!
+        .getProperty('confirmPassword');
+    confirmPasswordController.text = context
+        .read<UserViewModel>()
+        .currentUser!
+        .getProperty('confirmPassword');
+    _businessTypeEnum!.index;
+    cipcNumberController.text =
+        context.read<UserViewModel>().currentUser!.getProperty('cipcNumber');
+    idNumberController.text =
+        context.read<UserViewModel>().currentUser!.getProperty('idNumber');
   }
 
   @override
   void dispose() {
     bizNameController.dispose();
-    nameController.dispose();
     emailController.dispose();
     phoneController.dispose();
     locationController.dispose();
     passwordController.dispose();
     confirmPasswordController.dispose();
-    cipcNumberController.dispose();
-    idNumberController.dispose();
     super.dispose();
   }
 
-  ////
+  String completeAddress = "";
+  Position? position;
+  List<Placemark>? placeMark;
+
+////
   ///
 //-----get location function-----//
 
@@ -235,7 +253,7 @@ class _RegisterFormState extends State<RegisterForm> {
                     color: Colors.white,
                   ),
                   label: const Text(
-                    "Get Current Location",
+                    "Update Location",
                     style: TextStyle(color: Colors.white),
                   )),
               const SizedBoxH10(),
@@ -261,11 +279,11 @@ class _RegisterFormState extends State<RegisterForm> {
                   borderRadius: const BorderRadius.all(Radius.circular(20)),
                   color: Colors.indigo,
                   child: const Text(
-                    'Sign up',
+                    'Update Profile',
                     style: style16White,
                   ),
                   onPressed: () {
-                    createServiceProviderInUI(context,
+                    updateUserInUI(context,
                         bizLogo: bizImageUrl.toString().trim(),
                         name: bizNameController.text.trim(),
                         email: emailController.text.trim(),
