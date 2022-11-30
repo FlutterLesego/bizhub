@@ -70,32 +70,32 @@ class _FirstAppHomeState extends State<FirstAppHome> {
             ),
             const SizedBoxH10(),
             //Categories title and director
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const Text(
-                  "Categories",
-                  style: titleStyleBlack,
-                ),
-                TextButton(
-                  onPressed: () {
-                    Navigator.popAndPushNamed(
-                        context, RouteManager.categoriesPage);
-                  },
-                  child: InkWell(
-                    child: const Text(
-                      "view all",
-                      style: style16grey,
-                    ),
-                    onTap: () {
-                      Navigator.popAndPushNamed(
-                          context, RouteManager.categoriesPage);
-                    },
-                  ),
-                )
-              ],
-            ),
+            // Row(
+            //   crossAxisAlignment: CrossAxisAlignment.center,
+            //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //   children: [
+            //     const Text(
+            //       "Categories",
+            //       style: titleStyleBlack,
+            //     ),
+            //     TextButton(
+            //       onPressed: () {
+            //         Navigator.popAndPushNamed(
+            //             context, RouteManager.categoriesPage);
+            //       },
+            //       child: InkWell(
+            //         child: const Text(
+            //           "view all",
+            //           style: style16grey,
+            //         ),
+            //         onTap: () {
+            //           Navigator.popAndPushNamed(
+            //               context, RouteManager.categoriesPage);
+            //         },
+            //       ),
+            //     )
+            //   ],
+            // ),
             const SizedBoxH10(),
             // services view
             Expanded(
