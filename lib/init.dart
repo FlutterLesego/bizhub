@@ -1,6 +1,6 @@
 // ignore_for_file: use_build_context_synchronously
 
-import 'package:firebase_core/firebase_core.dart';
+import 'package:backendless_sdk/backendless_sdk.dart';
 import 'package:firstapp/routes/route_manager.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
@@ -10,16 +10,15 @@ import 'services/user_view_model.dart';
 
 class InitApp {
   //api keys for backendless
-  // static const String apiKeyAndroid = 'BC6FAE11-A586-4282-90CF-B47421B5299B';
-  // static const String apiKeyIOS = '7C7B13A1-6824-44DC-8C1B-4A2DD6F8682E';
-  // static const String appID = 'BCB6B236-BDDD-98CB-FFBD-96E39787DE00';
+  static const String apiKeyAndroid = 'B55C94D4-F218-43C5-9D3B-6FBB02FECBFC';
+  static const String apiKeyIOS = '7095D503-DC3E-4A60-88E5-5CCD1F95A042';
+  static const String appID = 'BCB6B236-BDDD-98CB-FFBD-96E39787DE00';
 
   static void initializeApp(BuildContext context) async {
-    await Firebase.initializeApp();
-    // await Backendless.initApp(
-    //     androidApiKey: apiKeyAndroid,
-    //     iosApiKey: apiKeyIOS,
-    //     applicationId: appID);
+    await Backendless.initApp(
+        androidApiKey: apiKeyAndroid,
+        iosApiKey: apiKeyIOS,
+        applicationId: appID);
     String result = await context.read<UserViewModel>().checkIfUserLoggedIn();
     if (result == 'OK') {
       context
@@ -27,6 +26,13 @@ class InitApp {
           .getServices(context.read<UserViewModel>().currentUser!.email);
       Navigator.popAndPushNamed(context, RouteManager.serviceProviderPage);
     } else {
+      List<Map<dynamic, dynamic>?>? map = await Backendless.data
+          .of("ServiceEntry")
+          .find()
+          .onError((error, stackTrace) {
+        result = error.toString();
+      });
+      context.read<ServiceViewModel>().getAllServices.toString();
       Navigator.popAndPushNamed(context, RouteManager.firstAppHomePage);
     }
   }

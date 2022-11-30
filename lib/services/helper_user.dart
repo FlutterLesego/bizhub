@@ -157,36 +157,6 @@ String completeAddress = "";
 Position? position;
 List<Placemark>? placeMark;
 
-////
-///
-//-----get location function-----//
-
-void getCurrentLocation(BuildContext context,
-    {required String location}) async {
-  LocationPermission locationPermission = await Geolocator.requestPermission();
-  if (locationPermission == LocationPermission.denied) {
-    await Geolocator.openLocationSettings();
-  }
-
-  Position newPosition = await Geolocator.getCurrentPosition(
-      desiredAccuracy: LocationAccuracy.best);
-
-  position = newPosition;
-
-  placeMark = await placemarkFromCoordinates(
-    position!.latitude,
-    position!.longitude,
-  );
-
-  Placemark pmark = placeMark![0];
-
-  completeAddress =
-      '${pmark.administrativeArea}, ${pmark.subLocality} ${pmark.locality}';
-  //get location step by step
-
-  location = completeAddress.toString().trim();
-}
-
 void getBusinessType(BuildContext context,
     {required ValueChanged valueChanged}) async {
   if (valueChanged.toString().isEmpty) {

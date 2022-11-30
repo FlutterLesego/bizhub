@@ -35,11 +35,22 @@ class _ServiceProviderPageState extends State<ServiceProviderPage> {
         actions: [
           ///--------------------------------------------------------///
           // - - - - - save icon to save the services in UI - - - - -//
+          // IconButton(
+          //     onPressed: () async {
+          //       saveAllServicesInUI(context);
+          //     },
+          //     icon: const Icon(Icons.save)),
+
+          ///----------------------------------------------------------------///
+          // - - - - - refress icon to refresh the services in UI - - - - -//
           IconButton(
               onPressed: () async {
-                saveAllServicesInUI(context);
+                refreshServicesInUI(context);
               },
-              icon: const Icon(Icons.save)),
+              icon: const Icon(
+                Icons.refresh,
+                color: Colors.indigo,
+              ))
         ],
       ),
 
@@ -79,7 +90,13 @@ class _ServiceProviderPageState extends State<ServiceProviderPage> {
                               itemCount: value.services.length,
                               itemBuilder: (context, index) {
                                 return ServiceCard(
-                                    service: value.services[index]);
+                                  service: value.services[index],
+                                  deleteAction: () {
+                                    context
+                                        .read<ServiceViewModel>()
+                                        .deleteService(value.services[index]);
+                                  },
+                                );
                               })
                           : const Center(
                               child: Text(

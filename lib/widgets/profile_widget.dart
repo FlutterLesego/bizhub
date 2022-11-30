@@ -2,6 +2,7 @@
 
 import 'dart:io';
 
+import 'package:backendless_sdk/backendless_sdk.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -19,11 +20,13 @@ class _ProfileWidgetState extends State<ProfileWidget> {
 
   String bizImageUrl = "";
 
-  Future _pickImage() async {
+  Future _pickImage(String image) async {
     imageXFile = await ImagePicker().pickImage(source: ImageSource.gallery);
     setState(() {
       imageXFile;
       bizImageUrl = imageXFile!.path.toString();
+
+      Backendless.files.upload((File(imageXFile!.path)), "/biz_logos");
     });
   }
 
@@ -36,7 +39,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
         hoverColor: Colors.white,
         highlightColor: Colors.white,
         onTap: () {
-          _pickImage();
+          _pickImage(bizImageUrl);
         },
         child: CircleAvatar(
           radius: MediaQuery.of(context).size.width / 5,
@@ -47,10 +50,18 @@ class _ProfileWidgetState extends State<ProfileWidget> {
               ? Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Icon(
-                      Icons.photo_camera,
-                      size: MediaQuery.of(context).size.width / 5,
+                    CircleAvatar(
+                      radius: MediaQuery.of(context).size.width / 5,
+                      backgroundColor: Colors.indigo.shade50,
+                      child: Image.asset(
+                        "assets/images/bizhublogo.png",
+                        fit: BoxFit.fill,
+                      ),
                     ),
+                    // Icon(
+                    //   Icons.photo_camera,
+                    //   size: MediaQuery.of(context).size.width / 5,
+                    // ),
                   ],
                 )
               : null,

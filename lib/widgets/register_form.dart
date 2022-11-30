@@ -1,5 +1,6 @@
 // ignore_for_file: deprecated_member_use, prefer_const_constructors
 import 'dart:io';
+import 'package:backendless_sdk/backendless_sdk.dart';
 import 'package:firstapp/misc/constants.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -38,6 +39,8 @@ class _RegisterFormState extends State<RegisterForm> {
     setState(() {
       imageXFile;
       bizImageUrl = imageXFile!.path.toString();
+
+      Backendless.files.upload((File(imageXFile!.path)), "/biz_logos");
     });
   }
 
@@ -76,11 +79,11 @@ class _RegisterFormState extends State<RegisterForm> {
   void getCurrentLocation() async {
     LocationPermission locationPermission = await Geolocator.checkPermission();
     if (locationPermission == LocationPermission.denied) {
-      await Geolocator.openLocationSettings();
+      await Geolocator.requestPermission();
     }
 
     Position newPosition = await Geolocator.getCurrentPosition(
-        desiredAccuracy: LocationAccuracy.bestForNavigation);
+        desiredAccuracy: LocationAccuracy.best);
 
     position = newPosition;
 
@@ -91,7 +94,8 @@ class _RegisterFormState extends State<RegisterForm> {
 
     Placemark pmark = placeMark![0];
 
-    completeAddress = '${pmark.locality}'; //get location step by step
+    completeAddress =
+        '${pmark.subLocality}, ${pmark.locality}'; //get location step by step
 
     locationController.text = completeAddress;
   }

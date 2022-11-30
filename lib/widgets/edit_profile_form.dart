@@ -65,7 +65,7 @@ class _EditProfileFormState extends State<EditProfileForm> {
         .read<UserViewModel>()
         .currentUser!
         .getProperty('confirmPassword');
-    _businessTypeEnum!.index;
+    _businessTypeEnum;
     cipcNumberController.text =
         context.read<UserViewModel>().currentUser!.getProperty('cipcNumber');
     idNumberController.text =

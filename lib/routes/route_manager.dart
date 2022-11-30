@@ -1,5 +1,6 @@
 // ignore: avoid_web_libraries_in_flutter, unused_import
 
+import 'package:firstapp/pages/edit_service_page.dart';
 import 'package:firstapp/pages/first_app_home.dart';
 import 'package:firstapp/pages/loading_page.dart';
 import 'package:firstapp/pages/profile_page.dart';
@@ -30,6 +31,7 @@ class RouteManager {
   static const String categoriesPage = 'categoriesPage';
   static const String viewServicePage = 'viewServicePage';
   static const String viewRatingsPage = 'viewRatingsPage';
+  static const String editServicePage = 'editServicePage';
 
   static Route<dynamic>? onGenerateRoute(RouteSettings settings) {
     switch (settings.name) {
@@ -56,7 +58,7 @@ class RouteManager {
         return MaterialPageRoute(builder: (context) => const ProfilePage());
 
       case editProfilePage:
-        return MaterialPageRoute(builder: (context) => EditProfilePage());
+        return MaterialPageRoute(builder: (context) => const EditProfilePage());
 
       //route for service provider home screen
       case serviceProviderPage:
@@ -82,6 +84,10 @@ class RouteManager {
       //route for viewing ratings for a service
       case viewRatingsPage:
         return MaterialPageRoute(builder: (context) => const ViewRatingsPage());
+
+      //route for viewing ratings for a service
+      case editServicePage:
+        return MaterialPageRoute(builder: (context) => const EditServicePage());
 
       default:
         throw Exception("No route found!");

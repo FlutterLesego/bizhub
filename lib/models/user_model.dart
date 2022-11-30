@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:firstapp/widgets/radio_button.dart';
 
 class User {

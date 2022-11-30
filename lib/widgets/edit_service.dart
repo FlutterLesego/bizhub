@@ -9,18 +9,18 @@ import '../misc/validators.dart';
 import '../services/helper_service.dart';
 import '../services/service_view_model.dart';
 
-class ServiceAdd extends StatefulWidget {
-  const ServiceAdd({super.key});
+class ServiceEdit extends StatefulWidget {
+  const ServiceEdit({super.key});
 
   @override
-  State<ServiceAdd> createState() => _ServiceAddState();
+  State<ServiceEdit> createState() => _ServiceEditState();
 }
 
-class _ServiceAddState extends State<ServiceAdd> {
+class _ServiceEditState extends State<ServiceEdit> {
   late TextEditingController titleController;
   late TextEditingController descriptionController;
 
-  _ServiceAddState() {
+  _ServiceEditState() {
     _selectedValue = _categoriesList[0];
   }
 
@@ -122,14 +122,14 @@ class _ServiceAddState extends State<ServiceAdd> {
                       const SizedBoxH20(),
                       ElevatedButton(
                           onPressed: () {
-                            createNewServiceInUI(
+                            updateServiceInUI(
                               context,
                               titleController: titleController,
                               descriptionController: descriptionController,
                               categoryName: _selectedValue.toString().trim(),
                             );
                           },
-                          child: const Text("Add Service"))
+                          child: const Text("Save Service"))
                     ],
                   ),
                 ),

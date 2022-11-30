@@ -1,7 +1,3 @@
-// ignore_for_file: avoid_renaming_method_parameters
-
-import 'dart:ffi';
-
 Map<dynamic, dynamic> convertServiceListToMap(List<Service> services) {
   Map<dynamic, dynamic> map = {};
   for (var i = 0; i < services.length; i++) {
@@ -64,7 +60,7 @@ class Service {
       category: json['serviceCategory'] as String,
       location: json['serviceLocation'] as String,
       servicePhone: json['servicePhone'] as String,
-      serviceEmail: json['serviceEnail'] as String,
+      serviceEmail: json['serviceEmail'] as String,
       image: json['serviceImage'] as String,
       created: DateTime.fromMillisecondsSinceEpoch(
           (json['created'] as double).toInt()),

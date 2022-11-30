@@ -1,17 +1,15 @@
 import 'package:firstapp/misc/constants.dart';
 import 'package:firstapp/models/service.dart';
-import 'package:firstapp/services/helper_user.dart';
-import 'package:firstapp/services/service_view_model.dart';
+import 'package:firstapp/routes/route_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
-import 'package:provider/provider.dart';
 
 class ServiceCard extends StatelessWidget {
-  const ServiceCard({
-    Key? key,
-    required this.service,
-  }) : super(key: key);
+  const ServiceCard(
+      {Key? key, required this.service, required this.deleteAction})
+      : super(key: key);
   final Service service;
+  final Function() deleteAction;
 
   @override
   Widget build(BuildContext context) {
@@ -21,13 +19,17 @@ class ServiceCard extends StatelessWidget {
         endActionPane: ActionPane(motion: const BehindMotion(), children: [
           SlidableAction(
             icon: Icons.delete,
+            foregroundColor: Colors.indigo,
             onPressed: (BuildContext context) {
-              deleteAccountInUI(context);
+              deleteAction;
             },
           ),
           SlidableAction(
             icon: Icons.edit,
-            onPressed: (BuildContext context) {},
+            foregroundColor: Colors.indigo,
+            onPressed: (BuildContext context) {
+              Navigator.popAndPushNamed(context, RouteManager.editServicePage);
+            },
           )
         ]),
         child: ListTile(

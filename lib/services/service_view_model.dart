@@ -38,11 +38,10 @@ class ServiceViewModel with ChangeNotifier {
 
 ////--------------------------------------------////
 // -----get services of the service provider-----//
-  Future<String> getServices(String services) async {
+  Future<String> getServices(String username) async {
     String result = 'OK';
     DataQueryBuilder queryBuilder = DataQueryBuilder()
-      ..whereClause = "services = '$services'";
-    // queryBuilder.sortBy = ["created"];
+      ..whereClause = "username = '$username'";
 
     _busyRetrieving = true;
     notifyListeners();
@@ -129,6 +128,14 @@ class ServiceViewModel with ChangeNotifier {
 // -----get all services available-----//
   Future<String> getAllServices(String services) async {
     String result = 'OK';
+
+    // List<Map<dynamic, dynamic>?>? map = await Backendless.data
+    //     .of("ServiceEntry")
+    //     .find()
+    //     .onError((error, stackTrace) {
+    //   result = error.toString();
+    // });
+
     DataQueryBuilder queryBuilder = DataQueryBuilder()
       ..whereClause = "services = '$services'";
     queryBuilder.sortBy = ["created"];
@@ -143,24 +150,25 @@ class ServiceViewModel with ChangeNotifier {
       result = error.toString();
     });
 
+    //convert map and save it into the service entry
+    // if (map != null) {
+    //   if (map.length > 0) {
+    //     _serviceEntry = ServiceEntry.fromJson(map.first);
+    //     _services = convertMapToServiceList(_serviceEntry!.services);
+    //     notifyListeners();
+    //   } else {
+    //     emptyServices();
+    //     notifyListeners();
+    //   }
+    // } else {
+    //   result = 'NOT OK';
+    // }
+
     //check if there is an error and show it
     if (result != 'OK') {
       _busyRetrieving = false;
       notifyListeners();
       return result;
-    }
-
-    //convert map and save it into the service entry
-    if (map != null) {
-      if (map.length > 0) {
-        _serviceEntry = ServiceEntry.fromJson(map.first);
-        _services = convertMapToServiceList(_serviceEntry!.services);
-        notifyListeners();
-      } else {
-        emptyServices();
-      }
-    } else {
-      result = 'NOT OK';
     }
 
     _busyRetrieving = false;

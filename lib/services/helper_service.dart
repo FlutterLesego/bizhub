@@ -33,7 +33,8 @@ void createNewServiceInUI(BuildContext context,
             .getProperty('phoneNumber'),
         serviceEmail:
             context.read<UserViewModel>().currentUser!.getProperty('email'),
-        image: 'imagePath');
+        image:
+            context.read<UserViewModel>().currentUser!.getProperty('bizLogo'));
     if (context.read<ServiceViewModel>().services.contains(service)) {
       showSnackBar(context, "Service Already Exists!", 3000);
     } else {
@@ -59,29 +60,28 @@ void updateServiceInUI(BuildContext context,
     showSnackBar(context, "Please enter all fields", 2000);
   } else {
     Service service = Service(
-        bizName: context.read<UserViewModel>().currentUser!.getProperty('name'),
-        title: titleController.text.trim(),
-        created: DateTime.now(),
-        description: descriptionController.text.trim(),
-        category: categoryName.toString().trim(),
-        location:
-            context.read<UserViewModel>().currentUser!.getProperty('location'),
-        servicePhone: context
-            .read<UserViewModel>()
-            .currentUser!
-            .getProperty('phoneNumber'),
-        serviceEmail:
-            context.read<UserViewModel>().currentUser!.getProperty('email'),
-        image: 'imagePath');
+      bizName: context.read<UserViewModel>().currentUser!.getProperty('name'),
+      title: titleController.text.trim(),
+      created: DateTime.now(),
+      description: descriptionController.text.trim(),
+      category: categoryName.toString().trim(),
+      location:
+          context.read<UserViewModel>().currentUser!.getProperty('location'),
+      servicePhone:
+          context.read<UserViewModel>().currentUser!.getProperty('phoneNumber'),
+      serviceEmail:
+          context.read<UserViewModel>().currentUser!.getProperty('email'),
+      image: context.read<UserViewModel>().currentUser!.getProperty('bizlogo'),
+    );
     if (context.read<ServiceViewModel>().services.contains(service)) {
-      showSnackBar(context, "Service Already Exists!", 3000);
+      showSnackBar(context, "No changes were made!", 3000);
     } else {
       titleController.text = '';
       descriptionController.text = '';
       context.read<ServiceViewModel>().createService(service);
       context.read<ServiceViewModel>().saveServiceEntry(
           context.read<UserViewModel>().currentUser!.email, true);
-      showSnackBar(context, 'Service added successfully!', 2000);
+      showSnackBar(context, 'Service updated successfully!', 2000);
       Navigator.popAndPushNamed(context, RouteManager.serviceProviderPage);
     }
   }
@@ -103,10 +103,32 @@ void saveAllServicesInUI(BuildContext context) async {
 }
 
 void refreshServicesInUI(BuildContext context) async {
-  String result = context.read<ServiceViewModel>().getAllServices.toString();
+  String result = await context
+      .read<ServiceViewModel>()
+      .getServices(context.read<UserViewModel>().currentUser!.email);
   if (result != 'OK') {
     showSnackBar(context, result, 3000);
   } else {
     showSnackBar(context, "Services Retrieved Successfully", 2000);
   }
 }
+
+void getAllServicesInUI(BuildContext context) async {
+  String result =
+      await context.read<ServiceViewModel>().getAllServices.toString();
+
+  if (result != 'OK') {
+    showSnackBar(context, result, 3000);
+  } else {
+    showSnackBar(context, "Service saved successfully!", 3000);
+  }
+}
+
+// void _launchUrl(String url) async {
+//     url = '';
+//     if (await canLaunch(url)) {
+//       await launch(url);
+//     } else {
+//       throw 'Could not launch $url';
+//     }
+//   }

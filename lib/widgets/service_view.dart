@@ -19,69 +19,72 @@ class ServiceView extends StatelessWidget {
         Navigator.popAndPushNamed(context, RouteManager.viewServicePage);
       },
       child: Card(
-        color: Colors.indigo.shade50,
+        color: Colors.grey.shade100,
         child: ListTile(
-          title: Container(
-            margin: const EdgeInsets.only(top: 10, right: 10, bottom: 20),
-            child: Row(
-              children: [
-                Container(
-                  width: 100,
+          title: Row(
+            children: [
+              Container(
+                width: 100,
+                height: 100,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),
+                    color: Colors.white30,
+                    // ignore: prefer_const_constructors
+                    image: DecorationImage(
+                        fit: BoxFit.cover, image: AssetImage(service.image))),
+              ),
+              const SizedBoxW5(),
+              Expanded(
+                child: Container(
                   height: 100,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20),
-                      color: Colors.white30,
-                      // ignore: prefer_const_constructors
-                      image: DecorationImage(
-                          fit: BoxFit.cover,
-                          image: AssetImage('assets/images/code_stable.png'))),
-                ),
-                Expanded(
-                  child: Container(
-                    height: 100,
-                    width: MediaQuery.of(context).size.width / 2,
-                    decoration: const BoxDecoration(
-                        borderRadius: BorderRadius.only(
-                            topRight: Radius.circular(20),
-                            bottomRight: Radius.circular(20))),
-                    child: Column(
-                      children: [
-                        Row(
-                          children: [
-                            Text(
-                              service.bizName,
-                              style: style16Black,
-                            ),
-                          ],
-                        ),
-                        const SizedBoxH10(),
-                        Row(
-                          children: [
-                            Text(
-                              service.title,
-                              style: style16grey,
-                            ),
-                          ],
-                        ),
-                        const SizedBoxH10(),
-                        Row(
-                          children: [
-                            const Icon(
-                              Icons.location_pin,
-                              color: Colors.indigo,
-                            ),
-                            Text(
-                              service.location,
-                              overflow: TextOverflow.ellipsis,
-                            )
-                          ],
-                        )
-                      ],
-                    ),
+                  width: MediaQuery.of(context).size.width / 2,
+                  decoration: const BoxDecoration(
+                      borderRadius: BorderRadius.only(
+                          topRight: Radius.circular(20),
+                          bottomRight: Radius.circular(20))),
+                  child: Column(
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            service.bizName,
+                            style: titleStyleBlack,
+                          ),
+                          Text(
+                            service.category,
+                            style: style14Black,
+                          )
+                        ],
+                      ),
+                      const SizedBoxH10(),
+                      Row(
+                        children: [
+                          Text(
+                            service.title,
+                            style: style16Black,
+                          ),
+                        ],
+                      ),
+                      const SizedBoxH10(),
+                      Row(
+                        children: [
+                          const Icon(
+                            Icons.location_pin,
+                            color: Colors.indigo,
+                          ),
+                          Text(
+                            service.location,
+                            style: style16Black,
+                            overflow: TextOverflow.ellipsis,
+                          )
+                        ],
+                      )
+                    ],
                   ),
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),

@@ -16,19 +16,27 @@ class ViewService extends StatelessWidget {
         children: [
           Container(
             height: MediaQuery.of(context).size.height / 3,
-            decoration: const BoxDecoration(
+            decoration: BoxDecoration(
                 color: Colors.white,
-                borderRadius: BorderRadius.only(
+                borderRadius: const BorderRadius.only(
                     bottomLeft: Radius.circular(10),
-                    bottomRight: Radius.circular(10))),
+                    bottomRight: Radius.circular(10)),
+                image: DecorationImage(
+                    image: AssetImage(service.image), fit: BoxFit.cover)),
           ),
           const SizedBoxH10(),
-          Container(
-            margin: const EdgeInsets.only(left: 10),
-            child: Text(
-              service.bizName,
-              style: title26Indigo,
-            ),
+          Row(
+            children: [
+              Text(
+                '${service.bizName} - ',
+                style: title26Indigo,
+              ),
+              const SizedBoxW5(),
+              Text(
+                service.category,
+                style: style16Black,
+              ),
+            ],
           ),
           //rating and location
           Row(
@@ -40,11 +48,45 @@ class ViewService extends StatelessWidget {
                   },
                   icon: const Icon(Icons.star),
                   label: const Text(
-                    "3,8",
+                    "0",
+                    style: style16Indigo,
+                  )),
+              TextButton.icon(
+                  onPressed: () {
+                    showSnackBar(context, "show location", 2000);
+                  },
+                  icon: const Icon(Icons.location_pin),
+                  label: Text(
+                    service.location,
                     style: style16Indigo,
                   )),
             ],
           ),
+          Divider(
+            thickness: 1.0,
+            color: Colors.indigo.shade100,
+          ),
+          Text(service.title, style: titleStyleBlack),
+          const SizedBoxH5(),
+          Text(service.description, style: style16Black),
+          Divider(
+            thickness: 1.0,
+            color: Colors.indigo.shade100,
+          ),
+          TextButton.icon(
+              onPressed: () {},
+              icon: const Icon(Icons.call),
+              label: Text(
+                service.servicePhone,
+                style: style16Indigo,
+              )),
+          TextButton.icon(
+              onPressed: () {},
+              icon: const Icon(Icons.email),
+              label: Text(
+                service.serviceEmail,
+                style: style16Indigo,
+              ))
         ],
       ),
     );
