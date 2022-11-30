@@ -50,19 +50,19 @@ class _FirstAppHomeState extends State<FirstAppHome> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: const [
-                      Icon(
-                        Icons.search,
-                        color: Colors.grey,
+                      // Icon(
+                      //   Icons.search,
+                      //   color: Colors.grey,
+                      // ),
+                      TextField(
+                        decoration: InputDecoration(
+                            labelText: 'What are you looking for?',
+                            suffixIcon: Icon(Icons.search)),
                       ),
-                      Text(
-                        'What are you looking for?',
-                        style: style16grey,
-                        textAlign: TextAlign.center,
-                      ),
-                      Icon(
-                        Icons.filter_list,
-                        color: Colors.grey,
-                      ),
+                      // Icon(
+                      //   Icons.filter_list,
+                      //   color: Colors.grey,
+                      // ),
                     ],
                   ),
                 ),

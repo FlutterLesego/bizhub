@@ -94,8 +94,7 @@ class _RegisterFormState extends State<RegisterForm> {
 
     Placemark pmark = placeMark![0];
 
-    completeAddress =
-        '${pmark.subLocality}, ${pmark.locality}'; //get location step by step
+    completeAddress = '${pmark.subLocality}'; //get location step by step
 
     locationController.text = completeAddress;
   }
