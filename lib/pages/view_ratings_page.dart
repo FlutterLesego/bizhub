@@ -1,7 +1,8 @@
 // ignore_for_file: prefer_const_constructors
 
-import 'package:firstapp/services/service_view_model.dart';
-import 'package:firstapp/widgets/view_service.dart';
+import 'package:bizhub/misc/constants.dart';
+import 'package:bizhub/services/service_view_model.dart';
+import 'package:bizhub/widgets/view_service.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart' as provider;
 
@@ -25,13 +26,12 @@ class ViewRatingsPage extends StatelessWidget {
                     const EdgeInsets.symmetric(horizontal: 8.0, vertical: 20),
                 child: provider.Consumer<ServiceViewModel>(
                   builder: ((context, value, child) {
-                    return ListView.builder(
-                        itemCount: 5,
-                        itemBuilder: (context, index) {
-                          return ViewService(
-                            service: value.services[index],
-                          );
-                        });
+                    return Center(
+                      child: Text(
+                        "No reviews available",
+                        style: style16Black,
+                      ),
+                    );
                   }),
                 ),
               ),

@@ -1,4 +1,4 @@
-import 'package:firstapp/widgets/edit_profile_form.dart';
+import 'package:bizhub/widgets/edit_profile_form.dart';
 import 'package:flutter/material.dart';
 
 class EditProfilePage extends StatelessWidget {

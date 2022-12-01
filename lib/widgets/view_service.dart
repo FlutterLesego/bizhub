@@ -1,4 +1,4 @@
-import 'package:firstapp/widgets/dialogs.dart';
+import 'package:bizhub/widgets/dialogs.dart';
 import 'package:flutter/material.dart';
 
 import '../misc/constants.dart';

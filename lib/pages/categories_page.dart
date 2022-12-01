@@ -1,6 +1,10 @@
-import 'package:firstapp/misc/constants.dart';
-import 'package:firstapp/routes/route_manager.dart';
+import 'package:bizhub/misc/constants.dart';
+import 'package:bizhub/routes/route_manager.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart' as provider;
+
+import '../services/service_view_model.dart';
+import '../widgets/service_view.dart';
 
 class CategoriesPage extends StatelessWidget {
   const CategoriesPage({super.key});
@@ -14,7 +18,7 @@ class CategoriesPage extends StatelessWidget {
             Icons.arrow_back_ios,
           ),
           onTap: () {
-            Navigator.popAndPushNamed(context, RouteManager.firstAppHomePage);
+            Navigator.popAndPushNamed(context, RouteManager.bizhubHomePage);
           },
         ),
         title: const Text(
@@ -22,15 +26,35 @@ class CategoriesPage extends StatelessWidget {
           style: style16White,
         ),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(5.0),
-        child: SafeArea(
-            child: GridView.count(
-          crossAxisCount: 2,
-          crossAxisSpacing: 2,
-          mainAxisSpacing: 2,
-          children: const [],
-        )),
+      body: SafeArea(
+        child: Container(
+          padding: EdgeInsets.all(8),
+          child: Column(
+            children: [
+              Expanded(
+                child: provider.Consumer<ServiceViewModel>(
+                  builder: ((context, value, child) {
+                    return value != null
+                        ? ListView.builder(
+                            physics: const BouncingScrollPhysics(),
+                            itemCount: value.services.length,
+                            itemBuilder: (context, index) {
+                              return ServiceView(
+                                service: value.services[index],
+                              );
+                            })
+                        : const Center(
+                            child: Text(
+                              'Categories Unavailable',
+                              style: style16Black,
+                            ),
+                          );
+                  }),
+                ),
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }

@@ -1,7 +1,7 @@
 // ignore_for_file: must_be_immutable, prefer_const_constructors, duplicate_ignore
 
-import 'package:firstapp/models/service.dart';
-import 'package:firstapp/routes/route_manager.dart';
+import 'package:bizhub/models/service.dart';
+import 'package:bizhub/routes/route_manager.dart';
 import 'package:flutter/material.dart';
 import '../misc/constants.dart';
 
@@ -31,7 +31,7 @@ class ServiceView extends StatelessWidget {
                     color: Colors.white30,
                     // ignore: prefer_const_constructors
                     image: DecorationImage(
-                        fit: BoxFit.cover, image: AssetImage(service.image))),
+                        fit: BoxFit.cover, image: NetworkImage(service.image))),
               ),
               const SizedBoxW5(),
               Expanded(

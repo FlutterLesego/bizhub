@@ -1,7 +1,7 @@
 // ignore_for_file: use_build_context_synchronously, unused_field, recursive_getters, body_might_complete_normally_nullable, avoid_print
 
 import 'package:backendless_sdk/backendless_sdk.dart';
-import 'package:firstapp/models/service_entry.dart';
+import 'package:bizhub/models/service_entry.dart';
 import 'package:flutter/cupertino.dart';
 
 class UserViewModel with ChangeNotifier {
@@ -41,6 +41,7 @@ class UserViewModel with ChangeNotifier {
       await Backendless.userService.register(user);
       ServiceEntry emptyEntry =
           ServiceEntry(services: {}, username: user.email);
+
       await Backendless.data
           .of('ServiceEntry')
           .save(emptyEntry.toJson())
@@ -59,15 +60,15 @@ class UserViewModel with ChangeNotifier {
 // -----update service provider-----//
   Future<String> updateServiceProvider(BackendlessUser user) async {
     String result = 'OK';
-    // DataQueryBuilder queryBuilder = DataQueryBuilder();
-    // queryBuilder.whereClause = "user = user";
-    // Backendless.data
-    //     .of('Users')
-    //     .find(queryBuilder)
-    //     .then((users) {})
-    //     .onError((error, stackTrace) {
-    //   result = error.toString();
-    // });
+    DataQueryBuilder queryBuilder = DataQueryBuilder();
+    queryBuilder.whereClause = "user = user";
+    Backendless.data
+        .of('Users')
+        .find(queryBuilder)
+        .then((users) {})
+        .onError((error, stackTrace) {
+      result = error.toString();
+    });
 
     _showUserProgress = true;
     _userProgressText = 'Updating details...';
@@ -176,23 +177,6 @@ class UserViewModel with ChangeNotifier {
     String result = 'OK';
     _showUserProgress = true;
     _userProgressText = 'Resetting password';
-    notifyListeners();
-    await Backendless.userService
-        .restorePassword(username)
-        .onError((error, stackTrace) {
-      result = getError(error.toString());
-    });
-    _showUserProgress = false;
-    notifyListeners();
-    return result;
-  }
-
-////-------------------------------------------////
-// -----reset password for service provider-----//
-  Future<String> deleteAccount(String username) async {
-    String result = 'OK';
-    _showUserProgress = true;
-    _userProgressText = 'Deleting account...';
     notifyListeners();
     await Backendless.userService
         .restorePassword(username)

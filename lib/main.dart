@@ -1,4 +1,4 @@
-import 'package:firstapp/routes/route_manager.dart';
+import 'package:bizhub/routes/route_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

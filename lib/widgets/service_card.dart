@@ -1,6 +1,6 @@
-import 'package:firstapp/misc/constants.dart';
-import 'package:firstapp/models/service.dart';
-import 'package:firstapp/routes/route_manager.dart';
+import 'package:bizhub/misc/constants.dart';
+import 'package:bizhub/models/service.dart';
+import 'package:bizhub/routes/route_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 
@@ -24,13 +24,6 @@ class ServiceCard extends StatelessWidget {
               deleteAction;
             },
           ),
-          SlidableAction(
-            icon: Icons.edit,
-            foregroundColor: Colors.indigo,
-            onPressed: (BuildContext context) {
-              Navigator.popAndPushNamed(context, RouteManager.editServicePage);
-            },
-          )
         ]),
         child: ListTile(
           title: Text(service.title, style: bold16Indigo),

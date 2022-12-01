@@ -1,4 +1,4 @@
-import 'package:firstapp/misc/constants.dart';
+import 'package:bizhub/misc/constants.dart';
 import 'package:flutter/material.dart';
 
 import '../models/category.dart';

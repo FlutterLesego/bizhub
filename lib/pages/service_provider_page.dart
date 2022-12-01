@@ -1,7 +1,7 @@
 // ignore_for_file: unnecessary_null_comparison
 
 import 'package:backendless_sdk/backendless_sdk.dart';
-import 'package:firstapp/widgets/biz_nav_drawer.dart';
+import 'package:bizhub/widgets/biz_nav_drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart' as provider;
 import '../../misc/constants.dart';
@@ -64,6 +64,7 @@ class _ServiceProviderPageState extends State<ServiceProviderPage> {
               const SizedBoxH20(),
               Padding(
                 padding: const EdgeInsets.only(left: 15.0),
+                //title
                 child: Row(
                   children: [
                     provider.Selector<UserViewModel, BackendlessUser?>(
@@ -78,6 +79,7 @@ class _ServiceProviderPageState extends State<ServiceProviderPage> {
                   ],
                 ),
               ),
+              //listing the services of the business
               Expanded(
                 child: Padding(
                   padding:

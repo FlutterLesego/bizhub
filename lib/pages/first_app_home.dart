@@ -1,21 +1,21 @@
 // ignore_for_file: unnecessary_null_comparison
 
-import 'package:firstapp/misc/constants.dart';
-import 'package:firstapp/routes/route_manager.dart';
-import 'package:firstapp/widgets/service_view.dart';
+import 'package:bizhub/misc/constants.dart';
+import 'package:bizhub/widgets/service_view.dart';
 import 'package:flutter/material.dart';
+import '../routes/route_manager.dart';
 import '../services/service_view_model.dart';
 import '../widgets/navigation_drawer.dart';
 import 'package:provider/provider.dart' as provider;
 
-class FirstAppHome extends StatefulWidget {
-  const FirstAppHome({Key? key}) : super(key: key);
+class bizhubHome extends StatefulWidget {
+  const bizhubHome({Key? key}) : super(key: key);
 
   @override
-  State<FirstAppHome> createState() => _FirstAppHomeState();
+  State<bizhubHome> createState() => _bizhubHomeState();
 }
 
-class _FirstAppHomeState extends State<FirstAppHome> {
+class _bizhubHomeState extends State<bizhubHome> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,72 +36,56 @@ class _FirstAppHomeState extends State<FirstAppHome> {
         child: Column(
           children: [
             //search bar
+            Padding(
+              padding: const EdgeInsets.only(
+                right: 20.0,
+              ),
+              child: TextField(
+                onChanged: (text) {
+                  text = text.toLowerCase();
+                  //TODO: search function
+                },
+                cursorColor: Colors.indigo,
+                decoration: const InputDecoration(
+                  labelText: 'What are you looking for?',
+                  icon: Icon(Icons.search),
+                  iconColor: Colors.indigo,
+                ),
+              ),
+            ),
+            const SizedBoxH10(),
+            // Categories title and director
             Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Container(
-                  width: MediaQuery.of(context).size.width / 1.15,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20),
-                    color: Colors.indigo.shade50,
-                  ),
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: const [
-                      // Icon(
-                      //   Icons.search,
-                      //   color: Colors.grey,
-                      // ),
-                      TextField(
-                        decoration: InputDecoration(
-                            labelText: 'What are you looking for?',
-                            suffixIcon: Icon(Icons.search)),
-                      ),
-                      // Icon(
-                      //   Icons.filter_list,
-                      //   color: Colors.grey,
-                      // ),
-                    ],
-                  ),
+                const Text(
+                  "Categories",
+                  style: titleStyleBlack,
                 ),
+                TextButton(
+                  onPressed: () {
+                    Navigator.popAndPushNamed(
+                        context, RouteManager.categoriesPage);
+                  },
+                  child: InkWell(
+                    child: const Text(
+                      "view all",
+                      style: style16grey,
+                    ),
+                    onTap: () {
+                      Navigator.popAndPushNamed(
+                          context, RouteManager.categoriesPage);
+                    },
+                  ),
+                )
               ],
             ),
             const SizedBoxH10(),
-            //Categories title and director
-            // Row(
-            //   crossAxisAlignment: CrossAxisAlignment.center,
-            //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            //   children: [
-            //     const Text(
-            //       "Categories",
-            //       style: titleStyleBlack,
-            //     ),
-            //     TextButton(
-            //       onPressed: () {
-            //         Navigator.popAndPushNamed(
-            //             context, RouteManager.categoriesPage);
-            //       },
-            //       child: InkWell(
-            //         child: const Text(
-            //           "view all",
-            //           style: style16grey,
-            //         ),
-            //         onTap: () {
-            //           Navigator.popAndPushNamed(
-            //               context, RouteManager.categoriesPage);
-            //         },
-            //       ),
-            //     )
-            //   ],
-            // ),
-            const SizedBoxH10(),
             // services view
-            Expanded(
-                child: SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    child: Row(children: const []))),
+            SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(children: const [])),
             Row(
               children: const [
                 Text(
@@ -125,7 +109,7 @@ class _FirstAppHomeState extends State<FirstAppHome> {
                           })
                       : const Center(
                           child: Text(
-                            'Services Not Yet Available',
+                            'No Services Available',
                             style: style16Black,
                           ),
                         );
@@ -138,4 +122,6 @@ class _FirstAppHomeState extends State<FirstAppHome> {
       )),
     );
   }
+
+  searchServices() {}
 }

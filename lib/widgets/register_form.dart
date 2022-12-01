@@ -1,7 +1,7 @@
 // ignore_for_file: deprecated_member_use, prefer_const_constructors
 import 'dart:io';
 import 'package:backendless_sdk/backendless_sdk.dart';
-import 'package:firstapp/misc/constants.dart';
+import 'package:bizhub/misc/constants.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart';

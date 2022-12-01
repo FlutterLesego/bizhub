@@ -1,4 +1,4 @@
-# firstapp (Backendless Database)
+# bizhub (Backendless Database)
 
 A new Flutter project.
 

@@ -1,7 +1,7 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'package:backendless_sdk/backendless_sdk.dart';
-import 'package:firstapp/widgets/radio_button.dart';
+import 'package:bizhub/widgets/radio_button.dart';
 import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
@@ -131,7 +131,7 @@ void logoutUserInUI(BuildContext context) async {
 
   if (result == 'OK') {
     context.read<UserViewModel>().setCurrentUserToNull();
-    Navigator.popAndPushNamed(context, RouteManager.firstAppHomePage);
+    Navigator.popAndPushNamed(context, RouteManager.bizhubHomePage);
   } else {
     showSnackBar(context, result, 3000);
   }

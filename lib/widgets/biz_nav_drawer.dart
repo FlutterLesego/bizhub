@@ -1,3 +1,4 @@
+import 'package:bizhub/widgets/profile_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -15,6 +16,7 @@ class BizNavigationDrawer extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
+              ProfileWidget(),
               buildHeader(context),
               buildMenuItems(context),
             ],
@@ -77,48 +79,6 @@ class BizNavigationDrawer extends StatelessWidget {
                 Navigator.pushNamed(context, RouteManager.serviceProviderPage);
               },
             ),
-            // ListTile(
-            //   leading: const Icon(
-            //     Icons.favorite_border,
-            //     color: Colors.indigo,
-            //   ),
-            //   title: const Text(
-            //     'Favourites',
-            //     style: style16Indigo,
-            //   ),
-            //   onTap: () {
-            //     Navigator.pop(context);
-            //     // Navigator.pushNamed(context, RouteManager.favouritesPage);
-            //   },
-            // ),
-            // ListTile(
-            //   leading: const Icon(
-            //     Icons.notifications,
-            //     color: Colors.indigo,
-            //   ),
-            //   title: const Text(
-            //     'Notifications',
-            //     style: style16Indigo,
-            //   ),
-            //   onTap: () {
-            //     Navigator.pop(context);
-            //     // Navigator.pushNamed(context, RouteManager.notificationsPage);
-            //   },
-            // ),
-            // ListTile(
-            //   leading: const Icon(
-            //     Icons.receipt_long_outlined,
-            //     color: Colors.indigo,
-            //   ),
-            //   title: const Text(
-            //     'History',
-            //     style: style16Indigo,
-            //   ),
-            //   onTap: () {
-            //     Navigator.pop(context);
-            //     // Navigator.pushNamed(context,RouteManager.historyPage);
-            //   },
-            // ),
             const Divider(
               height: 20.0,
             ),

@@ -1,7 +1,7 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'package:backendless_sdk/backendless_sdk.dart';
-import 'package:firstapp/routes/route_manager.dart';
+import 'package:bizhub/routes/route_manager.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
 
@@ -32,8 +32,7 @@ class InitApp {
           .onError((error, stackTrace) {
         result = error.toString();
       });
-      context.read<ServiceViewModel>().getAllServices.toString();
-      Navigator.popAndPushNamed(context, RouteManager.firstAppHomePage);
+      Navigator.popAndPushNamed(context, RouteManager.bizhubHomePage);
     }
   }
 }

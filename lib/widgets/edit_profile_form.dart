@@ -2,8 +2,8 @@
 
 import 'dart:io';
 
-import 'package:firstapp/services/user_view_model.dart';
-import 'package:firstapp/widgets/radio_button.dart';
+import 'package:bizhub/services/user_view_model.dart';
+import 'package:bizhub/widgets/radio_button.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart';

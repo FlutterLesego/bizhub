@@ -1,12 +1,11 @@
 // ignore_for_file: prefer_const_constructors
 
-import 'package:firstapp/misc/constants.dart';
-import 'package:firstapp/routes/route_manager.dart';
+import 'package:bizhub/misc/constants.dart';
+import 'package:bizhub/routes/route_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../misc/validators.dart';
-import '../services/helper_service.dart';
 import '../services/service_view_model.dart';
 
 class ServiceEdit extends StatefulWidget {
@@ -122,12 +121,12 @@ class _ServiceEditState extends State<ServiceEdit> {
                       const SizedBoxH20(),
                       ElevatedButton(
                           onPressed: () {
-                            updateServiceInUI(
-                              context,
-                              titleController: titleController,
-                              descriptionController: descriptionController,
-                              categoryName: _selectedValue.toString().trim(),
-                            );
+                            // updateServiceInUI(
+                            //   context,
+                            //   titleController: titleController,
+                            //   descriptionController: descriptionController,
+                            //   categoryName: _selectedValue.toString().trim(),
+                            // );
                           },
                           child: const Text("Save Service"))
                     ],

@@ -1,5 +1,5 @@
-import 'package:firstapp/init.dart';
-import 'package:firstapp/misc/constants.dart';
+import 'package:bizhub/init.dart';
+import 'package:bizhub/misc/constants.dart';
 import 'package:flutter/material.dart';
 
 import '../widgets/app_progress_indicator.dart';
@@ -18,14 +18,6 @@ class _LoadingPageState extends State<LoadingPage> {
     super.initState();
     WidgetsFlutterBinding.ensureInitialized();
     InitApp.initializeApp(context);
-    //set timer before directing to next page
-    // Timer(
-    //     //set time in seconds
-    //     const Duration(seconds: 5), () {
-
-    //   //go to login page after 5 seconds of the loading page
-
-    // });
   }
 
   @override

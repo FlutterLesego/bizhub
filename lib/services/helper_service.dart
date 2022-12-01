@@ -19,6 +19,7 @@ void createNewServiceInUI(BuildContext context,
   if (titleController.text.isEmpty || descriptionController.text.isEmpty) {
     showSnackBar(context, "Please enter all fields", 2000);
   } else {
+    //saving service into service entry table for current user
     Service service = Service(
         bizName: context.read<UserViewModel>().currentUser!.getProperty('name'),
         title: titleController.text.trim(),
@@ -51,56 +52,6 @@ void createNewServiceInUI(BuildContext context,
 
 // ----------helpers---------//
 ///
-//update a service
-void updateServiceInUI(BuildContext context,
-    {required TextEditingController titleController,
-    required TextEditingController descriptionController,
-    required String categoryName}) async {
-  if (titleController.text.isEmpty || descriptionController.text.isEmpty) {
-    showSnackBar(context, "Please enter all fields", 2000);
-  } else {
-    Service service = Service(
-      bizName: context.read<UserViewModel>().currentUser!.getProperty('name'),
-      title: titleController.text.trim(),
-      created: DateTime.now(),
-      description: descriptionController.text.trim(),
-      category: categoryName.toString().trim(),
-      location:
-          context.read<UserViewModel>().currentUser!.getProperty('location'),
-      servicePhone:
-          context.read<UserViewModel>().currentUser!.getProperty('phoneNumber'),
-      serviceEmail:
-          context.read<UserViewModel>().currentUser!.getProperty('email'),
-      image: context.read<UserViewModel>().currentUser!.getProperty('bizlogo'),
-    );
-    if (context.read<ServiceViewModel>().services.contains(service)) {
-      showSnackBar(context, "No changes were made!", 3000);
-    } else {
-      titleController.text = '';
-      descriptionController.text = '';
-      context.read<ServiceViewModel>().createService(service);
-      context.read<ServiceViewModel>().saveServiceEntry(
-          context.read<UserViewModel>().currentUser!.email, true);
-      showSnackBar(context, 'Service updated successfully!', 2000);
-      Navigator.popAndPushNamed(context, RouteManager.serviceProviderPage);
-    }
-  }
-}
-
-////
-///
-//---------save all services in UI---------//
-
-void saveAllServicesInUI(BuildContext context) async {
-  String result = await context
-      .read<ServiceViewModel>()
-      .saveServiceEntry(context.read<UserViewModel>().currentUser!.email, true);
-  if (result != 'OK') {
-    showSnackBar(context, result, 3000);
-  } else {
-    showSnackBar(context, "Service saved successfully!", 3000);
-  }
-}
 
 void refreshServicesInUI(BuildContext context) async {
   String result = await context
@@ -112,23 +63,3 @@ void refreshServicesInUI(BuildContext context) async {
     showSnackBar(context, "Services Retrieved Successfully", 2000);
   }
 }
-
-void getAllServicesInUI(BuildContext context) async {
-  String result =
-      await context.read<ServiceViewModel>().getAllServices.toString();
-
-  if (result != 'OK') {
-    showSnackBar(context, result, 3000);
-  } else {
-    showSnackBar(context, "Service saved successfully!", 3000);
-  }
-}
-
-// void _launchUrl(String url) async {
-//     url = '';
-//     if (await canLaunch(url)) {
-//       await launch(url);
-//     } else {
-//       throw 'Could not launch $url';
-//     }
-//   }
