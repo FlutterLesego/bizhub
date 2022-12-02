@@ -7,7 +7,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart' as provider;
 
 import '../services/service_view_model.dart';
-import '../view/service_view.dart';
 
 class CategoriesPage extends StatelessWidget {
   const CategoriesPage({super.key});

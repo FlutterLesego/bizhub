@@ -1,7 +1,6 @@
 // ignore_for_file: unnecessary_null_comparison, camel_case_types
 
 import 'package:bizhub/misc/constants.dart';
-import 'package:bizhub/view/category_view.dart';
 import 'package:flutter/material.dart';
 import '../routes/route_manager.dart';
 import '../services/service_view_model.dart';

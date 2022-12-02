@@ -1,4 +1,3 @@
-import 'package:bizhub/widgets/profile_widget.dart';
 import 'package:flutter/material.dart';
 import '../misc/constants.dart';
 import '../routes/route_manager.dart';

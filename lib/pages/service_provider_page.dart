@@ -4,14 +4,12 @@ import 'package:backendless_sdk/backendless_sdk.dart';
 import 'package:bizhub/widgets/biz_nav_drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart' as provider;
-import 'package:tuple/tuple.dart';
 import '../../misc/constants.dart';
 import '../../routes/route_manager.dart';
 import '../services/helper_service.dart';
 import '../services/service_view_model.dart';
 import '../services/user_view_model.dart';
 import '../view/service_card.dart';
-import '../widgets/app_progress_indicator.dart';
 
 class ServiceProviderPage extends StatefulWidget {
   const ServiceProviderPage({super.key});
