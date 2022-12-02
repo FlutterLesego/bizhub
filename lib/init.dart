@@ -26,12 +26,7 @@ class InitApp {
           .getServices(context.read<UserViewModel>().currentUser!.email);
       Navigator.popAndPushNamed(context, RouteManager.serviceProviderPage);
     } else {
-      List<Map<dynamic, dynamic>?>? map = await Backendless.data
-          .of("ServiceEntry")
-          .find()
-          .onError((error, stackTrace) {
-        result = error.toString();
-      });
+      context.read<ServiceViewModel>().getServices('username');
       Navigator.popAndPushNamed(context, RouteManager.bizhubHomePage);
     }
   }

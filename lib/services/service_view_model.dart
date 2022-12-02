@@ -17,13 +17,11 @@ class ServiceViewModel with ChangeNotifier {
 
   ServiceEntry? _serviceEntry;
 
-  CategoryEntry? _categoryEntry;
-
   //empty service list
   List<Service> _services = [];
   List<Service> get services => _services;
 
-  List<Category> _categories = [];
+  final List<Category> _categories = [];
   List<Category> get categories => _categories;
 
   void emptyServices() {

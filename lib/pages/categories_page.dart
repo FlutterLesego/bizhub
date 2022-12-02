@@ -1,3 +1,5 @@
+// ignore_for_file: unnecessary_null_comparison
+
 import 'package:bizhub/misc/constants.dart';
 import 'package:bizhub/routes/route_manager.dart';
 import 'package:flutter/material.dart';
@@ -28,7 +30,7 @@ class CategoriesPage extends StatelessWidget {
       ),
       body: SafeArea(
         child: Container(
-          padding: EdgeInsets.all(8),
+          padding: const EdgeInsets.all(8),
           child: Column(
             children: [
               Expanded(

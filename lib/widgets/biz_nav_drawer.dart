@@ -16,7 +16,7 @@ class BizNavigationDrawer extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
-              ProfileWidget(),
+              const ProfileWidget(),
               buildHeader(context),
               buildMenuItems(context),
             ],

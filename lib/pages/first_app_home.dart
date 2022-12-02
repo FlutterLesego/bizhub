@@ -1,4 +1,4 @@
-// ignore_for_file: unnecessary_null_comparison
+// ignore_for_file: unnecessary_null_comparison, camel_case_types
 
 import 'package:bizhub/misc/constants.dart';
 import 'package:flutter/material.dart';
@@ -43,6 +43,7 @@ class _bizhubHomeState extends State<bizhubHome> {
               child: TextField(
                 onChanged: (text) {
                   text = text.toLowerCase();
+                  // ignore: todo
                   //TODO: search function
                 },
                 cursorColor: Colors.indigo,
