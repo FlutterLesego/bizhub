@@ -1,11 +1,8 @@
 import 'package:bizhub/widgets/profile_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-
 import '../misc/constants.dart';
 import '../routes/route_manager.dart';
 import '../services/helper_user.dart';
-import '../services/user_view_model.dart';
 
 class BizNavigationDrawer extends StatelessWidget {
   const BizNavigationDrawer({Key? key}) : super(key: key);
@@ -16,7 +13,6 @@ class BizNavigationDrawer extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
-              const ProfileWidget(),
               buildHeader(context),
               buildMenuItems(context),
             ],
@@ -37,21 +33,11 @@ class BizNavigationDrawer extends StatelessWidget {
                 top: 24 + MediaQuery.of(context).padding.top, bottom: 24),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                const SizedBoxH10(),
+              children: const [
+                SizedBoxH10(),
                 Text(
-                  context
-                      .read<UserViewModel>()
-                      .currentUser!
-                      .getProperty('name'),
-                  style: style14White,
-                ),
-                const SizedBoxH10(),
-                Text(
-                  context
-                      .read<UserViewModel>()
-                      .currentUser!
-                      .getProperty('email'),
+                  'Edit profile >',
+                  style: style16White,
                 )
               ],
             ),

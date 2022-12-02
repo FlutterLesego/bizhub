@@ -3,6 +3,7 @@
 import 'package:bizhub/misc/constants.dart';
 import 'package:bizhub/routes/route_manager.dart';
 import 'package:bizhub/widgets/appbar_widget.dart';
+import 'package:bizhub/widgets/dialogs.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -109,7 +110,10 @@ class _ProfilePageState extends State<ProfilePage> {
                 style: style14Black,
               )),
           TextButton.icon(
-            onPressed: () {},
+            onPressed: () {
+              showSnackBar(context, "Request sent!", 2000);
+              showSnackBar(context, "Please wait for 24 - 48 hours", 2000);
+            },
             icon: const Icon(
               Icons.delete_forever_outlined,
               color: Colors.indigo,

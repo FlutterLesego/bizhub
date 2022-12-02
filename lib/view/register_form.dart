@@ -243,6 +243,7 @@ class _RegisterFormState extends State<RegisterForm> {
                   )),
               const SizedBoxH10(),
               TextFormField(
+                obscureText: true,
                 validator: validatePassword,
                 controller: passwordController,
                 decoration: formDecoration(
@@ -252,6 +253,7 @@ class _RegisterFormState extends State<RegisterForm> {
               ),
               const SizedBoxH10(),
               TextFormField(
+                obscureText: true,
                 validator: validateConfirmPassword,
                 controller: confirmPasswordController,
                 decoration: formDecoration(

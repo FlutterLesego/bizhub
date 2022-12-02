@@ -15,18 +15,21 @@ class InitApp {
   static const String appID = 'BCB6B236-BDDD-98CB-FFBD-96E39787DE00';
 
   static void initializeApp(BuildContext context) async {
+    //initialize app with database
     await Backendless.initApp(
         androidApiKey: apiKeyAndroid,
         iosApiKey: apiKeyIOS,
         applicationId: appID);
     String result = await context.read<UserViewModel>().checkIfUserLoggedIn();
+    //director the user to service provider page if already logged in
     if (result == 'OK') {
       context
           .read<ServiceViewModel>()
           .getServices(context.read<UserViewModel>().currentUser!.email);
       Navigator.popAndPushNamed(context, RouteManager.serviceProviderPage);
     } else {
-      context.read<ServiceViewModel>().getServices('username');
+      //director the user to the bizhub home page if not logged in
+      context.read<ServiceViewModel>().getServices;
       Navigator.popAndPushNamed(context, RouteManager.bizhubHomePage);
     }
   }

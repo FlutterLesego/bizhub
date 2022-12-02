@@ -1,6 +1,7 @@
 // ignore_for_file: unnecessary_null_comparison, camel_case_types
 
 import 'package:bizhub/misc/constants.dart';
+import 'package:bizhub/view/category_view.dart';
 import 'package:flutter/material.dart';
 import '../routes/route_manager.dart';
 import '../services/service_view_model.dart';
@@ -55,13 +56,13 @@ class _bizhubHomeState extends State<bizhubHome> {
               ),
             ),
             const SizedBoxH10(),
-            // Categories title and director
+
+            // services view
             Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 const Text(
-                  "Categories",
+                  "New Services",
                   style: titleStyleBlack,
                 ),
                 TextButton(
@@ -71,7 +72,7 @@ class _bizhubHomeState extends State<bizhubHome> {
                   },
                   child: InkWell(
                     child: const Text(
-                      "view all",
+                      "view categories",
                       style: style16grey,
                     ),
                     onTap: () {
@@ -80,19 +81,6 @@ class _bizhubHomeState extends State<bizhubHome> {
                     },
                   ),
                 )
-              ],
-            ),
-            const SizedBoxH10(),
-            // services view
-            SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Row(children: const [])),
-            Row(
-              children: const [
-                Text(
-                  "New Services",
-                  style: titleStyleBlack,
-                ),
               ],
             ),
             const SizedBoxH10(),
@@ -123,6 +111,4 @@ class _bizhubHomeState extends State<bizhubHome> {
       )),
     );
   }
-
-  searchServices() {}
 }

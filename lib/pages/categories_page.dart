@@ -2,6 +2,7 @@
 
 import 'package:bizhub/misc/constants.dart';
 import 'package:bizhub/routes/route_manager.dart';
+import 'package:bizhub/view/category_view.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart' as provider;
 
@@ -41,8 +42,8 @@ class CategoriesPage extends StatelessWidget {
                             physics: const BouncingScrollPhysics(),
                             itemCount: value.services.length,
                             itemBuilder: (context, index) {
-                              return ServiceView(
-                                service: value.services[index],
+                              return ServiceCategoryView(
+                                category: value.categories[index],
                               );
                             })
                         : const Center(
