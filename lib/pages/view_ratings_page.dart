@@ -2,7 +2,6 @@
 
 import 'package:bizhub/misc/constants.dart';
 import 'package:bizhub/services/service_view_model.dart';
-import 'package:bizhub/widgets/view_service.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart' as provider;
 

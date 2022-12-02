@@ -14,7 +14,7 @@ import '../pages/edit_profile_page.dart';
 import '../pages/login_page.dart';
 import '../pages/register_page.dart';
 import '../pages/service_provider_page.dart';
-import '../widgets/add_service.dart';
+import '../view/add_service.dart';
 
 class RouteManager {
   static const String loadingPage = '/';

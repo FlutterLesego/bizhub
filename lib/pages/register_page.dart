@@ -1,6 +1,7 @@
 import 'package:bizhub/routes/route_manager.dart';
 import 'package:flutter/material.dart';
-import '../widgets/register_form.dart';
+
+import '../view/register_form.dart';
 
 class RegisterPage extends StatelessWidget {
   const RegisterPage({Key? key}) : super(key: key);

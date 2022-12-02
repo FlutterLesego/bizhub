@@ -1,9 +1,10 @@
 // ignore_for_file: prefer_const_constructors
 import 'package:bizhub/routes/route_manager.dart';
 import 'package:bizhub/services/service_view_model.dart';
-import 'package:bizhub/widgets/view_service.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart' as provider;
+
+import '../view/view_service.dart';
 
 class ViewServicePage extends StatelessWidget {
   const ViewServicePage({super.key});

@@ -9,7 +9,7 @@ import '../../routes/route_manager.dart';
 import '../services/helper_service.dart';
 import '../services/service_view_model.dart';
 import '../services/user_view_model.dart';
-import '../widgets/service_card.dart';
+import '../view/service_card.dart';
 
 class ServiceProviderPage extends StatefulWidget {
   const ServiceProviderPage({super.key});

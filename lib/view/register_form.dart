@@ -9,7 +9,7 @@ import 'package:geolocator/geolocator.dart';
 import 'package:image_picker/image_picker.dart';
 import '../misc/validators.dart';
 import '../services/helper_user.dart';
-import 'radio_button.dart';
+import '../widgets/radio_button.dart';
 
 class RegisterForm extends StatefulWidget {
   const RegisterForm({Key? key}) : super(key: key);

@@ -1,5 +1,6 @@
-import 'package:bizhub/widgets/edit_profile_form.dart';
 import 'package:flutter/material.dart';
+
+import '../view/edit_profile_form.dart';
 
 class EditProfilePage extends StatelessWidget {
   const EditProfilePage({Key? key}) : super(key: key);

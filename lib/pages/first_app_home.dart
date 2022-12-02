@@ -1,10 +1,10 @@
 // ignore_for_file: unnecessary_null_comparison
 
 import 'package:bizhub/misc/constants.dart';
-import 'package:bizhub/widgets/service_view.dart';
 import 'package:flutter/material.dart';
 import '../routes/route_manager.dart';
 import '../services/service_view_model.dart';
+import '../view/service_view.dart';
 import '../widgets/navigation_drawer.dart';
 import 'package:provider/provider.dart' as provider;
 
